@@ -2,7 +2,7 @@
 name: " Test request"
 about: Test 사항 입력
 title: ''
-labels: ''
+labels: test
 assignees: ''
 
 ---
