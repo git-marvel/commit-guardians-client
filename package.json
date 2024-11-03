@@ -1,5 +1,5 @@
 {
-  "name": "commit-guardians",
+  "name": "commit-guardians-client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,12 +10,16 @@
     "preview": "vite preview",
     "prepare": "husky",
     "postinstall": "husky init",
-    "format": "prettier --cache --write ."
+    "format": "prettier --cache --write .",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwindcss": "^3.4.14"
+    "react-router-dom": "^6.27.0",
+    "tailwindcss": "^3.4.14",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
@@ -31,6 +35,7 @@
     "husky": "^9.1.6",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
-    "vite": "^5.4.10"
+    "vite": "^5.4.10",
+    "vitest": "^2.1.2"
   }
 }
