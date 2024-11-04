@@ -9,7 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky",
-    "postinstall": "husky init",
     "format": "prettier --cache --write .",
     "test": "vitest",
     "test:run": "vitest run"
