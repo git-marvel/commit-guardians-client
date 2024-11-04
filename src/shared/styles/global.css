@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  #root {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Pretendard", Arial, Helvetica, sans-serif;
+  }
+
+  @font-face {
+    font-family: "Pretendard";
+    font-weight: 45 920;
+    font-style: normal;
+    font-display: swap;
+    src: url("../assets/fonts/PretendardVariable.woff2")
+      format("woff2-variations");
+  }
+
+  @font-face {
+    font-family: "Pixelify";
+    font-weight: 45 920;
+    font-style: normal;
+    font-display: swap;
+    src: url("../assets/fonts/PixelifySans-VariableFont_wght.ttf");
+  }
+}
