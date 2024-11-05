@@ -1,25 +1,17 @@
 import useCommitStore from "../../feature/commit/store/useCommitStore";
-import messages from "../../shared/constants/messages";
+import extractGitInfoFromURL from "../../shared/utils/extractGitInfoFromURL";
 import getCommitList from "./api/getCommitList";
 
 const Home = () => {
   const setCommitList = useCommitStore((state) => state.setCommitList);
 
-  const handleRepoInfoSubmit = async (e) => {
-    e.preventDefault();
+  const handleRepoInfoSubmit = async (event) => {
+    event.preventDefault();
 
-    const formData = new FormData(e.target);
-    const formJson = Object.fromEntries(formData.entries());
-    const parsedURL = formJson.repositoryURL.split("/");
-    const githubIndex = parsedURL.indexOf("github.com");
-    const [organizationName, repositoryName] = parsedURL.slice(
-      githubIndex + 1,
-      githubIndex + 3
-    );
-
-    if (!organizationName || !repositoryName) {
-      throw new Error(messages.errors.invalidURL);
-    }
+    const formData = new FormData(event.target);
+    const repositoryURL = Object.fromEntries(formData.entries()).repositoryURL;
+    const { organizationName, repositoryName } =
+      extractGitInfoFromURL(repositoryURL);
 
     try {
       getCommitList({ organizationName, repositoryName, setCommitList });
