@@ -1,7 +1,11 @@
+import useCommitStore from "../../feature/commit/store/useCommitStore";
+
 const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
-const COMMITS_PER_PAGE = 100;
+const COMMITS_PER_PAGE = 3;
 
 const Home = () => {
+  const setCommitList = useCommitStore((state) => state.setCommitList);
+
   const handleRepoInfoSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,6 +50,8 @@ const Home = () => {
 
       allCommits.push((await Promise.all(fetchPromises)).flat());
     }
+
+    setCommitList(allCommits.flat());
   };
 
   return (
