@@ -63,6 +63,7 @@ const Home = () => {
         <input
           name="repositoryURL"
           placeholder="ex) https://github.com/git-marvel/commit-guardians-client"
+          required
         />
       </label>
       <button type="submit">git api 요청</button>
