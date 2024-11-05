@@ -41,7 +41,6 @@ const getCommitList = async ({
     }
 
     setCommitList(allCommits.flat());
-    console.log(allCommits);
   } catch (error) {
     throw new Error(error);
   }
