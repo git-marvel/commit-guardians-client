@@ -1,7 +1,6 @@
 import useCommitStore from "../../feature/commit/store/useCommitStore";
-
-const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
-const COMMITS_PER_PAGE = 3;
+import messages from "../../shared/constants/messages";
+import getCommitList from "./api/getCommitList";
 
 const Home = () => {
   const setCommitList = useCommitStore((state) => state.setCommitList);
@@ -18,42 +17,15 @@ const Home = () => {
       githubIndex + 3
     );
 
-    const gitcommitResponse = await fetch(
-      `https://api.github.com/repos/${organizationName}/${repositoryName}/commits?per_page=${COMMITS_PER_PAGE}&page=1`,
-      {
-        headers: {
-          Authorization: `token ${githubToken}`,
-        },
-      }
-    );
-    const gitcommitFirstPage = await gitcommitResponse.json();
-
-    const linkHeader = gitcommitResponse.headers.get("Link");
-    const lastPageNumber = linkHeader
-      ? parseInt(linkHeader.match(/&page=(\d+)>; rel="last"/)?.[1])
-      : 1;
-
-    const allCommits = gitcommitFirstPage;
-
-    if (lastPageNumber > 1) {
-      const fetchPromises = [];
-      for (let page = 2; page <= lastPageNumber; page++) {
-        fetchPromises.push(
-          fetch(
-            `https://api.github.com/repos/${organizationName}/${repositoryName}/commits?per_page=${COMMITS_PER_PAGE}&page=${page}`,
-            {
-              headers: {
-                Authorization: `token ${githubToken}`,
-              },
-            }
-          ).then((res) => res.json())
-        );
-      }
-
-      allCommits.push((await Promise.all(fetchPromises)).flat());
+    if (!organizationName || !repositoryName) {
+      throw new Error(messages.errors.invalidURL);
     }
 
-    setCommitList(allCommits.flat());
+    try {
+      getCommitList({ organizationName, repositoryName, setCommitList });
+    } catch (error) {
+      throw new Error(error.messages);
+    }
   };
 
   return (
