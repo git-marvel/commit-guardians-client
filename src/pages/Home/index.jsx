@@ -11,10 +11,12 @@ const Home = () => {
 
     const formData = new FormData(e.target);
     const formJson = Object.fromEntries(formData.entries());
-    const [organizationName, repositoryName] = [
-      formJson.organizationName,
-      formJson.repositoryName,
-    ];
+    const parsedURL = formJson.repositoryURL.split("/");
+    const githubIndex = parsedURL.indexOf("github.com");
+    const [organizationName, repositoryName] = parsedURL.slice(
+      githubIndex + 1,
+      githubIndex + 3
+    );
 
     const gitcommitResponse = await fetch(
       `https://api.github.com/repos/${organizationName}/${repositoryName}/commits?per_page=${COMMITS_PER_PAGE}&page=1`,
@@ -57,10 +59,11 @@ const Home = () => {
   return (
     <form method="post" onSubmit={handleRepoInfoSubmit}>
       <label>
-        Organization name:{" "}
-        <input name="organizationName" defaultValue="ex) facebook" />
-        Repository name:{" "}
-        <input name="repositoryName" defaultValue="ex) react" />
+        Repository URL:{" "}
+        <input
+          name="repositoryURL"
+          placeholder="ex) https://github.com/git-marvel/commit-guardians-client"
+        />
       </label>
       <button type="submit">git api 요청</button>
     </form>
