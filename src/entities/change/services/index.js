@@ -6,10 +6,10 @@ const getChanges = (diffPerCommit) => {
   const codeListPerFile = diffPerCommit.split("diff --git").slice(1);
   const commitChangesMap = new Map();
 
-  for (const commitCode of codeListPerFile) {
+  codeListPerFile.map((commitCode) => {
     const result = makeAChange(commitCode);
     commitChangesMap.set(result.fileName, result.changes);
-  }
+  });
 
   return commitChangesMap;
 };
@@ -17,7 +17,7 @@ const getChanges = (diffPerCommit) => {
 const makeAChange = (commitCode) => {
   const codePerLineList = commitCode.split("\n");
   const fileName = codePerLineList[0].split(" ")[1];
-  let changes = [];
+  const changes = [];
   let changesCode = {};
   let hasDelta = false;
 
