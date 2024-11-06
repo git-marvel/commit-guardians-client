@@ -30,7 +30,7 @@ const Home = () => {
           required
         />
       </label>
-      <button type="submit">api 요청</button>;
+      <button type="submit">api 요청</button>
     </form>
   );
 };
