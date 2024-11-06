@@ -1,5 +1,5 @@
 const CheckCommitQualityButton = () => {
-  return <button>확인하기</button>;
+  return <button type="submit">확인하기</button>;
 };
 
 export default CheckCommitQualityButton;

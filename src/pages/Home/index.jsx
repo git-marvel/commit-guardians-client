@@ -1,6 +1,7 @@
+import CheckCommitQualityButton from "../../features/checkCommitQuality/components/CheckCommitQualityButton";
 import useCommitStore from "../../features/commit/store/useCommitStore";
 import extractGitInfoFromURL from "../../shared/utils/extractGitInfoFromURL";
-import getCommitList from "./api/getCommitList";
+import { getCommitList } from "./api/getCommitList";
 
 const Home = () => {
   const setCommitList = useCommitStore((state) => state.setCommitList);
@@ -30,7 +31,7 @@ const Home = () => {
           required
         />
       </label>
-      <button type="submit">git api 요청</button>
+      <CheckCommitQualityButton />
     </form>
   );
 };
