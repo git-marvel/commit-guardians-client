@@ -13,11 +13,7 @@ const NotFound = () => {
         code="404"
         heading="Page Not Found 🤔"
         paragraph="The page you are looking for does not exist."
-        button={
-          <Button onClick={handleRoutingHome}>
-            <p>Go to Home</p>
-          </Button>
-        }
+        button={<Button onClick={handleRoutingHome}>Go to Home</Button>}
       />
       <Footer />
     </>

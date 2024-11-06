@@ -9,9 +9,7 @@ const MyCommitBadge = () => {
 
   return (
     <>
-      <Button onClick={handleRoutingCommitScoreboard}>
-        <p>💯 10 commits</p>
-      </Button>
+      <Button onClick={handleRoutingCommitScoreboard}>💯 10 commits</Button>
       <CopyBadgeButton />
       <Footer />
     </>

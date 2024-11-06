@@ -13,7 +13,7 @@ const Button = ({ onClick, children }) => {
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
 export default Button;
