@@ -6,7 +6,7 @@ const getChanges = (diffPerCommit) => {
   const codeListPerFile = diffPerCommit.split("diff --git").slice(1);
   const commitChangesMap = new Map();
 
-  codeListPerFile.map((commitCode) => {
+  codeListPerFile.forEach((commitCode) => {
     const result = makeAChange(commitCode);
     commitChangesMap.set(result.fileName, result.changes);
   });
@@ -23,8 +23,8 @@ const makeAChange = (commitCode) => {
 
   codePerLineList.forEach((code) => {
     if (
-      (code.indexOf("-") === 0 && code.includes("---") === false) ||
-      (code.indexOf("+") === 0 && code.includes("+++") === false)
+      (code.indexOf("-") === 0 && !code.includes("---")) ||
+      (code.indexOf("+") === 0 && !code.includes("+++"))
     ) {
       hasDelta = true;
       changesCode = createChangeEntity({
@@ -32,16 +32,14 @@ const makeAChange = (commitCode) => {
         previousContent: changesCode,
         content: code,
       });
-    } else {
-      if (hasDelta && code !== NO_NEW_LINE_MESSAGE) {
-        hasDelta = false;
-        changes.push(changesCode);
-        changesCode = {};
-      }
+    } else if (hasDelta && code !== NO_NEW_LINE_MESSAGE) {
+      hasDelta = false;
+      changes.push(changesCode);
+      changesCode = {};
     }
   });
 
   return { fileName: fileName, changes: changes };
 };
 
-export { getChanges, makeAChange };
+export { getChanges };

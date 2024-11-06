@@ -1,7 +1,7 @@
 import { getChanges } from "../../../entities/change/services";
 import { GITHUB_TOKEN } from "../../../shared/constants/env";
 
-const COMMITS_PER_PAGE = 3;
+const COMMITS_PER_PAGE = 100;
 const DIFF_MEDIA_TYPE = "application/vnd.github.diff";
 
 const setCommitBaseUrl = ({ owner, repo }) =>
@@ -37,11 +37,13 @@ const getCommitList = async ({
       const fetchPromises = [];
 
       for (let page = 2; page <= lastPageNumber; page++) {
-        fetchPromises.push(
-          fetchWithAuth(`${commitListUrl}&page=${page}`).then((res) =>
-            res.json()
-          )
-        );
+        const commitPromise = async () => {
+          const response = await fetchWithAuth(`${commitListUrl}&page=${page}`);
+
+          return response.json();
+        };
+
+        fetchPromises.push(commitPromise);
       }
 
       allCommits.push((await Promise.all(fetchPromises)).flat());
@@ -65,7 +67,7 @@ const getCommitList = async ({
   }
 };
 
-const getSingleCommit = async ({ owner, repo, ref }) => {
+const getCommitDiff = async ({ owner, repo, ref }) => {
   const commitUrl = `${setCommitBaseUrl({ owner, repo })}/${ref}`;
 
   const response = await fetchWithAuth(commitUrl, DIFF_MEDIA_TYPE);
@@ -74,4 +76,4 @@ const getSingleCommit = async ({ owner, repo, ref }) => {
   return getChanges(changedCode);
 };
 
-export { getCommitList, getSingleCommit };
+export { getCommitList, getCommitDiff };
