@@ -1,6 +1,6 @@
 import useCommitStore from "../../features/commit/store/useCommitStore";
 import extractGitInfoFromURL from "../../shared/utils/extractGitInfoFromURL";
-import getCommitList from "./api/getCommitList";
+import { getCommitList } from "./api";
 
 const Home = () => {
   const setCommitList = useCommitStore((state) => state.setCommitList);
@@ -30,7 +30,7 @@ const Home = () => {
           required
         />
       </label>
-      <button type="submit">git api 요청</button>
+      <button type="submit">api 요청</button>
     </form>
   );
 };
