@@ -4,14 +4,14 @@ const NO_NEW_LINE_MESSAGE = "\\ No newline at end of file";
 
 const getChanges = (diffPerCommit) => {
   const codeListPerFile = diffPerCommit.split("diff --git").slice(1);
-  const commitChangesMap = new Map();
+  const commitChanges = {};
 
   codeListPerFile.forEach((commitCode) => {
     const result = makeAChange(commitCode);
-    commitChangesMap.set(result.fileName, result.changes);
+    commitChanges[result.fileName] = result.changes;
   });
 
-  return commitChangesMap;
+  return commitChanges;
 };
 
 const makeAChange = (commitCode) => {
@@ -22,10 +22,11 @@ const makeAChange = (commitCode) => {
   let hasDelta = false;
 
   codePerLineList.forEach((code) => {
-    if (
-      (code.indexOf("-") === 0 && !code.includes("---")) ||
-      (code.indexOf("+") === 0 && !code.includes("+++"))
-    ) {
+    const isDeltaLine =
+      (code.startsWith("-") && !code.includes("---")) ||
+      (code.startsWith("+") && !code.includes("+++"));
+
+    if (isDeltaLine) {
       hasDelta = true;
       changesCode = createChangeEntity({
         key: code[0],
@@ -39,7 +40,7 @@ const makeAChange = (commitCode) => {
     }
   });
 
-  return { fileName: fileName, changes: changes };
+  return { fileName, changes };
 };
 
 export { getChanges };

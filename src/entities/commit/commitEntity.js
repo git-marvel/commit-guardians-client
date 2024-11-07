@@ -17,6 +17,7 @@ const createCommitEntity = ({ type, sha, url, author, message }) => {
     author: author,
     numOfChanges: null,
     numOfFiles: null,
+    diffObj: null,
   };
 };
 

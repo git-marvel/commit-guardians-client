@@ -62,19 +62,15 @@ const getCommitDiff = async ({ owner, repo, sha }) => {
 
   return getChanges(changedCode);
 };
+const getCommitDiffList = async ({ owner, repo, commitsToCheck }) => {
+  const fetchPromises = commitsToCheck.map(async (commit) => {
+    const { sha } = commit;
+    commit.diffObj = await getCommitDiff({ owner, repo, sha });
 
-const getCommitDiffList = async ({ owner, repo, checkCommitList }) => {
-  const fetchPromises = [];
-  checkCommitList.forEach((element) => {
-    const { sha } = element;
-    const commitDiffPromise = async () => {
-      return await getCommitDiff({ owner, repo, sha });
-    };
-
-    fetchPromises.push(commitDiffPromise());
+    return commit;
   });
 
   return await Promise.all(fetchPromises);
 };
 
-export { getCommitList, getCommitDiff, getCommitDiffList };
+export { getCommitDiffList, getCommitList };
