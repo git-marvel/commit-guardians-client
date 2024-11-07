@@ -16,12 +16,8 @@ const fetchWithAuth = async (url, accept = "*/*") => {
   });
 };
 
-const getCommitList = async ({
-  organizationName,
-  repositoryName,
-  setCommitList,
-}) => {
-  const commitListUrl = `${setCommitBaseUrl({ owner: organizationName, repo: repositoryName })}?per_page=${COMMITS_PER_PAGE}`;
+const getCommitList = async ({ owner, repo }) => {
+  const commitListUrl = `${setCommitBaseUrl({ owner, repo })}?per_page=${COMMITS_PER_PAGE}`;
 
   try {
     const gitCommitResponse = await fetchWithAuth(`${commitListUrl}&page=${1}`);
@@ -49,26 +45,14 @@ const getCommitList = async ({
       allCommits.push((await Promise.all(fetchPromises)).flat());
     }
 
-    const filterCommitsInfo = allCommits.flat().map((element) => {
-      const { sha, url, commit } = element;
-      const { author, message } = commit;
-
-      return {
-        sha,
-        url,
-        author,
-        message,
-      };
-    });
-
-    setCommitList(filterCommitsInfo);
+    return allCommits.flat();
   } catch (error) {
     throw new Error(error);
   }
 };
 
-const getCommitDiff = async ({ owner, repo, ref }) => {
-  const commitUrl = `${setCommitBaseUrl({ owner, repo })}/${ref}`;
+const getCommitDiff = async ({ owner, repo, sha }) => {
+  const commitUrl = `${setCommitBaseUrl({ owner, repo })}/${sha}`;
 
   const response = await fetchWithAuth(commitUrl, DIFF_MEDIA_TYPE);
   const changedCode = await response.text();
@@ -76,4 +60,20 @@ const getCommitDiff = async ({ owner, repo, ref }) => {
   return getChanges(changedCode);
 };
 
-export { getCommitList, getCommitDiff };
+const getCommitDiffList = async ({ owner, repo, checkCommitList }) => {
+  const fetchPromises = [];
+  checkCommitList.forEach((element) => {
+    const { sha } = element;
+    const commitPromise = async () => {
+      const changes = await getCommitDiff({ owner, repo, sha });
+
+      return changes;
+    };
+
+    fetchPromises.push(commitPromise());
+  });
+
+  return await Promise.all(fetchPromises);
+};
+
+export { getCommitList, getCommitDiff, getCommitDiffList };

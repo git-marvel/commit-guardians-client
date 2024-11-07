@@ -1,6 +1,7 @@
 import useCommitStore from "../../features/commit/store/useCommitStore";
 import extractGitInfoFromURL from "../../shared/utils/extractGitInfoFromURL";
-import { getCommitList } from "./api";
+import { getCheckCommitList } from "../../entities/commitType/services";
+import { getCommitDiffList, getCommitList } from "./api";
 
 const Home = () => {
   const setCommitList = useCommitStore((state) => state.setCommitList);
@@ -10,11 +11,18 @@ const Home = () => {
 
     const formData = new FormData(event.target);
     const repositoryURL = Object.fromEntries(formData.entries()).repositoryURL;
-    const { organizationName, repositoryName } =
-      extractGitInfoFromURL(repositoryURL);
+    const { owner, repo } = extractGitInfoFromURL(repositoryURL);
 
     try {
-      getCommitList({ organizationName, repositoryName, setCommitList });
+      const commitList = await getCommitList({ owner, repo });
+      const checkCommitList = getCheckCommitList(commitList);
+      const changeList = await getCommitDiffList({
+        owner,
+        repo,
+        checkCommitList,
+      });
+
+      setCommitList(changeList);
     } catch (error) {
       throw new Error(error.messages);
     }
