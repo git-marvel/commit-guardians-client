@@ -22,7 +22,9 @@ const Home = () => {
         checkCommitList,
       });
 
-      setCommitList(changeList);
+      const jsonMap = changeList.map((change) => Array.from(change.values()));
+
+      setCommitList(jsonMap);
     } catch (error) {
       throw new Error(error.messages);
     }
