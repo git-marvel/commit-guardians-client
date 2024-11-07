@@ -1,5 +1,5 @@
 import { getChanges } from "../../../entities/change/services";
-import { GITHUB_TOKEN } from "../../../shared/constants/env";
+import { GITHUB_TOKEN } from "../../../shared/constants";
 
 const COMMITS_PER_PAGE = 100;
 const DIFF_MEDIA_TYPE = "application/vnd.github.diff";
@@ -40,10 +40,10 @@ const getCommitList = async ({
         const commitPromise = async () => {
           const response = await fetchWithAuth(`${commitListUrl}&page=${page}`);
 
-          return response.json();
+          return await response.json();
         };
 
-        fetchPromises.push(commitPromise);
+        fetchPromises.push(commitPromise());
       }
 
       allCommits.push((await Promise.all(fetchPromises)).flat());
