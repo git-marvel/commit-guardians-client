@@ -1,3 +1,4 @@
+import axios from "axios";
 import { getChanges } from "../../../entities/change/services";
 import { GITHUB_TOKEN } from "../../../shared/constants";
 
@@ -8,7 +9,7 @@ const setCommitBaseUrl = ({ owner, repo }) =>
   `https://api.github.com/repos/${owner}/${repo}/commits`;
 
 const fetchWithAuth = async (url, accept = "*/*") => {
-  return await fetch(url, {
+  return await axios.get(url, {
     headers: {
       Authorization: `token ${GITHUB_TOKEN}`,
       Accept: accept,
@@ -20,26 +21,28 @@ const getCommitList = async ({ owner, repo }) => {
   const commitListUrl = `${setCommitBaseUrl({ owner, repo })}?per_page=${COMMITS_PER_PAGE}`;
 
   try {
-    const gitCommitResponse = await fetchWithAuth(`${commitListUrl}&page=${1}`);
-    const linkHeader = gitCommitResponse.headers.get("Link");
+    const gitCommitFirstPage = await fetchWithAuth(
+      `${commitListUrl}&page=${1}`
+    );
+    const linkHeader = gitCommitFirstPage.headers["Link"];
     const lastPageNumber = linkHeader
       ? parseInt(linkHeader.match(/&page=(\d+)>; rel="last"/)?.[1])
       : 1;
 
-    const gitCommitFirstPage = await gitCommitResponse.json();
-    const allCommits = gitCommitFirstPage;
+    const allCommits = gitCommitFirstPage.data;
 
     if (lastPageNumber > 1) {
       const fetchPromises = [];
 
       for (let page = 2; page <= lastPageNumber; page++) {
-        const commitPromise = async () => {
-          const response = await fetchWithAuth(`${commitListUrl}&page=${page}`);
-
-          return await response.json();
+        const commitPagePromise = async () => {
+          const commitPage = await fetchWithAuth(
+            `${commitListUrl}&page=${page}`
+          );
+          return commitPage.data;
         };
 
-        fetchPromises.push(commitPromise());
+        fetchPromises.push(commitPagePromise());
       }
 
       allCommits.push((await Promise.all(fetchPromises)).flat());
@@ -55,7 +58,7 @@ const getCommitDiff = async ({ owner, repo, sha }) => {
   const commitUrl = `${setCommitBaseUrl({ owner, repo })}/${sha}`;
 
   const response = await fetchWithAuth(commitUrl, DIFF_MEDIA_TYPE);
-  const changedCode = await response.text();
+  const changedCode = response.data;
 
   return getChanges(changedCode);
 };
@@ -64,13 +67,11 @@ const getCommitDiffList = async ({ owner, repo, checkCommitList }) => {
   const fetchPromises = [];
   checkCommitList.forEach((element) => {
     const { sha } = element;
-    const commitPromise = async () => {
-      const changes = await getCommitDiff({ owner, repo, sha });
-
-      return changes;
+    const commitDiffPromise = async () => {
+      return await getCommitDiff({ owner, repo, sha });
     };
 
-    fetchPromises.push(commitPromise());
+    fetchPromises.push(commitDiffPromise());
   });
 
   return await Promise.all(fetchPromises);
