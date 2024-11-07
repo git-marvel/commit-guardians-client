@@ -1,6 +1,6 @@
 import useCommitStore from "../../features/commit/store/useCommitStore";
 import extractGitInfoFromURL from "../../shared/utils/extractGitInfoFromURL";
-import { getCheckCommitList } from "../../entities/commitType/services";
+import { getCheckableCommits } from "../../entities/commit/services";
 import { getCommitDiffList, getCommitList } from "./api";
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
 
     try {
       const commitList = await getCommitList({ owner, repo });
-      const checkCommitList = getCheckCommitList(commitList);
+      const checkCommitList = getCheckableCommits(commitList);
       const changeList = await getCommitDiffList({
         owner,
         repo,
