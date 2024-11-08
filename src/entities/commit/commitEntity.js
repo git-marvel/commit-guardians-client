@@ -12,10 +12,17 @@ const createCommitEntity = ({ type, sha, url, author, message }) => {
     url: url,
     message: message,
     author: author,
-    numOfChanges: null,
-    numOfFiles: null,
     diffObj: null,
+    numOfFiles: null,
+    numOfChanges: null,
   };
 };
 
-export { createCommitEntity };
+const makeCommitEntityWithDiff = ({ commit, diffObj }) => {
+  commit.diffObj = diffObj;
+  commit.numOfFiles = Object.keys(diffObj).length;
+
+  return commit;
+};
+
+export { createCommitEntity, makeCommitEntityWithDiff };

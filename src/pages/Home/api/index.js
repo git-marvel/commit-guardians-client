@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getChanges } from "../../../entities/change/services";
+import { makeCommitEntityWithDiff } from "../../../entities/commit/commitEntity";
 import { GITHUB_TOKEN } from "../../../shared/constants";
 
 const COMMITS_PER_PAGE = 100;
@@ -64,11 +65,15 @@ const getCommitDiff = async ({ owner, repo, sha }) => {
 };
 
 const getCommitDiffList = async ({ owner, repo, commitsToCheck }) => {
-  const fetchPromises = commitsToCheck.map(async (commit) => {
-    const { sha } = commit;
-    commit.diffObj = await getCommitDiff({ owner, repo, sha });
+  const fetchPromises = commitsToCheck.map(async (commitWithType) => {
+    const { sha } = commitWithType;
+    const diffObj = await getCommitDiff({ owner, repo, sha });
+    const commitWithDiff = makeCommitEntityWithDiff({
+      commit: commitWithType,
+      diffObj,
+    });
 
-    return commit;
+    return commitWithDiff;
   });
 
   return await Promise.all(fetchPromises);
