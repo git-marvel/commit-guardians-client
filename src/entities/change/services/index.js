@@ -23,8 +23,8 @@ const makeAChange = (commitCode) => {
 
   codePerLineList.forEach((code) => {
     const isDeltaLine =
-      (code.startsWith("-") && !code.includes("---")) ||
-      (code.startsWith("+") && !code.includes("+++"));
+      (code.startsWith("-") && !code.startsWith("---")) ||
+      (code.startsWith("+") && !code.startsWith("+++"));
 
     if (isDeltaLine) {
       hasDelta = true;

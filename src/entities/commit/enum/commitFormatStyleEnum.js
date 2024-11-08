@@ -14,10 +14,6 @@ const COMMIT_FORMAT_STYLE = {
     type: "template-based",
     splitWith: "]",
   },
-  sentenceCase: {
-    type: "sentence-case",
-    splitWith: " ",
-  },
 };
 
 COMMIT_FORMAT_STYLE.list = [
