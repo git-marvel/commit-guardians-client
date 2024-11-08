@@ -1,6 +1,6 @@
+import { createCommitEntity } from "../commitEntity";
 import COMMIT_FORMAT_STYLE from "../enum/commitFormatStyleEnum";
 import COMMIT_TYPE from "../enum/commitTypeEnum";
-import { createCommitEntity } from "../commitEntity";
 
 const removeParentheses = (string) => string.replace(/\(.*\)$/, "");
 
