@@ -62,6 +62,7 @@ const getCommitDiff = async ({ owner, repo, sha }) => {
 
   return getChanges(changedCode);
 };
+
 const getCommitDiffList = async ({ owner, repo, commitsToCheck }) => {
   const fetchPromises = commitsToCheck.map(async (commit) => {
     const { sha } = commit;

@@ -20,11 +20,6 @@ const COMMIT_FORMAT_STYLE = {
   },
 };
 
-/**
- * simpleText 와 sentenceCase 의 커밋메세지 분할 트리거 문자가 같으므로
- * COMMIT_FORMAT_STYLE.list 에 sentenceCase 는 추가하지 않습니다.
- * 추후, splitWith 문자가 달라진다면, list 에 추가해주세요.
- */
 COMMIT_FORMAT_STYLE.list = [
   COMMIT_FORMAT_STYLE.prefix,
   COMMIT_FORMAT_STYLE.simpleText,

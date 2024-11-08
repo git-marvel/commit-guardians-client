@@ -1,7 +1,4 @@
 /**
- * github 에서 주는 커밋내용을 받아서,
- * 커밋 타입을 포함한 커밋 엔티티를 반환합니다.
- *
  * @param {{type: COMMIT_TYPE.type,
  *          sha: string,
  *          url: string,
