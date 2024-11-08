@@ -3,7 +3,8 @@ import Loading from "../../shared/components/Loading";
 import useValidateCommit from "./hooks/useValidateCommit";
 
 const Home = () => {
-  const { isLoading, commitList, handleCheckCommitQuality } = useValidateCommit();
+  const { isLoading, commitList, handleCheckCommitQuality } =
+    useValidateCommit();
 
   return (
     <div className="absolute top-0 m-10">
