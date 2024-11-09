@@ -25,7 +25,7 @@ const getCommitList = async ({ owner, repo }) => {
     const gitCommitFirstPage = await fetchWithAuth(
       `${commitListUrl}&page=${1}`
     );
-    const linkHeader = gitCommitFirstPage.headers["Link"];
+    const linkHeader = gitCommitFirstPage.headers["link"];
     const lastPageNumber = linkHeader
       ? parseInt(linkHeader.match(/&page=(\d+)>; rel="last"/)?.[1])
       : 1;
