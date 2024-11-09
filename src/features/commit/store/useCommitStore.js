@@ -3,6 +3,10 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 const initialState = {
   commitList: [],
+  scoredCommitInfo: {
+    perfectCommitNumber: null,
+    finalQualityPercent: null,
+  },
 };
 
 const useCommitStore = create(
