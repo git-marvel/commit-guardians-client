@@ -1,16 +1,18 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { getCheckableCommits } from "../../../entities/commit/services";
 import useCommitStore from "../../../features/commit/store/useCommitStore";
 import extractGitInfoFromURL from "../../../shared/utils/extractGitInfoFromURL";
 import { getCommitDiffList, getCommitList } from "../api";
 
 const useValidateCommit = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const setCommitList = useCommitStore((state) => state.setCommitList);
   const commitList = useCommitStore((state) => state.commitList);
 
   const handleCheckCommitQuality = useCallback(
     async (event) => {
       event.preventDefault();
+      setIsLoading(true);
 
       const formData = new FormData(event.target);
       const repositoryURL = Object.fromEntries(
@@ -31,12 +33,14 @@ const useValidateCommit = () => {
         setCommitList(diffList);
       } catch (error) {
         throw new Error(error);
+      } finally {
+        setIsLoading(false);
       }
     },
     [setCommitList]
   );
 
-  return { commitList, handleCheckCommitQuality };
+  return { isLoading, commitList, handleCheckCommitQuality };
 };
 
 export default useValidateCommit;

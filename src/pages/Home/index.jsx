@@ -1,8 +1,10 @@
 import Button from "../../shared/components/Button";
+import Loading from "../../shared/components/Loading";
 import useValidateCommit from "./hooks/useValidateCommit";
 
 const Home = () => {
-  const { commitList, handleCheckCommitQuality } = useValidateCommit();
+  const { isLoading, commitList, handleCheckCommitQuality } =
+    useValidateCommit();
 
   return (
     <div className="absolute top-0 m-10">
@@ -18,6 +20,7 @@ const Home = () => {
         </label>
         <Button>커밋 퀄리티 확인하기</Button>
       </form>
+      {isLoading && <Loading />}
       {commitList.map((commit, index) => (
         <div key={commit.sha}>
           <div className="mt-10 bg-lime-100">
