@@ -30,11 +30,11 @@ const useValidateCommit = () => {
           commitsToCheck,
         });
 
-        setIsLoading(false);
         setCommitList(diffList);
       } catch (error) {
-        setIsLoading(false);
         throw new Error(error);
+      } finally {
+        setIsLoading(false);
       }
     },
     [setCommitList]
