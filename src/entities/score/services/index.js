@@ -8,8 +8,9 @@ const getTotalQualityPercent = (scoredCommitList) => {
   const perfectCommitNumber = scoredCommitList.filter(
     (scoredCommit) => scoredCommit.score === 100
   ).length;
-  const totalQualityPercent =
-    Math.floor(perfectCommitNumber / scoredCommitList.length) * 100;
+  const totalQualityPercent = Math.floor(
+    (perfectCommitNumber / scoredCommitList.length) * 100
+  );
   const finalQualityPercent =
     totalQualityPercent === 0 && perfectCommitNumber > 0
       ? 1
