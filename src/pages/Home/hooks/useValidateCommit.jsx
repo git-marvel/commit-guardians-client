@@ -6,9 +6,7 @@ import { getCommitDiffList, getCommitList } from "../api";
 
 const useValidateCommit = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const setCommitList = useCommitStore(
-    (state) => state.commitInfo.setCommitList
-  );
+  const setCommitList = useCommitStore((state) => state.setCommitList);
   const setTotalCommitNumber = useCommitStore(
     (state) => state.setTotalCommitNumber
   );
