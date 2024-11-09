@@ -24,7 +24,7 @@ const useCommitStore = create(
           scoredCommitInfo: newScoredCommitInfo,
         })),
 
-      clearCommitList: () =>
+      clearAll: () =>
         set(() => ({
           ...initialState,
         })),
