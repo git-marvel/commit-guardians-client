@@ -2,6 +2,7 @@ import axios from "axios";
 import { getChanges } from "../../../entities/change/services";
 import { makeCommitEntityWithDiff } from "../../../entities/commit/commitEntity";
 import { GITHUB_TOKEN } from "../../../shared/constants";
+import handleError from "../../../shared/error/handleError";
 
 const COMMITS_PER_PAGE = 100;
 const DIFF_MEDIA_TYPE = "application/vnd.github.diff";
@@ -51,17 +52,21 @@ const getCommitList = async ({ owner, repo }) => {
 
     return allCommits.flat();
   } catch (error) {
-    throw new Error(error);
+    handleError(error);
   }
 };
 
 const getCommitDiff = async ({ owner, repo, sha }) => {
-  const commitUrl = `${setCommitBaseUrl({ owner, repo })}/${sha}`;
+  try {
+    const commitUrl = `${setCommitBaseUrl({ owner, repo })}/${sha}`;
 
-  const response = await fetchWithAuth(commitUrl, DIFF_MEDIA_TYPE);
-  const changedCode = response.data;
+    const response = await fetchWithAuth(commitUrl, DIFF_MEDIA_TYPE);
+    const changedCode = response.data;
 
-  return getChanges(changedCode);
+    return getChanges(changedCode);
+  } catch (error) {
+    handleError(error);
+  }
 };
 
 const getCommitDiffList = async ({ owner, repo, commitsToCheck }) => {
