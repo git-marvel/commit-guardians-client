@@ -5,7 +5,7 @@ const initialState = {
   commitInfo: {
     commitList: [],
     numOfCommit: null,
-    totalCommitNumber: null,
+    totalNumOfCommit: null,
   },
   scoredCommitInfo: {
     perfectCommitNumber: null,
@@ -27,11 +27,11 @@ const useCommitStore = create(
           },
         })),
 
-      setTotalCommitNumber: (totalCommitNumber) =>
+      setTotalNumOfCommit: (totalNumOfCommit) =>
         set((state) => ({
           commitInfo: {
             ...state.commitInfo,
-            totalCommitNumber: totalCommitNumber,
+            totalNumOfCommit: totalNumOfCommit,
           },
         })),
 
