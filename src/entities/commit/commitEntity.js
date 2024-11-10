@@ -2,11 +2,17 @@ import COMMIT_TYPE from "./enum/commitTypeEnum";
 import scoreRemoveCommitType from "./services/scoreRemoveCommitType";
 
 /**
- * @param {{type: COMMIT_TYPE.type,
- *          sha: string,
- *          url: string,
- *          author: {date: string, email: string, name: string},
- *          message: string}}
+ * @param {{
+ * type: COMMIT_TYPE.type,
+ * sha: string,
+ * url: string,
+ * author: {date: string, email: string, name: string},
+ * message: string,
+ * diffObj: {"FILE_NAME.example": [{"+": string, "-": string}, ...]},
+ * numOfFiles: number,
+ * numOfChanges: number,
+ * qualityScore: number,
+ * }}
  */
 const createCommitEntity = ({ type, sha, url, author, message }) => {
   return {
