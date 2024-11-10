@@ -1,13 +1,19 @@
 import Button from "../../shared/components/Button";
 import Loading from "../../shared/components/Loading";
+import useGithubAPIStatus from "./hooks/useGithubAPIStatus";
 import useValidateCommit from "./hooks/useValidateCommit";
 
 const Home = () => {
   const { isLoading, errorMessage, commitList, handleCheckCommitQuality } =
     useValidateCommit();
+  const { githubAPIStatus } = useGithubAPIStatus();
 
   return (
     <div className="absolute top-0 m-10">
+      <div className="flex items-center space-x-2">
+        <h3>GitHub API Status</h3>
+        <div className={githubAPIStatus}></div>
+      </div>
       <form method="post" onSubmit={handleCheckCommitQuality}>
         <label>
           <span className="text-slate-400">Repository URL</span>
