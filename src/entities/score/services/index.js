@@ -1,8 +1,6 @@
 /**
  * @param {Array} scoredCommitList - 점수가 매겨진 commit들의 목록
- * @returns {Object} 100점인 커밋의 개수와 비율을 포함한 객체
- * @returns {number} return.perfectCommitNumber - 점수가 100점인 커밋의 개수
- * @returns {number} return.finalQualityPercent - 전체 커밋 중 완벽한 커밋의 백분율 (0%일 경우 최소 1%로 조정)
+ * @returns {{ perfectCommitNumber: number, finalQualityPercent: number }}
  */
 const getTotalQualityPercent = (scoredCommitList) => {
   const perfectCommitNumber = scoredCommitList.filter(
