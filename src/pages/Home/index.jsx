@@ -20,7 +20,7 @@ const Home = () => {
         </label>
         <Button>커밋 퀄리티 확인하기</Button>
       </form>
-      {errorMessage && <p className="error">{errorMessage}</p>}
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       {isLoading && <Loading />}
       {commitList.map((commit, index) => (
         <div key={commit.sha}>
