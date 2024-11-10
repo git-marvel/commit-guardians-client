@@ -4,7 +4,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 const initialState = {
   commitInfo: {
     commitList: [],
-    commitNumber: null,
+    numOfCommit: null,
     totalCommitNumber: null,
   },
   scoredCommitInfo: {
@@ -23,7 +23,7 @@ const useCommitStore = create(
           commitInfo: {
             ...state.commitInfo,
             commitList: newCommitList,
-            commitNumber: newCommitList.length,
+            numOfCommit: newCommitList.length,
           },
         })),
 
