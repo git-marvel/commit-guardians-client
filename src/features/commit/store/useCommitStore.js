@@ -2,7 +2,15 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 const initialState = {
-  commitList: [],
+  commitInfo: {
+    commitList: [],
+    numOfCommit: null,
+    totalNumOfCommit: null,
+  },
+  scoredCommitInfo: {
+    perfectCommitNumber: null,
+    finalQualityPercent: null,
+  },
 };
 
 const useCommitStore = create(
@@ -11,11 +19,28 @@ const useCommitStore = create(
       ...initialState,
 
       setCommitList: (newCommitList) =>
-        set(() => ({
-          commitList: newCommitList,
+        set((state) => ({
+          commitInfo: {
+            ...state.commitInfo,
+            commitList: newCommitList,
+            numOfCommit: newCommitList.length,
+          },
         })),
 
-      clearCommitList: () =>
+      setTotalNumOfCommit: (totalNumOfCommit) =>
+        set((state) => ({
+          commitInfo: {
+            ...state.commitInfo,
+            totalNumOfCommit: totalNumOfCommit,
+          },
+        })),
+
+      setScoredCommitInfo: (newScoredCommitInfo) =>
+        set(() => ({
+          scoredCommitInfo: newScoredCommitInfo,
+        })),
+
+      clearAll: () =>
         set(() => ({
           ...initialState,
         })),

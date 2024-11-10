@@ -7,7 +7,10 @@ import { getCommitDiffList, getCommitList } from "../api";
 const useValidateCommit = () => {
   const [isLoading, setIsLoading] = useState(false);
   const setCommitList = useCommitStore((state) => state.setCommitList);
-  const commitList = useCommitStore((state) => state.commitList);
+  const setTotalNumOfCommit = useCommitStore(
+    (state) => state.setTotalNumOfCommit
+  );
+  const commitList = useCommitStore((state) => state.commitInfo.commitList);
 
   const handleCheckCommitQuality = useCallback(
     async (event) => {
@@ -30,6 +33,7 @@ const useValidateCommit = () => {
           commitsToCheck,
         });
 
+        setTotalNumOfCommit(allCommits.length);
         setCommitList(diffList);
       } catch (error) {
         throw new Error(error);
@@ -37,7 +41,7 @@ const useValidateCommit = () => {
         setIsLoading(false);
       }
     },
-    [setCommitList]
+    [setCommitList, setTotalNumOfCommit]
   );
 
   return { isLoading, commitList, handleCheckCommitQuality };
