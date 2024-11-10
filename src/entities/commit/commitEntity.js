@@ -1,3 +1,6 @@
+import COMMIT_TYPE from "./enum/commitTypeEnum";
+import scoreRemoveCommitType from "./services/scoreRemoveCommitType";
+
 /**
  * @param {{type: COMMIT_TYPE.type,
  *          sha: string,
@@ -15,6 +18,7 @@ const createCommitEntity = ({ type, sha, url, author, message }) => {
     diffObj: null,
     numOfFiles: null,
     numOfChanges: null,
+    qualityScore: null,
   };
 };
 
@@ -25,4 +29,16 @@ const makeCommitEntityWithDiff = ({ commit, diffObj }) => {
   return commit;
 };
 
-export { createCommitEntity, makeCommitEntityWithDiff };
+const setCommitQualityScore = ({ commit, commitType, diffObj }) => {
+  switch (commitType) {
+    case COMMIT_TYPE.remove.type: {
+      const qualityScore = scoreRemoveCommitType(diffObj); // remove 에 따른 점수가
+      commit.qualityScore = qualityScore;
+      break;
+    }
+    default:
+      return 0;
+  }
+};
+
+export { createCommitEntity, makeCommitEntityWithDiff, setCommitQualityScore };
