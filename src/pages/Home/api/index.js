@@ -84,4 +84,15 @@ const getCommitDiffList = async ({ owner, repo, commitsToCheck }) => {
   return await Promise.all(fetchPromises);
 };
 
-export { getCommitDiffList, getCommitList };
+const getGithubStatus = async () => {
+  try {
+    const githubStatus = await axios.get(
+      "https://www.githubstatus.com/api/v2/status.json"
+    );
+    return githubStatus.data.status.indicator;
+  } catch {
+    return "unknown";
+  }
+};
+
+export { getCommitDiffList, getCommitList, getGithubStatus };
