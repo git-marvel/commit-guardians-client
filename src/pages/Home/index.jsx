@@ -3,7 +3,7 @@ import Loading from "../../shared/components/Loading";
 import useValidateCommit from "./hooks/useValidateCommit";
 
 const Home = () => {
-  const { isLoading, commitList, handleCheckCommitQuality } =
+  const { isLoading, errorMessage, commitList, handleCheckCommitQuality } =
     useValidateCommit();
 
   return (
@@ -20,6 +20,7 @@ const Home = () => {
         </label>
         <Button>커밋 퀄리티 확인하기</Button>
       </form>
+      {errorMessage && <p className="error">{errorMessage}</p>}
       {isLoading && <Loading />}
       {commitList.map((commit, index) => (
         <div key={commit.sha}>

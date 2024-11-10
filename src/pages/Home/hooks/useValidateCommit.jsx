@@ -6,6 +6,7 @@ import { getCommitDiffList, getCommitList } from "../api";
 
 const useValidateCommit = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const setCommitList = useCommitStore((state) => state.setCommitList);
   const setTotalNumOfCommit = useCommitStore(
     (state) => state.setTotalNumOfCommit
@@ -21,9 +22,9 @@ const useValidateCommit = () => {
       const repositoryURL = Object.fromEntries(
         formData.entries()
       ).repositoryURL;
-      const { owner, repo } = extractGitInfoFromURL(repositoryURL);
 
       try {
+        const { owner, repo } = extractGitInfoFromURL(repositoryURL);
         const allCommits = await getCommitList({ owner, repo });
         const commitsToCheck = getCheckableCommits(allCommits);
 
@@ -35,8 +36,9 @@ const useValidateCommit = () => {
 
         setTotalNumOfCommit(allCommits.length);
         setCommitList(diffList);
+        setErrorMessage(null);
       } catch (error) {
-        throw new Error(error);
+        setErrorMessage(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -44,7 +46,7 @@ const useValidateCommit = () => {
     [setCommitList, setTotalNumOfCommit]
   );
 
-  return { isLoading, commitList, handleCheckCommitQuality };
+  return { isLoading, errorMessage, commitList, handleCheckCommitQuality };
 };
 
 export default useValidateCommit;
