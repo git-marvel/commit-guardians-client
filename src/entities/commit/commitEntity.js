@@ -1,6 +1,7 @@
 import COMMIT_TYPE from "./enum/commitTypeEnum";
 import scoreDocsCommitType from "./services/scoreDocsCommitType";
 import scoreRemoveCommitType from "./services/scoreRemoveCommitType";
+import scoreTestCommitType from "./services/scoreTestCommitType";
 
 /**
  * @param {{
@@ -46,6 +47,10 @@ const setCommitQualityScore = ({ commit, commitType, diffObj }) => {
     }
     case COMMIT_TYPE.docs.type: {
       qualityScore = scoreDocsCommitType(diffObj);
+      break;
+    }
+    case COMMIT_TYPE.test.type: {
+      qualityScore = scoreTestCommitType(diffObj);
       break;
     }
   }
