@@ -38,7 +38,7 @@ const makeCommitEntityWithDiff = ({ commit, diffObj }) => {
 const setCommitQualityScore = ({ commit, commitType, diffObj }) => {
   switch (commitType) {
     case COMMIT_TYPE.remove.type: {
-      const qualityScore = scoreRemoveCommitType(diffObj); // remove 에 따른 점수가
+      const qualityScore = scoreRemoveCommitType(diffObj);
       commit.qualityScore = qualityScore;
       break;
     }
