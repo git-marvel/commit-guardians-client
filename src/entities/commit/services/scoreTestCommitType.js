@@ -1,4 +1,4 @@
-const TEST_TYPE_FILENAME_EXTENSIONS = new Set(["test", "spec"]);
+const TEST_TYPE_FILENAME_EXTENSIONS = new Set(["test", "spec", "mock"]);
 
 /**
  * @param {Object} diffObj - 변경사항 객체
