@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { setCommitQualityScore } from "../../../entities/commit/commitEntity";
 import { getCheckableCommits } from "../../../entities/commit/services";
 import useCommitStore from "../../../features/commit/store/useCommitStore";
 import extractGitInfoFromURL from "../../../shared/utils/extractGitInfoFromURL";
@@ -6,6 +7,7 @@ import { getCommitDiffList, getCommitList } from "../api";
 
 const useValidateCommit = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const setCommitList = useCommitStore((state) => state.setCommitList);
   const setTotalNumOfCommit = useCommitStore(
     (state) => state.setTotalNumOfCommit
@@ -21,22 +23,32 @@ const useValidateCommit = () => {
       const repositoryURL = Object.fromEntries(
         formData.entries()
       ).repositoryURL;
-      const { owner, repo } = extractGitInfoFromURL(repositoryURL);
 
       try {
+        const { owner, repo } = extractGitInfoFromURL(repositoryURL);
         const allCommits = await getCommitList({ owner, repo });
         const commitsToCheck = getCheckableCommits(allCommits);
 
-        const diffList = await getCommitDiffList({
+        const commitWithDiff = await getCommitDiffList({
           owner,
           repo,
           commitsToCheck,
         });
 
         setTotalNumOfCommit(allCommits.length);
-        setCommitList(diffList);
+
+        commitWithDiff.forEach((commit) => {
+          setCommitQualityScore({
+            commit,
+            commitType: commit.type,
+            diffObj: commit.diffObj,
+          });
+        });
+
+        setCommitList(commitWithDiff);
+        setErrorMessage(null);
       } catch (error) {
-        throw new Error(error);
+        setErrorMessage(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -44,7 +56,7 @@ const useValidateCommit = () => {
     [setCommitList, setTotalNumOfCommit]
   );
 
-  return { isLoading, commitList, handleCheckCommitQuality };
+  return { isLoading, errorMessage, commitList, handleCheckCommitQuality };
 };
 
 export default useValidateCommit;
