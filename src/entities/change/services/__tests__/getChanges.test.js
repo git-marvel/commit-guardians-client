@@ -28,7 +28,7 @@ describe("getChanges", () => {
     expect(jsChanges.length).toBeGreaterThan(0);
   });
 
-  it("change 는 + 와 - 의 .", () => {
+  it("change 는 + 와 - 의 key 를 가져야 한다.", () => {
     const result = getChanges(diffPerCommit);
 
     const htmlChanges = result["a/docs/api/en/renderers/WebGLRenderer.html"];
