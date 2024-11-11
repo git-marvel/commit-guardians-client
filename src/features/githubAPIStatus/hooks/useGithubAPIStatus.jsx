@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { getGithubStatus } from "../api";
 
 const useGithubAPIStatus = () => {
-  const [githubAPIStatus, setGithubAPIStatus] = useState("unknown");
+  const [githubAPIStatusColor, setGithubAPIStatusColor] = useState("unknown");
 
   useEffect(() => {
     const storeGithubStatus = async () => {
       const githubAPIStatus = await getGithubStatus();
 
-      const tailwindColor = (githubAPIStatus) => {
+      const transferStatusColor = (githubAPIStatus) => {
         switch (githubAPIStatus) {
           case "none":
             return "bg-green-500";
@@ -23,14 +23,14 @@ const useGithubAPIStatus = () => {
         }
       };
 
-      const statusCircleStyle = `w-5 h-5 rounded-full ${tailwindColor(githubAPIStatus)}`;
-      setGithubAPIStatus(statusCircleStyle);
+      const statusColor = transferStatusColor(githubAPIStatus);
+      setGithubAPIStatusColor(statusColor);
     };
 
     storeGithubStatus();
   }, []);
 
-  return { githubAPIStatus };
+  return { githubAPIStatusColor };
 };
 
 export default useGithubAPIStatus;
