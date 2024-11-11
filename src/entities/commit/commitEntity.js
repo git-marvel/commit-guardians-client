@@ -38,24 +38,20 @@ const makeCommitEntityWithDiff = ({ commit, diffObj }) => {
 };
 
 const setCommitQualityScore = ({ commit, commitType, diffObj }) => {
-  let qualityScore = 0;
+  const getCommitQualityScore = (commitType) => {
+    switch (commitType) {
+      case COMMIT_TYPE.remove.type:
+        return scoreRemoveCommitType(diffObj);
+      case COMMIT_TYPE.docs.type:
+        return scoreDocsCommitType(diffObj);
+      case COMMIT_TYPE.test.type:
+        return scoreTestCommitType(diffObj);
+      default:
+        return 0;
+    }
+  };
 
-  switch (commitType) {
-    case COMMIT_TYPE.remove.type: {
-      qualityScore = scoreRemoveCommitType(diffObj);
-      break;
-    }
-    case COMMIT_TYPE.docs.type: {
-      qualityScore = scoreDocsCommitType(diffObj);
-      break;
-    }
-    case COMMIT_TYPE.test.type: {
-      qualityScore = scoreTestCommitType(diffObj);
-      break;
-    }
-  }
-
-  commit.qualityScore = qualityScore;
+  commit.qualityScore = getCommitQualityScore(commitType);
 };
 
 export { createCommitEntity, makeCommitEntityWithDiff, setCommitQualityScore };
