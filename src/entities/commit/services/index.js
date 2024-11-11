@@ -30,7 +30,7 @@ const makeCommitTypeWithFormatStyle = (firstWordOfCommitMessage) => {
 
 /**
  * @param {Array} totalCommits - 모든 커밋 목록
- * @returns {Array} checkableCommitList - 검사 가능한 커밋 목록
+ * @returns {Array} checkableCommits - 검사 가능한 커밋 목록
  */
 const getCheckableCommits = (totalCommits) => {
   const checkableCommits = totalCommits.reduce((accumulatorList, commit) => {
