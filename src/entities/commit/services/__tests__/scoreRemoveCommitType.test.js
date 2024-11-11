@@ -1,8 +1,8 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import scoreRemoveCommitType, {
+  calculateFileScore,
   calculateModuleFileDeletions,
   isOnlyDeletionChange,
-  calculateFileScore,
 } from "../scoreRemoveCommitType";
 
 // 모듈 파일의 유효한 삭제 변경사항 개수를 계산하는 함수에 대한 테스트
