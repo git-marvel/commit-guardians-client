@@ -33,7 +33,7 @@ const makeCommitTypeWithFormatStyle = (firstWordOfCommitMessage) => {
  * @returns {Array} checkableCommits - 검사 가능한 커밋 목록
  */
 const getCheckableCommits = (totalCommits) => {
-  const checkableCommits = totalCommits.reduce((accumulatorList, commit) => {
+  const checkableCommits = totalCommits.reduce((accumulators, commit) => {
     const firstWord = commit.commit.message.split(" ")[0];
     const commitType = makeCommitTypeWithFormatStyle(firstWord);
 
@@ -46,10 +46,10 @@ const getCheckableCommits = (totalCommits) => {
         message: commit.commit.message,
       });
 
-      accumulatorList.push(commitWithType);
+      accumulators.push(commitWithType);
     }
 
-    return accumulatorList;
+    return accumulators;
   }, []);
 
   return checkableCommits;
