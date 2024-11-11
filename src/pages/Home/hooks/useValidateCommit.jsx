@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { setCommitQualityScore } from "../../../entities/commit/commitEntity";
 import { getCheckableCommits } from "../../../entities/commit/services";
 import useCommitStore from "../../../features/commit/store/useCommitStore";
 import extractGitInfoFromURL from "../../../shared/utils/extractGitInfoFromURL";
@@ -27,14 +28,23 @@ const useValidateCommit = () => {
         const allCommits = await getCommitList({ owner, repo });
         const commitsToCheck = getCheckableCommits(allCommits);
 
-        const diffList = await getCommitDiffList({
+        const commitWithDiff = await getCommitDiffList({
           owner,
           repo,
           commitsToCheck,
         });
 
         setTotalNumOfCommit(allCommits.length);
-        setCommitList(diffList);
+
+        commitWithDiff.forEach((commit) => {
+          setCommitQualityScore({
+            commit,
+            commitType: commit.type,
+            diffObj: commit.diffObj,
+          });
+        });
+
+        setCommitList(commitWithDiff);
       } catch (error) {
         throw new Error(error);
       } finally {
