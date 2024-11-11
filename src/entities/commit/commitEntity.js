@@ -1,4 +1,5 @@
 import COMMIT_TYPE from "./enum/commitTypeEnum";
+import scoreDocsCommitType from "./services/scoreDocsCommitType";
 import scoreRemoveCommitType from "./services/scoreRemoveCommitType";
 
 /**
@@ -36,15 +37,20 @@ const makeCommitEntityWithDiff = ({ commit, diffObj }) => {
 };
 
 const setCommitQualityScore = ({ commit, commitType, diffObj }) => {
+  let qualityScore = 0;
+
   switch (commitType) {
     case COMMIT_TYPE.remove.type: {
-      const qualityScore = scoreRemoveCommitType(diffObj);
-      commit.qualityScore = qualityScore;
+      qualityScore = scoreRemoveCommitType(diffObj);
       break;
     }
-    default:
-      return 0;
+    case COMMIT_TYPE.docs.type: {
+      qualityScore = scoreDocsCommitType(diffObj);
+      break;
+    }
   }
+
+  commit.qualityScore = qualityScore;
 };
 
 export { createCommitEntity, makeCommitEntityWithDiff, setCommitQualityScore };

@@ -17,14 +17,15 @@ const useValidateCommit = () => {
   const handleCheckCommitQuality = useCallback(
     async (event) => {
       event.preventDefault();
-      setIsLoading(true);
-
-      const formData = new FormData(event.target);
-      const repositoryURL = Object.fromEntries(
-        formData.entries()
-      ).repositoryURL;
 
       try {
+        setIsLoading(true);
+
+        const formData = new FormData(event.target);
+        const repositoryURL = Object.fromEntries(
+          formData.entries()
+        ).repositoryURL;
+
         const { owner, repo } = extractGitInfoFromURL(repositoryURL);
         const allCommits = await getCommitList({ owner, repo });
         const commitsToCheck = getCheckableCommits(allCommits);
