@@ -92,3 +92,8 @@ const scoreRemoveCommitType = (diffObj) => {
 };
 
 export default scoreRemoveCommitType;
+export {
+  calculateFileScore,
+  calculateModuleFileDeletions,
+  isOnlyDeletionChange,
+};
