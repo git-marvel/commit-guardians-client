@@ -1,14 +1,16 @@
+import GithubAPIStatus from "../../features/githubAPIStatus/components/GithubAPIStatus";
 import CommitQualityScore from "../../features/commit/components/CommitValidationMark";
 import Button from "../../shared/components/Button";
 import Loading from "../../shared/components/Loading";
 import useValidateCommit from "./hooks/useValidateCommit";
 
 const Home = () => {
-  const { isLoading, commitList, handleCheckCommitQuality } =
+  const { isLoading, errorMessage, commitList, handleCheckCommitQuality } =
     useValidateCommit();
 
   return (
     <div className="absolute top-0 m-10">
+      <GithubAPIStatus />
       <form method="post" onSubmit={handleCheckCommitQuality}>
         <label>
           <span className="text-slate-400">Repository URL</span>
@@ -21,6 +23,7 @@ const Home = () => {
         </label>
         <Button>커밋 퀄리티 확인하기</Button>
       </form>
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       {isLoading && <Loading />}
       {commitList.map((commit, index) => (
         <div key={commit.sha}>
