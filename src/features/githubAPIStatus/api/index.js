@@ -6,6 +6,7 @@ const GITHUB_STATUS_API_ADRESS =
 const getGithubStatus = async () => {
   try {
     const githubStatus = await axios.get(GITHUB_STATUS_API_ADRESS);
+
     return githubStatus.data.status.indicator;
   } catch {
     return "unknown";
