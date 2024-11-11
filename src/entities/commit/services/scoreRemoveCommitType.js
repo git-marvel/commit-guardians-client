@@ -18,8 +18,9 @@ const calculateModuleFileDeletions = (fileName, changes) => {
   );
 
   const modifications = changes.filter((change) => {
-    const hasDeletion = change["-"] && change["-"].length > 0;
-    const hasAddition = change["+"] && change["+"].length > 0;
+    const hasDeletion = change["-"] !== undefined && change["-"].length > 0;
+    const hasAddition = change["+"] !== undefined && change["+"].length > 0;
+
     return hasDeletion && hasAddition;
   });
 
