@@ -17,7 +17,6 @@ const useValidateCommit = () => {
   const handleCheckCommitQuality = useCallback(
     async (event) => {
       event.preventDefault();
-      setIsLoading(true);
 
       const formData = new FormData(event.target);
       const repositoryURL = Object.fromEntries(
@@ -25,6 +24,8 @@ const useValidateCommit = () => {
       ).repositoryURL;
 
       try {
+        setIsLoading(true);
+
         const { owner, repo } = extractGitInfoFromURL(repositoryURL);
         const allCommits = await getCommitList({ owner, repo });
         const commitsToCheck = getCheckableCommits(allCommits);
