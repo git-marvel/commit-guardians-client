@@ -41,8 +41,11 @@ const getCheckableCommits = (totalCommits) => {
       const commitWithType = createCommitEntity({
         type: commitType,
         sha: commit.sha,
-        url: commit.commit.url,
-        author: commit.commit.author,
+        url: commit.html_url,
+        author: {
+          ...commit.commit.author,
+          avatar_url: commit.author.avatar_url,
+        },
         message: commit.commit.message,
       });
 
