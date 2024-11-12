@@ -2,6 +2,10 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 const initialState = {
+  repository: {
+    owner: null,
+    repo: null,
+  },
   commitInfo: {
     commitList: [],
     numOfCommit: null,
@@ -17,6 +21,15 @@ const useCommitStore = create(
   persist(
     (set) => ({
       ...initialState,
+
+      setRepository: ({ owner, repo }) =>
+        set((state) => ({
+          repository: {
+            ...state.repository,
+            owner: owner,
+            repo: repo,
+          },
+        })),
 
       setCommitList: (newCommitList) =>
         set((state) => ({

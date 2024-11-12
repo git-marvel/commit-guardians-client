@@ -9,6 +9,7 @@ const useValidateCommit = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const setCommitList = useCommitStore((state) => state.setCommitList);
+  const setRepository = useCommitStore((state) => state.setRepository);
   const setTotalNumOfCommit = useCommitStore(
     (state) => state.setTotalNumOfCommit
   );
@@ -27,6 +28,9 @@ const useValidateCommit = () => {
         ).repositoryURL;
 
         const { owner, repo } = extractGitInfoFromURL(repositoryURL);
+
+        setRepository({ owner, repo });
+
         const allCommits = await getCommitList({ owner, repo });
         const commitsToCheck = getCheckableCommits(allCommits);
 
@@ -54,7 +58,7 @@ const useValidateCommit = () => {
         setIsLoading(false);
       }
     },
-    [setCommitList, setTotalNumOfCommit]
+    [setCommitList, setRepository, setTotalNumOfCommit]
   );
 
   return { isLoading, errorMessage, commitList, handleCheckCommitQuality };

@@ -17,6 +17,9 @@ export default {
         wiggleFadeOut: "wiggleFadeOut 2s ease-in-out",
         loadingProgressBar: "loadingProgressBar 2s linear infinite",
       },
+      gridTemplateColumns: {
+        14: "repeat(14, minmax(0, 1fr))",
+      },
     },
     fontFamily: {
       Pixelify: ["Pixelify"],

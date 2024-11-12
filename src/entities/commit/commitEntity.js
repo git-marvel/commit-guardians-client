@@ -31,10 +31,18 @@ const createCommitEntity = ({ type, sha, url, author, message }) => {
 };
 
 const makeCommitEntityWithDiff = ({ commit, diffObj }) => {
-  commit.diffObj = diffObj;
-  commit.numOfFiles = Object.keys(diffObj).length;
+  const numOfFiles = Object.keys(diffObj).length;
+  const numOfChanges = Object.values(diffObj).reduce(
+    (total, changes) => total + changes.length,
+    0
+  );
 
-  return commit;
+  return {
+    ...commit,
+    diffObj,
+    numOfFiles,
+    numOfChanges,
+  };
 };
 
 const setCommitQualityScore = ({ commit, commitType, diffObj }) => {

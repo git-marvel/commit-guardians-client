@@ -11,15 +11,15 @@ const useGithubAPIStatus = () => {
       const transferStatusColor = (githubAPIStatus) => {
         switch (githubAPIStatus) {
           case "none":
-            return "bg-green-500";
+            return "bg-green-400 border-green-500";
           case "minor":
-            return "bg-yellow-500";
+            return "bg-yellow-400 border-yellow-500";
           case "major":
-            return "bg-red-500";
+            return "bg-red-400 border-red-500";
           case "unknown":
-            return "bg-red-500";
+            return "bg-slate-200 border-black-700";
           default:
-            return "bg-red-500";
+            return "bg-red-500 border-red-700";
         }
       };
 
