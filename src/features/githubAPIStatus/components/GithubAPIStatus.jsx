@@ -4,9 +4,11 @@ const GithubAPIStatus = () => {
   const { githubAPIStatusColor } = useGithubAPIStatus();
 
   return (
-    <div className="flex items-center space-x-2">
-      <h3>GitHub API Status</h3>
-      <div className={`h-5 w-5 rounded-full ${githubAPIStatusColor}`}></div>
+    <div className="flex cursor-pointer items-center rounded-full border bg-slate-50 px-4 py-1">
+      <p className="pr-2 text-sm text-slate-400">GitHub API Status</p>
+      <div
+        className={`h-4 w-4 rounded-full border ${githubAPIStatusColor}`}
+      ></div>
     </div>
   );
 };
