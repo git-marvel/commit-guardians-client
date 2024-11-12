@@ -12,13 +12,13 @@ const MyCommitBadge = () => {
   );
 
   return (
-    <>
+    <div className="flex h-dvh flex-col items-center justify-center">
       <Button
         onClick={handleRoutingCommitScoreboard}
       >{`💯 ${perfectCommitNumber} commits`}</Button>
       <CopyBadgeButton />
       <Footer />
-    </>
+    </div>
   );
 };
 
