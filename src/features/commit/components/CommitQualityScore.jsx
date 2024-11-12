@@ -2,9 +2,11 @@ import PropTypes from "prop-types";
 
 const CommitQualityScore = ({ qualityScore }) => {
   return (
-    <div className="w-20 rounded px-1 py-1 text-xl font-bold text-blue-500">
-      Score: {qualityScore}
-    </div>
+    <p
+      className={`w-20 rounded py-1 text-base font-bold ${qualityScore === 100 ? "text-green-400" : "text-slate-500"} `}
+    >
+      {qualityScore === 100 ? `${qualityScore}점 🎉` : `${qualityScore}점`}
+    </p>
   );
 };
 
