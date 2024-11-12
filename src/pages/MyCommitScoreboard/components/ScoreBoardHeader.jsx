@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const ScoreBoardHeader = ({ gridCols }) => {
   return (
     <div
-      className={`${gridCols} grid w-full gap-4 divide-x-2 bg-slate-100 px-10 text-sm text-slate-400`}
+      className={`${gridCols} grid w-full gap-4 divide-x-2 bg-slate-900 px-10 text-sm text-slate-300`}
     >
       <p className="col-span-1 px-2 py-1">TYPE</p>
       <p className="col-span-5 px-2 py-1">COMMIT MESSAGE</p>
