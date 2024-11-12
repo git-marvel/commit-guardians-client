@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
 
+const MAX_WIDTH = 96;
+
 const BarGraph = ({ totalChanges, qualityScore }) => {
-  const width = Math.min(totalChanges, 96) * 10;
-  const scoreWidth = Math.min((totalChanges * qualityScore) / 100, 96) * 10;
+  const width = Math.min(totalChanges, MAX_WIDTH) * 10;
+  const scoreWidth =
+    Math.min((totalChanges * qualityScore) / 100, MAX_WIDTH) * 10;
 
   return (
     <>
