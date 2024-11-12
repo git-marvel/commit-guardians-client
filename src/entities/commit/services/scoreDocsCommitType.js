@@ -15,6 +15,10 @@ const DOCS_TYPE_FILENAME_EXTENSIONS = [
  * @returns {number} commitScore - 최종 점수
  */
 const scoreDocsCommitType = (diffObj) => {
+  if (!diffObj || Object.keys(diffObj).length === 0) {
+    return 0;
+  }
+
   const passedFilesCount = Object.keys(diffObj).filter((filePath) => {
     return DOCS_TYPE_FILENAME_EXTENSIONS.some((extension) =>
       filePath.endsWith(extension)
