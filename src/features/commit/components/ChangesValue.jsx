@@ -4,7 +4,9 @@ import FileIcon from "../../../shared/assets/svg/file-icon.svg";
 import BarGraph from "../../../shared/components/BarGraph";
 
 const ChangesValue = memo(({ commit }) => {
-  if (!commit.numOfFiles) return null;
+  if (!commit.numOfFiles) {
+    return null;
+  }
 
   return (
     <div className="flex">
