@@ -9,7 +9,7 @@ const Home = () => {
     useValidateCommit();
 
   return (
-    <div className="absolute top-0 m-10">
+    <div className="m-10">
       <GithubAPIStatus />
       <form method="post" onSubmit={handleCheckCommitQuality}>
         <label>
