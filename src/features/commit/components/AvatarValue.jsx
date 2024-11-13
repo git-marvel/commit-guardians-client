@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 
 const AvatarValue = ({ author }) => {
+  if (!author.avatar_url) {
+    return null;
+  }
+
   return (
     <>
       <img

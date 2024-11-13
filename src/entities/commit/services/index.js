@@ -44,7 +44,7 @@ const getCheckableCommits = (totalCommits) => {
         url: commit.html_url,
         author: {
           ...commit.commit.author,
-          avatar_url: commit.author.avatar_url,
+          avatar_url: commit.author?.avatar_url,
         },
         message: commit.commit.message,
       });
