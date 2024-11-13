@@ -1,6 +1,7 @@
 const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 const ERROR_MESSAGES = {
+  githubStatusError: "Github 상태가 원할하지 않습니다.",
   invalidURL:
     "적합하지 않은 URL입니다. [https://github.com/소유자이름/레포지토리이름/...] 혹은 [github.com/소유자이름/레포지토리이름/] 처럼 URL를 넣어주세요!",
   invalidGithubURL:
