@@ -1,4 +1,4 @@
-const TEST_TYPE_FILENAME_EXTENSIONS = new Set(["test", "spec", "mock"]);
+const TEST_TYPE_VALIDATED_KEYWORDS = ["test", "tests", "spec", "mock"];
 
 /**
  * @param {Object} diffObj - 변경사항 객체
@@ -6,13 +6,22 @@ const TEST_TYPE_FILENAME_EXTENSIONS = new Set(["test", "spec", "mock"]);
  */
 const scoreTestCommitType = (diffObj) => {
   const passedFilesCount = Object.keys(diffObj).filter((filePath) => {
-    const fileName = filePath.slice(filePath.lastIndexOf("/") + 1);
+    const separatedFileNames = filePath
+      .substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."))
+      .toLowerCase()
+      .split(".");
 
-    const hasTestFileExtension = fileName
-      .split(".")
-      .some((name) => TEST_TYPE_FILENAME_EXTENSIONS.has(name));
+    for (const name of separatedFileNames) {
+      const isTestType = TEST_TYPE_VALIDATED_KEYWORDS.some((extension) =>
+        name.endsWith(extension)
+      );
 
-    return hasTestFileExtension;
+      if (isTestType) {
+        return isTestType;
+      }
+    }
+
+    return false;
   }).length;
 
   const commitScore = Math.floor(
