@@ -1,5 +1,5 @@
-import GithubAPIStatus from "../../features/githubAPIStatus/components/GithubAPIStatus";
 import CommitQualityScore from "../../features/commit/components/CommitQualityScore";
+import GithubAPIStatus from "../../features/githubAPIStatus/components/GithubAPIStatus";
 import Button from "../../shared/components/Button";
 import Loading from "../../shared/components/Loading";
 import useValidateCommit from "./hooks/useValidateCommit";
