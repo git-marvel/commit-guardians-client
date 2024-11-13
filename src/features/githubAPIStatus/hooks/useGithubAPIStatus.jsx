@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { getGithubStatus } from "../api";
+import useGithubStatusStore from "../store";
 
 const useGithubAPIStatus = () => {
   const [githubAPIStatusColor, setGithubAPIStatusColor] = useState("unknown");
+  const setGithubStatus = useGithubStatusStore(
+    (state) => state.setGithubStatus
+  );
 
   useEffect(() => {
     const storeGithubStatus = async () => {
       const githubAPIStatus = await getGithubStatus();
+
+      setGithubStatus(githubAPIStatus);
 
       const transferStatusColor = (githubAPIStatus) => {
         switch (githubAPIStatus) {
@@ -28,7 +34,7 @@ const useGithubAPIStatus = () => {
     };
 
     storeGithubStatus();
-  }, []);
+  }, [setGithubStatus]);
 
   return { githubAPIStatusColor };
 };

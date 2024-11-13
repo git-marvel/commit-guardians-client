@@ -7,8 +7,10 @@ const throwCustomErrorMessage = (error) => {
       throw new Error(ERROR_MESSAGES.rateLimitExceeded);
     case 404:
       throw new Error(ERROR_MESSAGES.invalidGithubURL);
-    default:
+    case 500:
       throw new Error(ERROR_MESSAGES.networkError);
+    default:
+      throw error;
   }
 };
 
