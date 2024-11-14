@@ -2,6 +2,7 @@ const DOCS_TYPE_FILENAME_EXTENSIONS = [
   ".docs",
   ".md",
   ".mdx",
+  ".rst",
   ".img",
   ".png",
   ".jpeg",
