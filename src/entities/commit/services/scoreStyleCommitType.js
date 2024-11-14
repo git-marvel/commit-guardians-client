@@ -1,4 +1,5 @@
 import DiffMatchPatch from "diff-match-patch";
+
 const STYLE_FILE_NAME_WORDS = ["prettier", "eslint", "config"];
 const CLASS_NAME_REGEX = /className="([^"]*)"/;
 const OBJECT_PARAMS_REGEX = /\{\s([^}]*)\s\}/;
@@ -10,8 +11,8 @@ const isStyleFile = (filePath) => {
   return STYLE_FILE_NAME_WORDS.some((word) => fileName.includes(word));
 };
 
-const containsConsoleLog = (string) => {
-  return string.includes("console.log");
+const containsConsole = (string) => {
+  return string.includes("console");
 };
 
 const extractPattern = (text, pattern) => {
@@ -26,15 +27,15 @@ const extractPattern = (text, pattern) => {
   return { extracted, remaining };
 };
 
-const hasIdenticalClasses = ({ srtingAdded, srtingRemoved }) => {
-  const classAdded = extractPattern(srtingAdded, CLASS_NAME_REGEX);
-  const classRemoved = extractPattern(srtingRemoved, CLASS_NAME_REGEX);
+const hasIdenticalClasses = ({ stringAdded, stringRemoved }) => {
+  const classAdded = extractPattern(stringAdded, CLASS_NAME_REGEX);
+  const classRemoved = extractPattern(stringRemoved, CLASS_NAME_REGEX);
 
   if (classAdded.extracted === classRemoved.extracted) {
     return {
       identical: true,
-      srtingAdded: classAdded.remaining,
-      srtingRemoved: classRemoved.remaining,
+      stringAdded: classAdded.remaining,
+      stringRemoved: classRemoved.remaining,
     };
   }
 
@@ -47,20 +48,20 @@ const hasIdenticalClasses = ({ srtingAdded, srtingRemoved }) => {
 
   return {
     identical: isIdentical,
-    srtingAdded: classAdded.remaining,
-    srtingRemoved: classRemoved.remaining,
+    stringAdded: classAdded.remaining,
+    stringRemoved: classRemoved.remaining,
   };
 };
 
-const hasIdenticalObjectParams = ({ srtingAdded, srtingRemoved }) => {
-  const objectAdded = extractPattern(srtingAdded, OBJECT_PARAMS_REGEX);
-  const objectRemoved = extractPattern(srtingRemoved, OBJECT_PARAMS_REGEX);
+const hasIdenticalObjectParams = ({ stringAdded, stringRemoved }) => {
+  const objectAdded = extractPattern(stringAdded, OBJECT_PARAMS_REGEX);
+  const objectRemoved = extractPattern(stringRemoved, OBJECT_PARAMS_REGEX);
 
   if (objectAdded.extracted === objectRemoved.extracted) {
     return {
       identical: true,
-      srtingAdded: objectAdded.remaining,
-      srtingRemoved: objectRemoved.remaining,
+      stringAdded: objectAdded.remaining,
+      stringRemoved: objectRemoved.remaining,
     };
   }
 
@@ -73,30 +74,29 @@ const hasIdenticalObjectParams = ({ srtingAdded, srtingRemoved }) => {
 
   return {
     identical: isIdentical,
-    srtingAdded: objectAdded.remaining,
-    srtingRemoved: objectRemoved.remaining,
+    stringAdded: objectAdded.remaining,
+    stringRemoved: objectRemoved.remaining,
   };
 };
 
 const containsOnlySpecialChars = (text) => SPECIAL_CHARS_REGEX.test(text);
 
 const isStyleChange = (change) => {
-  const srtingAdded = change["+"].slice(1);
-  const srtingRemoved = change["-"].slice(1);
+  const stringAdded = change["+"].slice(1);
+  const stringRemoved = change["-"].slice(1);
   const dmp = new DiffMatchPatch();
   const diffs = dmp
-    .diff_main(srtingAdded, srtingRemoved)
+    .diff_main(stringAdded, stringRemoved)
     .filter(([type]) => type !== 0);
 
-  if (
-    diffs.every(
-      ([, text]) => containsOnlySpecialChars(text) || containsConsoleLog(text)
-    )
-  ) {
+  const isValidDiff = (text) =>
+    containsOnlySpecialChars(text) || containsConsole(text);
+
+  if (diffs.every(([, text]) => isValidDiff(text))) {
     return true;
   }
 
-  const classComparison = hasIdenticalClasses({ srtingAdded, srtingRemoved });
+  const classComparison = hasIdenticalClasses({ stringAdded, stringRemoved });
   if (!classComparison.identical) {
     return false;
   }
@@ -107,12 +107,10 @@ const isStyleChange = (change) => {
   }
 
   const remainingDiffs = dmp
-    .diff_main(paramComparison.srtingAdded, paramComparison.srtingRemoved)
+    .diff_main(paramComparison.stringAdded, paramComparison.stringRemoved)
     .filter(([type]) => type !== 0);
 
-  return remainingDiffs.every(
-    ([, text]) => containsOnlySpecialChars(text) || containsConsoleLog(text)
-  );
+  return remainingDiffs.every(([, text]) => isValidDiff(text));
 };
 
 /**
