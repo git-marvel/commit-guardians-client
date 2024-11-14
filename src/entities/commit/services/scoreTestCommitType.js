@@ -12,6 +12,11 @@ const isTestFile = (partOfFileName) => {
  */
 const scoreTestCommitType = (diffObj) => {
   const totalFiles = Object.keys(diffObj);
+
+  if (totalFiles.length === 0) {
+    return 0;
+  }
+
   const passedFilesCount = totalFiles.reduce((count, filePath) => {
     const fileName = filePath
       .substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."))
