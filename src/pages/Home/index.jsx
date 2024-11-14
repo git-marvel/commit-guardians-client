@@ -1,4 +1,3 @@
-import CommitQualityScore from "../../features/commit/components/CommitQualityScore";
 import GithubAPIStatus from "../../features/githubAPIStatus/components/GithubAPIStatus";
 import Button from "../../shared/components/Button";
 import Loading from "../../shared/components/Loading";
@@ -9,7 +8,6 @@ const Home = () => {
     isLoading,
     errorMessage,
     isGithubAPIHealthy,
-    commitList,
     handleCheckCommitQuality,
   } = useValidateCommit();
 
@@ -32,38 +30,6 @@ const Home = () => {
       )}
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       {isLoading && <Loading />}
-      {commitList.map((commit, index) => (
-        <div key={commit.sha}>
-          <div className="mt-10 bg-lime-100">
-            {commit.qualityScore !== null &&
-              commit.qualityScore !== undefined && (
-                <CommitQualityScore qualityScore={commit.qualityScore} />
-              )}
-            <span className="p-1 text-red-500">index: {index}</span>
-            <span className="p-1 text-slate-400">sha: {commit.sha}</span>
-            <span className="p-3 text-green-400">{commit.type}</span>
-            <span>message: {commit.message}</span>
-          </div>
-          {commit.diffObj &&
-            Object.entries(commit.diffObj).map(([key, changes]) => (
-              <div key={key}>
-                <span className="p-1 text-blue-500">File: {key}</span>
-                {changes.map((change, changeIndex) => (
-                  <div key={changeIndex}>
-                    {change["+"] && (
-                      <span className="p-1 text-green-500">
-                        + {change["+"]}
-                      </span>
-                    )}
-                    {change["-"] && (
-                      <span className="p-1 text-red-500">- {change["-"]}</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            ))}
-        </div>
-      ))}
     </div>
   );
 };
