@@ -28,7 +28,7 @@ const diffObj = {
   allFailed: {
     "a/scripts/utils/TemplateHelpers.ts": [
       {
-        "+": "+  return `\`${method.name}(${params})\``;",
+        "+": "+  return `\\`${method.name}(${params})\\``;",
         "-": "-  return `${method.name}(${params})`;",
       },
     ],
