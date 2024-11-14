@@ -26,10 +26,10 @@ const diffObj = {
     ],
   },
   allFailed: {
-    "a/docs/source/use/using.rst": [
+    "a/scripts/utils/TemplateHelpers.ts": [
       {
-        "+": '+\t\t\thref="../projects/kernels.html"]\n',
-        "-": '-\t\t\thref="../projects/kernels.html]\n',
+        "+": "+  return `\`${method.name}(${params})\``;",
+        "-": "-  return `${method.name}(${params})`;",
       },
     ],
   },
