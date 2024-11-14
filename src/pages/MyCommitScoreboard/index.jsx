@@ -4,7 +4,7 @@ import ScoreBoardHeader from "./components/ScoreBoardHeader";
 import ScoreBoardRow from "./components/ScoreBoardRow";
 import useShowCommitDetails from "./hooks/useShowCommitDetails";
 
-const GRID_COLS = "grid-cols-14";
+const GRID_COLS = "grid-cols-16";
 
 const MyCommitScoreboard = () => {
   const { commitList } = useShowCommitDetails();

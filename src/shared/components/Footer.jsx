@@ -10,7 +10,7 @@ const Footer = () => {
       >
         <h2 className="m-1 text-center text-sm">
           We are commit guardians!
-          <p className="text-purple-700">Team @git-marvel</p>
+          <p className="text-blue-700">Team @git-marvel</p>
         </h2>
       </a>
       <div className="text-s mb-8 mt-2 flex">

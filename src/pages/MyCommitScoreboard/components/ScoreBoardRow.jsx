@@ -15,20 +15,20 @@ const ScoreBoardRow = ({ gridCols, commit }) => {
       <div className="col-span-1 px-2 py-1">
         <CommitTypeValue type={commit.type} />
       </div>
-      <div className="col-span-5 px-2 py-1">
+      <div className="col-span-6 px-2 py-1">
         <CommitMessageValue commit={commit} />
+      </div>
+      <div className="col-span-3 flex flex-row items-center px-2 py-1">
+        <ChangesValue commit={commit} />
+      </div>
+      <div className="col-span-1 px-2 py-1">
+        <CommitQualityScore qualityScore={commit.qualityScore} />
       </div>
       <div className="col-span-2 flex flex-row items-center px-2 py-1">
         <AvatarValue author={commit.author} />
       </div>
       <div className="col-span-2 px-2 py-1 text-sm">
         {formatDate(commit.author.date)}
-      </div>
-      <div className="col-span-2 flex flex-row items-center px-2 py-1">
-        <ChangesValue commit={commit} />
-      </div>
-      <div className="col-span-1 px-2 py-1">
-        <CommitQualityScore qualityScore={commit.qualityScore} />
       </div>
       <div className="col-span-1 px-2 py-1">
         <SHAValue sha={commit.sha} />

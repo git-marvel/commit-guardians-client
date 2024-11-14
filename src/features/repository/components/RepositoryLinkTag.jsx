@@ -9,7 +9,7 @@ const RepositoryLinkTag = () => {
       target="_blank"
     >
       <span>{repository.owner}</span>
-      <span className="px-2 text-rose-300">/</span>
+      <span className="px-2 font-black text-sky-300">/</span>
       <span className="text-lg font-semibold text-slate-800">
         {repository.repo}
       </span>
