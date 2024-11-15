@@ -17,7 +17,7 @@ const useCopiedBadge = () => {
 
         setBadgeTagUrl(svgUrl);
       } catch (err) {
-        setError(`뱃지 불러오기를 실패했네요..🥲, ${err}`);
+        setError(`Fail to fetch the Badge..🥲, ${err}`);
       }
     };
 
@@ -41,7 +41,7 @@ const useCopiedBadge = () => {
 
       return badgeTag;
     } catch (error) {
-      setError(`뱃지 복사를 실패했네요..🥲, ${error}`);
+      setError(`Fail to copy the Badge..🥲, ${error}`);
     }
   }, [badgeTagUrl]);
 
