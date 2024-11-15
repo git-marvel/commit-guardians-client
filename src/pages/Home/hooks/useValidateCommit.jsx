@@ -16,7 +16,6 @@ const useValidateCommit = () => {
   const setTotalNumOfCommit = useCommitStore(
     (state) => state.setTotalNumOfCommit
   );
-  const commitList = useCommitStore((state) => state.commitInfo.commitList);
   const githubStatus = useGithubStatusStore((state) => state.githubStatus);
 
   useEffect(() => {
@@ -79,7 +78,6 @@ const useValidateCommit = () => {
     isLoading,
     errorMessage,
     isGithubAPIHealthy,
-    commitList,
     handleCheckCommitQuality,
   };
 };

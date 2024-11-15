@@ -1,6 +1,9 @@
+import COMMIT_TYPE from "../../entities/commit/enum/commitTypeEnum";
+import CommitTypeValue from "../../features/commit/components/CommitTypeValue";
 import GithubAPIStatus from "../../features/githubAPIStatus/components/GithubAPIStatus";
-import Button from "../../shared/components/Button";
+import RepositoryInputForm from "../../features/repository/components/RepositoryInputForm";
 import Loading from "../../shared/components/Loading";
+import Title from "./components/Title";
 import useValidateCommit from "./hooks/useValidateCommit";
 
 const Home = () => {
@@ -12,24 +15,23 @@ const Home = () => {
   } = useValidateCommit();
 
   return (
-    <div className="m-10">
-      <GithubAPIStatus />
-      {isGithubAPIHealthy && (
-        <form method="post" onSubmit={handleCheckCommitQuality}>
-          <label>
-            <span className="text-slate-400">Repository URL</span>
-            <input
-              className="w-full"
-              name="repositoryURL"
-              placeholder="ex) https://github.com/git-marvel/commit-guardians-client"
-              required
-            />
-          </label>
-          <Button>커밋 퀄리티 확인하기</Button>
-        </form>
-      )}
-      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-      {isLoading && <Loading />}
+    <div className="h-screen w-screen bg-gray-100">
+      <div className="m-4 flex flex-row items-center justify-end px-12 py-5">
+        <GithubAPIStatus />
+      </div>
+      <div className="flex flex-col items-center justify-center">
+        <div className="m-2 flex flex-row gap-2">
+          {COMMIT_TYPE.list.map((typeObj) => (
+            <CommitTypeValue key={typeObj.type} type={typeObj.type} />
+          ))}
+        </div>
+        <Title />
+        {isGithubAPIHealthy && !isLoading && (
+          <RepositoryInputForm onSubmit={handleCheckCommitQuality} />
+        )}
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+        {isLoading && <Loading />}
+      </div>
     </div>
   );
 };
