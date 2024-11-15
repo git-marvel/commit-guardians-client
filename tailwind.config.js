@@ -6,6 +6,7 @@ export default {
         wiggleFadeOut: {
           "0%": { transform: "rotate(-3deg)", opacity: "1" },
           "50%": { transform: "rotate(3deg)", opacity: "1" },
+          "75%": { transform: "rotate(3deg)", opacity: "0.5" },
           "100%": { transform: "rotate(-3deg)", opacity: "0" },
         },
         loadingProgressBar: {
@@ -14,7 +15,7 @@ export default {
         },
       },
       animation: {
-        wiggleFadeOut: "wiggleFadeOut 2s ease-in-out",
+        wiggleFadeOut: "wiggleFadeOut 4s ease-in-out",
         loadingProgressBar: "loadingProgressBar 2s linear infinite",
       },
       gridTemplateColumns: {
