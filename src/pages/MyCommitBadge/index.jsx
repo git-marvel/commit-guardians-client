@@ -3,6 +3,7 @@ import useCommitStore from "../../features/commit/store/useCommitStore";
 import CopyBadgeButton from "../../features/commitBadge/components/CopyBadge";
 import Button from "../../shared/components/Button";
 import Footer from "../../shared/components/Footer";
+import HomeButton from "../../shared/components/HomeButton";
 
 const MyCommitBadge = () => {
   const navigate = useNavigate();
@@ -14,6 +15,9 @@ const MyCommitBadge = () => {
 
   return (
     <div className="h-screen w-screen bg-gray-100">
+      <div className="m-4 flex flex-row items-center justify-start px-12 py-5">
+        <HomeButton />
+      </div>
       <div className="flex flex-col items-center justify-center">
         {perfectCommitNumber && (
           <>
