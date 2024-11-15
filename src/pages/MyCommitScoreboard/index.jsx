@@ -3,8 +3,9 @@ import RepositoryLinkTag from "../../features/repository/components/RepositoryLi
 import ScoreBoardHeader from "./components/ScoreBoardHeader";
 import ScoreBoardRow from "./components/ScoreBoardRow";
 import useShowCommitDetails from "./hooks/useShowCommitDetails";
+import HomeButton from "../../shared/components/HomeButton";
 
-const GRID_COLS = "grid-cols-14";
+const GRID_COLS = "grid-cols-16";
 
 const MyCommitScoreboard = () => {
   const { commitList } = useShowCommitDetails();
@@ -12,7 +13,10 @@ const MyCommitScoreboard = () => {
   return (
     <>
       <div className="m-4 flex w-full flex-row items-center justify-between px-12 py-5">
-        <RepositoryLinkTag />
+        <div className="flex flex-row items-center">
+          <HomeButton />
+          <RepositoryLinkTag />
+        </div>
         <GithubAPIStatus />
       </div>
       <ScoreBoardHeader gridCols={GRID_COLS} />

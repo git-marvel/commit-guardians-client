@@ -1,13 +1,7 @@
 import PropTypes from "prop-types";
 
 const Badge = ({ url }) => {
-  const githubUrl = "https://github.com/git-marvel/commit-guardians-client";
-
-  return (
-    <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-      <img src={url} alt="Commit Guardians Badge" />
-    </a>
-  );
+  return <img src={url} alt="Commit Guardians Badge" width="300" />;
 };
 
 Badge.propTypes = {

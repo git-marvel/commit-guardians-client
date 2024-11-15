@@ -10,7 +10,7 @@ const Footer = () => {
       >
         <h2 className="m-1 text-center text-sm">
           We are commit guardians!
-          <p className="text-purple-700">Team @git-marvel</p>
+          <p className="text-blue-700">Team @git-marvel</p>
         </h2>
       </a>
       <div className="text-s mb-8 mt-2 flex">
@@ -35,6 +35,7 @@ const GithubNameButton = ({ name, githubUrl }) => {
   return (
     <a
       href={githubUrl}
+      target="_blank"
       className="mb-2 me-2 flex rounded-full border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-slate-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
     >
       <h2 className="m-1 text-sm">{name}</h2>

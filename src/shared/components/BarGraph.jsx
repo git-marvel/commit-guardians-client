@@ -12,7 +12,7 @@ const BarGraph = ({ totalChanges, qualityScore }) => {
       <div className="relative">
         {scoreWidth !== 0 && (
           <div
-            className={`absolute z-40 h-6 rounded-[3px] border border-green-400 bg-green-300 ${qualityScore !== 100 && "rounded-r-none"}`}
+            className={`absolute z-40 h-6 rounded-[3px] border border-blue-400 bg-sky-300 ${qualityScore !== 100 && "rounded-r-none"}`}
             style={{ width: `${scoreWidth}px` }}
           ></div>
         )}
