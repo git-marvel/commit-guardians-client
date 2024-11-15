@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
-import { memo } from "react";
 import GithubLogo from "../../../shared/assets/svg/github-logo.svg";
 import Button from "../../../shared/components/Button";
 import CheckIcon from "../../../shared/components/CheckIcon";
 
-const RepositoryInputForm = memo(({ onSubmit }) => {
+const RepositoryInputForm = ({ onSubmit }) => {
   return (
     <form
       className="mx-auto w-full max-w-2xl"
@@ -42,12 +41,10 @@ const RepositoryInputForm = memo(({ onSubmit }) => {
       </div>
     </form>
   );
-});
+};
 
 RepositoryInputForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
-
-RepositoryInputForm.displayName = "RepositoryInputForm";
 
 export default RepositoryInputForm;
