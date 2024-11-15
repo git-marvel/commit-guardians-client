@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setCommitQualityScore } from "../../../entities/commit/commitEntity";
 import { getCheckableCommits } from "../../../entities/commit/services";
+import { getCommitSummary } from "../../../entities/score/services";
 import useCommitStore from "../../../features/commit/store/useCommitStore";
 import useGithubStatusStore from "../../../features/githubAPIStatus/store";
 import { ERROR_MESSAGES } from "../../../shared/constants";
@@ -19,6 +20,7 @@ const useValidateCommit = () => {
   const setTotalNumOfCommit = useCommitStore(
     (state) => state.setTotalNumOfCommit
   );
+  const setCommitSummary = useCommitStore((state) => state.setCommitSummary);
   const githubStatus = useGithubStatusStore((state) => state.githubStatus);
 
   const shouldNavigate = useMemo(
@@ -63,8 +65,11 @@ const useValidateCommit = () => {
       });
 
       setCommitList(commitWithDiff);
+
+      const totalCommitQualityInfo = getCommitSummary(commitWithDiff);
+      setCommitSummary(totalCommitQualityInfo);
     },
-    [setCommitList, setTotalNumOfCommit]
+    [setCommitList, setCommitSummary, setTotalNumOfCommit]
   );
 
   const handleCheckCommitQuality = useCallback(

@@ -1,14 +1,14 @@
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../../shared/config";
 
-const getBadgeUrl = async ({ qualityPercent }) => {
+const getBadgeUrl = async ({ totalScore }) => {
   let fileRef;
 
-  if (qualityPercent >= 80) {
+  if (totalScore >= 80) {
     fileRef = ref(storage, "badges/commit-rulemaster-style-01.svg");
-  } else if (qualityPercent >= 50) {
+  } else if (totalScore >= 50) {
     fileRef = ref(storage, "badges/commit-hardworker-style-02.svg");
-  } else if (qualityPercent >= 30) {
+  } else if (totalScore >= 30) {
     fileRef = ref(storage, "badges/commit-newbie-style-03.svg");
   } else {
     fileRef = ref(storage, "badges/commit-myway-style-04.svg");

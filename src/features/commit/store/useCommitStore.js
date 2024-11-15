@@ -11,9 +11,9 @@ const initialState = {
     numOfCommit: null,
     totalNumOfCommit: null,
   },
-  scoredCommitInfo: {
-    perfectCommitNumber: null,
-    finalQualityPercent: null,
+  commitSummary: {
+    numOfPerfectCommits: null,
+    totalScore: null,
   },
 };
 
@@ -48,9 +48,9 @@ const useCommitStore = create(
           },
         })),
 
-      setScoredCommitInfo: (newScoredCommitInfo) =>
+      setCommitSummary: (summaryObj) =>
         set(() => ({
-          scoredCommitInfo: newScoredCommitInfo,
+          commitSummary: summaryObj,
         })),
 
       clearAll: () =>
