@@ -12,7 +12,7 @@ const MyCommitScoreboard = () => {
 
   return (
     <>
-      <div className="m-4 flex w-full flex-row items-center justify-between px-12 py-5">
+      <div className="m-4 flex w-full flex-row items-center justify-between px-10 py-5">
         <div className="flex flex-row items-center">
           <HomeButton />
           <RepositoryLinkTag />
