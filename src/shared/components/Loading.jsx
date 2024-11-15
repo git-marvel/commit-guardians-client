@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Loading = ({ message = "결과를 불러오고 있어요" }) => {
+const Loading = ({ message = "Please wait for seconds" }) => {
   return (
     <>
       <div className="my-5 w-1/3">
