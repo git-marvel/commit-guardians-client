@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import useCommitStore from "../../commit/store/useCommitStore";
 import { getBadgeUrl } from "../services";
 
 const COPIED_DURATION_MS = 2000;
@@ -7,11 +8,12 @@ const useCopiedBadge = () => {
   const [badgeTagUrl, setBadgeTagUrl] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
   const [error, setError] = useState(null);
+  const totalScore = useCommitStore((state) => state.commitSummary.totalScore);
 
   useEffect(() => {
     const fetchBadgeUrl = async () => {
       try {
-        const svgUrl = await getBadgeUrl({ qualityPercent: 100 });
+        const svgUrl = await getBadgeUrl({ totalScore });
 
         setBadgeTagUrl(svgUrl);
       } catch (err) {
@@ -20,7 +22,7 @@ const useCopiedBadge = () => {
     };
 
     fetchBadgeUrl();
-  }, []);
+  }, [totalScore]);
 
   const copyBadgeTag = useCallback(async () => {
     try {
