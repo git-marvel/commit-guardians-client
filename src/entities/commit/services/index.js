@@ -2,7 +2,11 @@ import { createCommitEntity } from "../commitEntity";
 import COMMIT_FORMAT_STYLE from "../enum/commitFormatStyleEnum";
 import COMMIT_TYPE from "../enum/commitTypeEnum";
 
-const removeParentheses = (string) => string.replace(/\(.*\)$/, "");
+const EMOJI_REGEX =
+  /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;
+
+const removeEmoji = (string) => string.replace(EMOJI_REGEX, "");
+const removeSpecialCharacters = (string) => string.replace(/[^a-zA-Z]/g, "");
 
 /**
  * @param {string} firstWordOfCommitMessage
@@ -14,7 +18,7 @@ const makeCommitTypeWithFormatStyle = (firstWordOfCommitMessage) => {
   );
 
   const commitTypeString = formatStyle
-    ? removeParentheses(
+    ? removeSpecialCharacters(
         firstWordOfCommitMessage.split(formatStyle.splitWith)[0]
       )
         .trim()
@@ -34,7 +38,8 @@ const makeCommitTypeWithFormatStyle = (firstWordOfCommitMessage) => {
  */
 const getCheckableCommits = (totalCommits) => {
   const checkableCommits = totalCommits.reduce((accumulators, commit) => {
-    const firstWord = commit.commit.message.split(" ")[0];
+    const commitMessage = removeEmoji(commit.commit.message).trim();
+    const firstWord = commitMessage.split(" ")[0];
     const commitType = makeCommitTypeWithFormatStyle(firstWord);
 
     if (commitType !== undefined) {
