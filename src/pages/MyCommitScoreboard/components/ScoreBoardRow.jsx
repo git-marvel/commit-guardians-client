@@ -5,7 +5,6 @@ import CommitMessageValue from "../../../features/commit/components/CommitMessag
 import CommitQualityScore from "../../../features/commit/components/CommitQualityScore";
 import CommitTypeValue from "../../../features/commit/components/CommitTypeValue";
 import SHAValue from "../../../features/commit/components/SHAValue";
-import formatDate from "../../../shared/utils/formatDate";
 
 const ScoreBoardRow = ({ gridCols, commit }) => {
   return (
@@ -28,7 +27,10 @@ const ScoreBoardRow = ({ gridCols, commit }) => {
         <AvatarValue author={commit.author} />
       </div>
       <div className="col-span-2 px-2 py-1 text-sm">
-        {formatDate(commit.author.date)}
+        <p>{new Date(commit.author.date).toDateString()}</p>
+        <span className="text-xs text-slate-400">
+          {new Date(commit.author.date).toTimeString()}
+        </span>
       </div>
       <div className="col-span-1 px-2 py-1">
         <SHAValue sha={commit.sha} />
