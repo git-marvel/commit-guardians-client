@@ -3,12 +3,17 @@
  * @returns {{ numOfPerfectCommits: number, totalScore: number }}
  */
 const getCommitSummary = (commitList) => {
-  const numOfPerfectCommits = commitList.filter(
-    (commit) => commit.qualityScore === 100
-  ).length;
-  const totalQualityScore = Math.floor(
-    (numOfPerfectCommits / commitList.length) * 100
-  );
+  let numOfPerfectCommits = 0;
+  let totalScoreSum = 0;
+
+  commitList.forEach((commit) => {
+    if (commit.qualityScore === 100) {
+      numOfPerfectCommits++;
+    }
+    totalScoreSum += commit.qualityScore;
+  });
+
+  const totalQualityScore = Math.floor(totalScoreSum / commitList.length);
   const totalScore =
     totalQualityScore === 0 && numOfPerfectCommits > 0 ? 1 : totalQualityScore;
 
