@@ -29,10 +29,12 @@ const MyCommitBadge = () => {
         )}
         <div className="mb-2 flex flex-row items-center justify-between">
           <Button onClick={handleRoutingCommitScoreboard}>
-            View All Results
-            <span className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-200 text-xs font-semibold text-blue-800">
-              {numOfCommit}
-            </span>
+            <>
+              <span>View All Results</span>
+              <span className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-200 text-xs font-semibold text-blue-800">
+                {numOfCommit}
+              </span>
+            </>
           </Button>
         </div>
         <CopyBadgeButton />
