@@ -1,20 +1,18 @@
 /**
- * @param {Array} scoredCommitList - 점수가 매겨진 commit들의 목록
- * @returns {{ perfectCommitNumber: number, finalQualityPercent: number }}
+ * @param {Array} commitList - 점수가 매겨진 commit들의 목록
+ * @returns {{ numOfPerfectCommits: number, totalScore: number }}
  */
-const getTotalQualityPercent = (scoredCommitList) => {
-  const perfectCommitNumber = scoredCommitList.filter(
-    (scoredCommit) => scoredCommit.score === 100
+const getCommitSummary = (commitList) => {
+  const numOfPerfectCommits = commitList.filter(
+    (commit) => commit.qualityScore === 100
   ).length;
-  const totalQualityPercent = Math.floor(
-    (perfectCommitNumber / scoredCommitList.length) * 100
+  const totalQualityScore = Math.floor(
+    (numOfPerfectCommits / commitList.length) * 100
   );
-  const finalQualityPercent =
-    totalQualityPercent === 0 && perfectCommitNumber > 0
-      ? 1
-      : totalQualityPercent;
+  const totalScore =
+    totalQualityScore === 0 && numOfPerfectCommits > 0 ? 1 : totalQualityScore;
 
-  return { perfectCommitNumber, finalQualityPercent };
+  return { numOfPerfectCommits, totalScore };
 };
 
-export { getTotalQualityPercent };
+export { getCommitSummary };

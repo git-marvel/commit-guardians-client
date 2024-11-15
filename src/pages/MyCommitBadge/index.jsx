@@ -8,9 +8,7 @@ import HomeButton from "../../shared/components/HomeButton";
 const MyCommitBadge = () => {
   const navigate = useNavigate();
   const handleRoutingCommitScoreboard = () => navigate("/my-commit-scoreboard");
-  const perfectCommitNumber = useCommitStore(
-    (state) => state.scoredCommitInfo.perfectCommitNumber
-  );
+  const totalScore = useCommitStore((state) => state.commitSummary.totalScore);
   const numOfCommit = useCommitStore((state) => state.commitInfo.numOfCommit);
 
   return (
@@ -19,11 +17,11 @@ const MyCommitBadge = () => {
         <HomeButton />
       </div>
       <div className="flex flex-col items-center justify-center">
-        {perfectCommitNumber && (
+        {totalScore && (
           <>
             <p className="font-bold text-slate-500">Total</p>
             <h1 className="p-4 text-4xl font-bold text-blue-400">
-              {perfectCommitNumber}
+              {totalScore}
             </h1>
           </>
         )}
