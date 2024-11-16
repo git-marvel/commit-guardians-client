@@ -13,7 +13,7 @@ const ShaHoverBox = ({ copiedSha, shaType }) => {
     <p
       className={`absolute bottom-1 -translate-y-full rounded-full border border-blue-400 px-2 py-1 text-xs ${isShaCopied ? "text-slate-800" : "text-white"} whitespace-nowrap opacity-0 shadow-sm transition duration-300 ease-in-out group-hover:opacity-100 ${isShaCopied ? "bg-blue-300" : "bg-slate-800"}`}
     >
-      {isShaCopied ? "Copied ✔️" : `${isShaCopied} Copy`}
+      {isShaCopied ? "Copied ✔️" : `${shaType} Copy`}
     </p>
   );
 };
