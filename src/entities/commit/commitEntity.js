@@ -6,6 +6,7 @@ import scoreTestCommitType from "./services/scoreTestCommitType";
 
 /**
  * @param {{
+ * formatStyle: COMMIT_FORMAT_STYLE.type,
  * type: COMMIT_TYPE.type,
  * sha: string,
  * url: string,
@@ -17,8 +18,16 @@ import scoreTestCommitType from "./services/scoreTestCommitType";
  * qualityScore: number,
  * }}
  */
-const createCommitEntity = ({ type, sha, url, author, message }) => {
+const createCommitEntity = ({
+  formatStyle,
+  type,
+  sha,
+  url,
+  author,
+  message,
+}) => {
   return {
+    formatStyle: formatStyle,
     type: type,
     sha: sha,
     url: url,

@@ -8,28 +8,37 @@ const EMOJI_REGEX =
 const removeEmoji = (string) => string.replace(EMOJI_REGEX, "");
 const removeSpecialCharacters = (string) => string.replace(/[^a-zA-Z]/g, "");
 
-/**
- * @param {string} firstWordOfCommitMessage
- * @returns {undefined || COMMIT_TYPE} checkableCommitType
- */
-const makeCommitTypeWithFormatStyle = (firstWordOfCommitMessage) => {
-  const formatStyle = COMMIT_FORMAT_STYLE.list.find((style) =>
-    firstWordOfCommitMessage.includes(style.splitWith)
-  );
+const getFormatStyle = (firstWord) => {
+  return COMMIT_FORMAT_STYLE.list.find((style) =>
+    firstWord.includes(style.splitWith)
+  )?.type;
+};
 
+const getCheckableCommitType = (firstWord, formatStyle) => {
   const commitTypeString = formatStyle
-    ? removeSpecialCharacters(
-        firstWordOfCommitMessage.split(formatStyle.splitWith)[0]
-      )
+    ? removeSpecialCharacters(firstWord.split(formatStyle.splitWith)[0])
         .trim()
         .toLowerCase()
     : "";
 
-  const checkableCommitType = COMMIT_TYPE.list.find((validType) =>
+  return COMMIT_TYPE.list.find((validType) =>
     validType.sameMeaningWords.has(commitTypeString)
   )?.type;
+};
 
-  return checkableCommitType;
+const getFormatStyleAndRate = (commitList) => {
+  const formatStyleCountInfo = COMMIT_FORMAT_STYLE.list.reduce((acc, style) => {
+    acc[style.type] = 0;
+    return acc;
+  }, {});
+
+  commitList.forEach((commit) => {
+    if (Object.hasOwn(formatStyleCountInfo, commit.formatStyle)) {
+      formatStyleCountInfo[commit.formatStyle]++;
+    }
+  });
+
+  return formatStyleCountInfo;
 };
 
 /**
@@ -40,10 +49,12 @@ const getCheckableCommits = (totalCommits) => {
   const checkableCommits = totalCommits.reduce((accumulators, commit) => {
     const commitMessage = removeEmoji(commit.commit.message).trim();
     const firstWord = commitMessage.split(" ")[0];
-    const commitType = makeCommitTypeWithFormatStyle(firstWord);
+    const formatStyle = getFormatStyle(firstWord);
+    const commitType = getCheckableCommitType(firstWord, formatStyle);
 
     if (commitType !== undefined) {
       const commitWithType = createCommitEntity({
+        formatStyle: formatStyle,
         type: commitType,
         sha: commit.sha,
         url: commit.html_url,
@@ -63,4 +74,4 @@ const getCheckableCommits = (totalCommits) => {
   return checkableCommits;
 };
 
-export { getCheckableCommits };
+export { getCheckableCommits, getFormatStyleAndRate };
