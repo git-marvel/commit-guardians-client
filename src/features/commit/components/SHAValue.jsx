@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import CopyIcon from "../../../shared/assets/svg/copy-icon.svg";
 import useCopiedSha from "../hooks/useCopiedSha";
-import ShaHoverBox from "../../../shared/components/ShaHoverBox";
+import ShaHoverBox from "./ShaHoverBox";
 
 const SHAValue = ({ sha }) => {
   const { copiedSha, handleCopyCommitSha } = useCopiedSha();
