@@ -3,7 +3,7 @@ import { useState } from "react";
 const COPIED_DURATION_MS = 2000;
 
 const useCopiedSha = () => {
-  const [copiedSha, setCopiedSha] = useState(null);
+  const [copiedSha, setCopiedSha] = useState("");
 
   const handleCopyCommitSha = async (event, sha) => {
     event.preventDefault();
@@ -13,7 +13,7 @@ const useCopiedSha = () => {
     setCopiedSha(sha);
 
     setTimeout(() => {
-      setCopiedSha(null);
+      setCopiedSha("");
     }, COPIED_DURATION_MS);
   };
 
