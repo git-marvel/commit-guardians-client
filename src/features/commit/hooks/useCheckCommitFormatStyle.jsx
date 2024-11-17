@@ -19,7 +19,11 @@ const useCheckCommitFormatStyle = () => {
     {}
   );
 
-  return formatStyleAndRate;
+  const sortedFormatStyleAndRate = Object.entries(formatStyleAndRate).sort(
+    (a, b) => parseFloat(b[1]) - parseFloat(a[1])
+  );
+
+  return sortedFormatStyleAndRate;
 };
 
 export default useCheckCommitFormatStyle;

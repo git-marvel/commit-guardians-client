@@ -2,11 +2,7 @@ import PropTypes from "prop-types";
 import useCheckCommitFormatStyle from "../hooks/useCheckCommitFormatStyle";
 
 const CommitFormatStyleValue = () => {
-  const formatStyleAndRate = useCheckCommitFormatStyle();
-
-  const sortedFormatStyleAndRate = Object.entries(formatStyleAndRate).sort(
-    (a, b) => parseFloat(b[1]) - parseFloat(a[1])
-  );
+  const sortedFormatStyleAndRate = useCheckCommitFormatStyle();
 
   return (
     <div className="flex flex-row">
