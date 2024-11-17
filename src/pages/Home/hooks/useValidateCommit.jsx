@@ -27,15 +27,23 @@ const useValidateCommit = () => {
     (state) => state.setTotalNumOfCommit
   );
   const setCommitSummary = useCommitStore((state) => state.setCommitSummary);
+  const numOfCommit = useCommitStore((state) => state.commitInfo.numOfCommit);
   const githubStatus = useGithubStatusStore((state) => state.githubStatus);
 
   const shouldNavigate = useMemo(
     () =>
       !isLoading &&
-      errorMessage === null &&
       isGithubAPIHealthy &&
+      errorMessage === null &&
+      numOfCommit !== 0 &&
       isSubmitButtonClick,
-    [isLoading, errorMessage, isGithubAPIHealthy, isSubmitButtonClick]
+    [
+      isLoading,
+      isGithubAPIHealthy,
+      errorMessage,
+      numOfCommit,
+      isSubmitButtonClick,
+    ]
   );
 
   useEffect(() => {
@@ -98,7 +106,9 @@ const useValidateCommit = () => {
         setRepository({ owner, repo });
         await fetchCommits({ owner, repo });
 
-        setErrorMessage(null);
+        setErrorMessage(
+          numOfCommit === 0 ? ERROR_MESSAGES.noCommitsToCheck : null
+        );
       } catch (error) {
         setErrorMessage(error.message);
         setSubmitButtonClick(false);
@@ -106,7 +116,7 @@ const useValidateCommit = () => {
         setIsLoading(false);
       }
     },
-    [fetchCommits, setRepository]
+    [fetchCommits, setRepository, numOfCommit]
   );
 
   return {
