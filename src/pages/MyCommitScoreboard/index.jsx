@@ -1,5 +1,4 @@
 import CommitFormatStyleValue from "../../features/commit/components/CommitFormatStyleValue";
-import useCheckToNavigate from "../../features/commit/hooks/useCheckToNavigate";
 import GithubAPIStatus from "../../features/githubAPIStatus/components/GithubAPIStatus";
 import RepositoryLinkTag from "../../features/repository/components/RepositoryLinkTag";
 import HomeButton from "../../shared/components/HomeButton";
@@ -10,7 +9,6 @@ import useShowCommitDetails from "./hooks/useShowCommitDetails";
 const GRID_COLS = "grid-cols-16";
 
 const MyCommitScoreboard = () => {
-  useCheckToNavigate();
   const { commitList } = useShowCommitDetails();
 
   return (

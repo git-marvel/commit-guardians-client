@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import useCheckToNavigate from "../../features/commit/hooks/useCheckToNavigate";
 import useCommitStore from "../../features/commit/store/useCommitStore";
 import CopyBadgeButton from "../../features/commitBadge/components/CopyBadge";
 import Button from "../../shared/components/Button";
@@ -7,7 +6,6 @@ import Footer from "../../shared/components/Footer";
 import HomeButton from "../../shared/components/HomeButton";
 
 const MyCommitBadge = () => {
-  useCheckToNavigate();
   const navigate = useNavigate();
   const handleRoutingCommitScoreboard = () => navigate("/my-commit-scoreboard");
   const numOfPerfectCommits = useCommitStore(
