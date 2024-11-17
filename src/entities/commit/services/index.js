@@ -6,6 +6,7 @@ const EMOJI_REGEX =
   /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;
 
 const removeEmoji = (string) => string.replace(EMOJI_REGEX, "");
+const removeParentheses = (string) => string.replace(/\(.*?\)/g, "");
 const removeSpecialCharacters = (string) => string.replace(/[^a-zA-Z]/g, "");
 
 const getFormatStyle = (firstWord) => {
@@ -15,11 +16,14 @@ const getFormatStyle = (firstWord) => {
 };
 
 const getCheckableCommitType = (firstWord, formatStyle) => {
-  const commitTypeString = formatStyle
-    ? removeSpecialCharacters(firstWord.split(formatStyle.splitWith)[0])
-        .trim()
-        .toLowerCase()
-    : "";
+  if (!formatStyle) {
+    return;
+  }
+
+  const firstPart = firstWord.split(formatStyle.splitWith)[0];
+  const withoutParentheses = removeParentheses(firstPart);
+  const cleanedFirstPart = removeSpecialCharacters(withoutParentheses);
+  const commitTypeString = cleanedFirstPart.trim().toLowerCase();
 
   return COMMIT_TYPE.list.find((validType) =>
     validType.sameMeaningWords.has(commitTypeString)

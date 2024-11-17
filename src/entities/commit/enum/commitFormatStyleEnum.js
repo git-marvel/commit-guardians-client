@@ -8,7 +8,7 @@ const COMMIT_FORMAT_STYLE = {
   },
   simpleText: {
     type: "simple-text-style",
-    splitWith: " ",
+    splitWith: "",
   },
   templateBased: {
     type: "template-based",
