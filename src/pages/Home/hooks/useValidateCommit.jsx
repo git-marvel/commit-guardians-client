@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setCommitQualityScore } from "../../../entities/commit/commitEntity";
-import { getCheckableCommits } from "../../../entities/commit/services";
+import {
+  getCheckableCommits,
+  getFormatStyleAndRate,
+} from "../../../entities/commit/services";
 import { getCommitSummary } from "../../../entities/score/services";
 import useCommitStore from "../../../features/commit/store/useCommitStore";
 import useGithubStatusStore from "../../../features/githubAPIStatus/store";
@@ -15,8 +18,11 @@ const useValidateCommit = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGithubAPIHealthy, setGithubAPIHealthy] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const setCommitList = useCommitStore((state) => state.setCommitList);
   const setRepository = useCommitStore((state) => state.setRepository);
+  const setCommitList = useCommitStore((state) => state.setCommitList);
+  const setCommitFormatStyle = useCommitStore(
+    (state) => state.setCommitFormatStyle
+  );
   const setTotalNumOfCommit = useCommitStore(
     (state) => state.setTotalNumOfCommit
   );
@@ -66,10 +72,13 @@ const useValidateCommit = () => {
 
       setCommitList(commitWithDiff);
 
+      const formatStyleCountInfo = getFormatStyleAndRate(commitsToCheck);
+      setCommitFormatStyle(formatStyleCountInfo);
+
       const totalCommitQualityInfo = getCommitSummary(commitWithDiff);
       setCommitSummary(totalCommitQualityInfo);
     },
-    [setCommitList, setCommitSummary, setTotalNumOfCommit]
+    [setCommitFormatStyle, setCommitList, setCommitSummary, setTotalNumOfCommit]
   );
 
   const handleCheckCommitQuality = useCallback(

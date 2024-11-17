@@ -8,6 +8,7 @@ const initialState = {
   },
   commitInfo: {
     commitList: [],
+    commitFormatStyle: {},
     numOfCommit: null,
     totalNumOfCommit: null,
   },
@@ -37,6 +38,14 @@ const useCommitStore = create(
             ...state.commitInfo,
             commitList: newCommitList,
             numOfCommit: newCommitList.length,
+          },
+        })),
+
+      setCommitFormatStyle: (commitFormatStyleObj) =>
+        set((state) => ({
+          commitInfo: {
+            ...state.commitInfo,
+            commitFormatStyle: commitFormatStyleObj,
           },
         })),
 
