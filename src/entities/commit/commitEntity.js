@@ -27,12 +27,12 @@ const createCommitEntity = ({
   message,
 }) => {
   return {
-    formatStyle: formatStyle,
-    type: type,
-    sha: sha,
-    url: url,
-    message: message,
-    author: author,
+    formatStyle,
+    type,
+    sha,
+    url,
+    message,
+    author,
     diffObj: null,
     numOfFiles: null,
     numOfChanges: null,
