@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setCommitQualityScore } from "../../../entities/commit/commitEntity";
 import {
@@ -30,27 +30,24 @@ const useValidateCommit = () => {
   const numOfCommit = useCommitStore((state) => state.commitInfo.numOfCommit);
   const githubStatus = useGithubStatusStore((state) => state.githubStatus);
 
-  const shouldNavigate = useMemo(
-    () =>
+  useEffect(() => {
+    if (
       !isLoading &&
       isGithubAPIHealthy &&
       errorMessage === null &&
       numOfCommit !== 0 &&
-      isSubmitButtonClick,
-    [
-      isLoading,
-      isGithubAPIHealthy,
-      errorMessage,
-      numOfCommit,
-      isSubmitButtonClick,
-    ]
-  );
-
-  useEffect(() => {
-    if (shouldNavigate) {
+      isSubmitButtonClick
+    ) {
       navigate("/my-commit-badge");
     }
-  }, [shouldNavigate, navigate]);
+  }, [
+    isLoading,
+    isGithubAPIHealthy,
+    errorMessage,
+    numOfCommit,
+    isSubmitButtonClick,
+    navigate,
+  ]);
 
   useEffect(() => {
     const isUnhealthy = githubStatus === "unknown" || githubStatus === "major";
