@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setCommitQualityScore } from "../../../entities/commit/commitEntity";
 import {
@@ -27,22 +27,27 @@ const useValidateCommit = () => {
     (state) => state.setTotalNumOfCommit
   );
   const setCommitSummary = useCommitStore((state) => state.setCommitSummary);
+  const numOfCommit = useCommitStore((state) => state.commitInfo.numOfCommit);
   const githubStatus = useGithubStatusStore((state) => state.githubStatus);
 
-  const shouldNavigate = useMemo(
-    () =>
-      !isLoading &&
-      errorMessage === null &&
-      isGithubAPIHealthy &&
-      isSubmitButtonClick,
-    [isLoading, errorMessage, isGithubAPIHealthy, isSubmitButtonClick]
-  );
-
   useEffect(() => {
-    if (shouldNavigate) {
+    if (
+      !isLoading &&
+      isGithubAPIHealthy &&
+      errorMessage === null &&
+      numOfCommit !== 0 &&
+      isSubmitButtonClick
+    ) {
       navigate("/my-commit-badge");
     }
-  }, [shouldNavigate, navigate]);
+  }, [
+    isLoading,
+    isGithubAPIHealthy,
+    errorMessage,
+    numOfCommit,
+    isSubmitButtonClick,
+    navigate,
+  ]);
 
   useEffect(() => {
     const isUnhealthy = githubStatus === "unknown" || githubStatus === "major";
@@ -98,7 +103,9 @@ const useValidateCommit = () => {
         setRepository({ owner, repo });
         await fetchCommits({ owner, repo });
 
-        setErrorMessage(null);
+        setErrorMessage(
+          numOfCommit === 0 ? ERROR_MESSAGES.noCommitsToCheck : null
+        );
       } catch (error) {
         setErrorMessage(error.message);
         setSubmitButtonClick(false);
@@ -106,7 +113,7 @@ const useValidateCommit = () => {
         setIsLoading(false);
       }
     },
-    [fetchCommits, setRepository]
+    [fetchCommits, setRepository, numOfCommit]
   );
 
   return {

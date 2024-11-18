@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import InfoValue from "../../../features/commit/components/InfoValue";
 
 const ScoreBoardHeader = ({ gridCols }) => {
   return (
@@ -7,10 +8,16 @@ const ScoreBoardHeader = ({ gridCols }) => {
     >
       <p className="col-span-1 px-2 py-1">TYPE</p>
       <p className="col-span-6 px-2 py-1">COMMIT MESSAGE</p>
-      <p className="col-span-3 px-2 py-1">CHANGES</p>
+      <p className="relative col-span-3 px-2 py-1">
+        CHANGES
+        <InfoValue type="scoreBoardChanges" />
+      </p>
       <p className="col-span-1 px-2 py-1">SCORE</p>
       <p className="col-span-2 px-2 py-1">AUTHOR</p>
-      <p className="col-span-2 px-2 py-1">DATE</p>
+      <p className="relative col-span-2 px-2 py-1">
+        DATE
+        <InfoValue type="scoreBoardDate" />
+      </p>
       <p className="col-span-1 px-2 py-1">SHA</p>
     </div>
   );
