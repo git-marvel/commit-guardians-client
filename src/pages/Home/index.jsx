@@ -29,7 +29,7 @@ const Home = () => {
         {isGithubAPIHealthy && !isLoading && (
           <RepositoryInputForm onSubmit={handleCheckCommitQuality} />
         )}
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+        {errorMessage && <p className="m-5 text-red-500">{errorMessage}</p>}
         {isLoading && <Loading />}
       </div>
     </div>
