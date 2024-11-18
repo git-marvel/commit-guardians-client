@@ -9,7 +9,7 @@ const InfoValue = ({ type }) => {
   return (
     <span className="group">
       <InfoIcon />
-      <span className="absolute left-20 top-3 flex flex-col rounded-md border border-blue-400 bg-slate-800 px-3 py-1 text-white opacity-0 transition duration-300 ease-in-out group-hover:opacity-100">
+      <span className="absolute left-20 top-3 hidden flex-col rounded-md border border-blue-400 bg-slate-800 px-3 py-1 text-white transition duration-300 ease-in-out group-hover:flex">
         {messages.map((message) => (
           <React.Fragment key={message.title}>
             <span className="mb-1 text-sm font-semibold">{message.title}</span>
