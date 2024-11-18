@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { get, set, del } from "idb-keyval";
 
-const storage = {
+const indexedDB = {
   getItem: async (name) => {
     return (await get(name)) || null;
   },
@@ -82,7 +82,7 @@ const useCommitStore = create(
     }),
     {
       name: "commit-storage",
-      storage: createJSONStorage(() => storage),
+      storage: createJSONStorage(() => indexedDB),
     }
   )
 );
