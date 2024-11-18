@@ -1,6 +1,6 @@
 import { ERROR_MESSAGES } from "../constants";
 
-const throwCustomErrorMessage = (error) => {
+const throwFetchErrorMessage = (error) => {
   switch (error.status) {
     case 403:
     case 429:
