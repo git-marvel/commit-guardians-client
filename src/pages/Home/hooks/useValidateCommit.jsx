@@ -69,7 +69,6 @@ const useValidateCommit = () => {
           diffObj: commit.diffObj,
         });
       });
-      console.log(commitWithDiff);
 
       setCommitList(commitWithDiff);
 
