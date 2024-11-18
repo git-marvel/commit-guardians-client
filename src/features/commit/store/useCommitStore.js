@@ -1,5 +1,32 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { get, set, del } from "idb-keyval";
+import { throwIndexedDBErrorMessage } from "../../../shared/error/throwCustomErrorMessage";
+
+const indexedDB = {
+  getItem: async (name) => {
+    try {
+      const value = await get(name);
+      return value || null;
+    } catch (error) {
+      throwIndexedDBErrorMessage(error);
+    }
+  },
+  setItem: async (name, value) => {
+    try {
+      await set(name, value);
+    } catch (error) {
+      throwIndexedDBErrorMessage(error);
+    }
+  },
+  removeItem: async (name) => {
+    try {
+      await del(name);
+    } catch (error) {
+      throwIndexedDBErrorMessage(error);
+    }
+  },
+};
 
 const initialState = {
   repository: {
@@ -69,7 +96,7 @@ const useCommitStore = create(
     }),
     {
       name: "commit-storage",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => indexedDB),
     }
   )
 );

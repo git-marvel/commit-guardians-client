@@ -7,7 +7,7 @@ import {
 } from "../../../entities/commit/services";
 import { getCommitSummary } from "../../../entities/score/services";
 import useCommitStore from "../../../features/commit/store/useCommitStore";
-import useGithubStatusStore from "../../../features/githubAPIStatus/store";
+import useGithubStatusStore from "../../../features/githubAPIStatus/store/useGithubStatusStore";
 import { ERROR_MESSAGES } from "../../../shared/constants";
 import extractGitInfoFromURL from "../../../shared/utils/extractGitInfoFromURL";
 import { getCommitDiffList, getCommitList } from "../api";

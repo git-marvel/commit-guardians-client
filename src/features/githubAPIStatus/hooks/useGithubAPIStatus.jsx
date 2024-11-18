@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getGithubStatus } from "../api";
-import useGithubStatusStore from "../store";
+import useGithubStatusStore from "../store/useGithubStatusStore";
 
 const useGithubAPIStatus = () => {
   const [githubAPIStatusColor, setGithubAPIStatusColor] = useState("unknown");
