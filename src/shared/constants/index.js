@@ -12,6 +12,15 @@ const ERROR_MESSAGES = {
   networkError: "새로 고침 후 올바른 URL로 다시 시도 해주세요!",
   serverError:
     "Commit 목록을 받아오는데 오류가 생겼습니다. 조금 뒤 다시 시도 해주세요!",
+
+  // indexedDB Error
+  idbQuotaExceededError:
+    "저장 용량을 초과 했네요, 이번 버전에서는 commit수가 더 적은 레포지토리를 시도해주세요!",
+  idbInvalidStateError:
+    "데이터 베이스가 제대로 열리지 않은 것 같네요, 페이지를 다시 로드 해주세요!",
+  idbAbortError: "요청이 취소된 듯 하네요, 다시 시도해주세요!",
+  idbUnknownError:
+    "데이터 베이스의 알 수 없는 오류가 발생 한 것 같아요, 페이지를 다시 로드 해주세요!",
 };
 
 export { ERROR_MESSAGES, GITHUB_TOKEN };
