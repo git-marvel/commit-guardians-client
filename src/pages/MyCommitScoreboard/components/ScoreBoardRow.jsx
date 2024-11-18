@@ -7,6 +7,8 @@ import CommitTypeValue from "../../../features/commit/components/CommitTypeValue
 import SHAValue from "../../../features/commit/components/SHAValue";
 
 const ScoreBoardRow = ({ gridCols, commit }) => {
+  const time = new Date(commit.author.date).toTimeString().slice(0, 8);
+
   return (
     <div
       className={`${gridCols} grid w-full items-center gap-4 px-10 py-2 text-base text-slate-800 transition duration-300 ease-in-out hover:bg-slate-100`}
@@ -28,9 +30,7 @@ const ScoreBoardRow = ({ gridCols, commit }) => {
       </div>
       <div className="col-span-2 px-2 py-1 text-sm">
         <p>{new Date(commit.author.date).toDateString()}</p>
-        <span className="text-xs text-slate-400">
-          {new Date(commit.author.date).toTimeString()}
-        </span>
+        <span className="text-xs text-slate-400">{time}</span>
       </div>
       <div className="col-span-1 px-2 py-1">
         <SHAValue sha={commit.sha} />
