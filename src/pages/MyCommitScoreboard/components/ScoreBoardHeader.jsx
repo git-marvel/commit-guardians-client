@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import InfoValue from "../../../features/commit/components/InfoValue";
 
-const time = new Date().toTimeString().substring(8);
-
 const ScoreBoardHeader = ({ gridCols }) => {
   return (
     <div
@@ -12,13 +10,13 @@ const ScoreBoardHeader = ({ gridCols }) => {
       <p className="col-span-6 px-2 py-1">COMMIT MESSAGE</p>
       <p className="relative col-span-3 px-2 py-1">
         CHANGES
-        <InfoValue text="코드 수정에서 제거와 추가가 짝을 이루는 변경 단위" />
+        <InfoValue type="scoreBoardChanges" />
       </p>
       <p className="col-span-1 px-2 py-1">SCORE</p>
       <p className="col-span-2 px-2 py-1">AUTHOR</p>
       <p className="relative col-span-2 px-2 py-1">
         DATE
-        <InfoValue text={time} />
+        <InfoValue type="scoreBoardDate" />
       </p>
       <p className="col-span-1 px-2 py-1">SHA</p>
     </div>
