@@ -22,7 +22,7 @@ const CopyBadge = () => {
           width={22}
           className="invert"
         />
-        <div className="absolute -bottom-2 left-6 w-64 translate-y-full rounded-full border border-blue-400 bg-sky-50 px-2 py-2 text-slate-800 opacity-0 shadow-sm transition duration-300 ease-in-out group-hover:opacity-100">
+        <div className="absolute -bottom-2 left-6 w-64 translate-y-full rounded-full border border-blue-400 bg-sky-50 px-2 py-2 text-slate-800 hidden shadow-sm transition duration-300 ease-in-out group-hover:flex">
           Paste your repository <b>README.md</b>
           <div className="absolute -top-2 left-14 h-4 w-4 rotate-45 transform border-l border-t border-blue-400 bg-sky-50"></div>
         </div>
