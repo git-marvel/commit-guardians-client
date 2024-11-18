@@ -1,5 +1,18 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { get, set, del } from "idb-keyval";
+
+const storage = {
+  getItem: async (name) => {
+    return (await get(name)) || null;
+  },
+  setItem: async (name, value) => {
+    await set(name, value);
+  },
+  removeItem: async (name) => {
+    await del(name);
+  },
+};
 
 const initialState = {
   repository: {
@@ -69,7 +82,7 @@ const useCommitStore = create(
     }),
     {
       name: "commit-storage",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => storage),
     }
   )
 );
