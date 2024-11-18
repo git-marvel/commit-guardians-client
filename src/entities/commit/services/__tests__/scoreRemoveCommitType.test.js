@@ -1,34 +1,8 @@
 import { describe, expect, it } from "vitest";
 import scoreRemoveCommitType, {
   calculateFileScore,
-  calculateModuleFileDeletions,
   isOnlyDeletionChange,
 } from "../scoreRemoveCommitType";
-
-// 모듈 파일의 유효한 삭제 변경사항 개수를 계산하는 함수에 대한 테스트
-describe("calculateModuleFileDeletions", () => {
-  const changes = [
-    { "-": "minus library", "+": "" },
-    { "-": "minus library2", "+": "" },
-  ];
-
-  it("JSON 파일일 경우 changes를 반환해야 합니다.", () => {
-    expect(calculateModuleFileDeletions("test.json", changes)).toBe(
-      changes.length
-    );
-  });
-
-  it("YAML 파일일 경우 true를 반환해야 합니다.", () => {
-    expect(calculateModuleFileDeletions("test.yaml", changes)).toBe(
-      changes.length
-    );
-  });
-
-  it("모듈 파일이 아닐 경우 undefined를 반환해야 합니다.", () => {
-    expect(calculateModuleFileDeletions("test.js", changes)).toBe(undefined);
-    expect(calculateModuleFileDeletions("test.ts", changes)).toBe(undefined);
-  });
-});
 
 // 삭제만 있는 변경사항인지 확인하는 함수에 대한 테스트
 describe("isOnlyDeletionChange", () => {

@@ -1,34 +1,5 @@
-const MODULE_FILE_EXTENSIONS = [".json", ".yaml"];
-
 /**
- * 조건 1. 모듈 파일의 유효한 삭제 변경사항 개수를 계산하는 함수
- * @param {string} fileName - 파일 이름
- * @param {Array} changes - 변경사항 목록
- * @returns {number || undefined} - 유효한 삭제 변경사항 개수 (순수 삭제 - 수정) || 모듈파일 확장자가 아닌 경우 undefined 를 반환
- */
-const calculateModuleFileDeletions = (fileName, changes) => {
-  if (
-    !MODULE_FILE_EXTENSIONS.some((extension) => fileName.endsWith(extension))
-  ) {
-    return;
-  }
-
-  const pureDeletions = changes.filter((change) =>
-    isOnlyDeletionChange(change)
-  );
-
-  const modifications = changes.filter((change) => {
-    const hasDeletion = change["-"] !== undefined && change["-"].length > 0;
-    const hasAddition = change["+"] !== undefined && change["+"].length > 0;
-
-    return hasDeletion && hasAddition;
-  });
-
-  return pureDeletions.length - modifications.length;
-};
-
-/**
- * 조건 2. 변경사항이 삭제만 있는지 확인하는 함수입니다.
+ * 변경사항이 삭제만 있는지 확인하는 함수입니다.
  * @param {Object} change - 변경사항 객체
  * @returns {boolean} - 삭제만 있는지 여부
  */
@@ -51,12 +22,6 @@ const calculateFileScore = (fileName, changes) => {
 
   if (!changes || changesLength === 0) {
     return 0;
-  }
-
-  const numOfPerfectChanges = calculateModuleFileDeletions(fileName, changes);
-
-  if (numOfPerfectChanges !== undefined) {
-    return Math.floor((numOfPerfectChanges / changesLength) * 100);
   }
 
   const validDeletionCount = changes.reduce((count, change) => {
@@ -92,8 +57,4 @@ const scoreRemoveCommitType = (diffObj) => {
 };
 
 export default scoreRemoveCommitType;
-export {
-  calculateFileScore,
-  calculateModuleFileDeletions,
-  isOnlyDeletionChange,
-};
+export { calculateFileScore, isOnlyDeletionChange };
