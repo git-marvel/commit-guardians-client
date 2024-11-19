@@ -13,7 +13,7 @@ const MyCommitScoreboard = () => {
   const { commitList } = useShowCommitDetails();
 
   return (
-    <div className="relative">
+    <div className="relative dark:bg-gray-900">
       <div className="sticky left-0 right-0 top-0 z-50 shadow-xl">
         <div className="flex w-full flex-row items-center justify-between bg-transparent px-10 py-5 backdrop-blur-xl">
           <div className="flex flex-row items-end">

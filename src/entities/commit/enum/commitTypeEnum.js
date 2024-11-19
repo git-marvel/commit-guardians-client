@@ -4,7 +4,8 @@
 const COMMIT_TYPE = {
   remove: {
     type: "remove",
-    color: "bg-slate-200 border border-slate-300 text-slate-900",
+    color:
+      "bg-slate-200 border border-slate-300 text-slate-900 dark:bg-slate-700 dark:border-slate-500 dark:text-slate-100",
     sameMeaningWords: new Set([
       "remove",
       "removed",
@@ -20,12 +21,13 @@ const COMMIT_TYPE = {
   },
   docs: {
     type: "docs",
-    color: "bg-white border-slate-300 border text-slate-700",
+    color:
+      "bg-white border-slate-300 border text-slate-700 dark:bg-slate-200 dark:border-slate-800 dark:text-slate-900",
     sameMeaningWords: new Set(["docs", "doc", "documentation", "readme"]),
   },
   style: {
     type: "style",
-    color: "bg-orange-100 border border-orange-200 text-orange-700",
+    color: "bg-orange-100 border border-orange-200 text-orange-700 ",
     sameMeaningWords: new Set(["style", "format", "beautify", "reformat"]),
   },
   test: {
