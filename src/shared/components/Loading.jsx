@@ -8,8 +8,8 @@ const Loading = ({ message = "Please wait for seconds" }) => {
           <div className="h-2 animate-loadingProgressBar bg-sky-400"></div>
         </div>
       </div>
-      <p className="font-Pixelify text-2xl">Loading...</p>
-      <p className="mt-2 text-sm">{message}</p>
+      <p className="font-Pixelify text-2xl dark:text-slate-50">Loading...</p>
+      <p className="mt-2 text-sm dark:text-slate-200">{message}</p>
     </>
   );
 };

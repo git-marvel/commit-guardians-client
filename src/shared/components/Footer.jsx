@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import GithubLogo from "../assets/svg/github-logo.svg";
+import GithubIcon from "../components/GithubIcon";
 
 const Footer = () => {
   return (
@@ -37,16 +37,10 @@ const GithubNameButton = ({ name, githubUrl }) => {
     <a
       href={githubUrl}
       target="_blank"
-      className="mb-2 me-2 flex rounded-full border border-gray-300 bg-white px-2 py-1 text-xs font-medium text-slate-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+      className="mb-2 me-2 flex items-center rounded-full border border-gray-300 bg-white px-2 py-1 text-xs font-medium text-slate-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
     >
       <h2 className="m-1 text-sm">{name}</h2>
-      <img
-        src={GithubLogo}
-        alt="Github Logo"
-        width="20"
-        height="18"
-        className="m-1"
-      />
+      <GithubIcon />
     </a>
   );
 };
