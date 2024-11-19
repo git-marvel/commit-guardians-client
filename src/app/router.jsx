@@ -1,20 +1,14 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import useCommitStore from "../features/commit/store/useCommitStore";
+import usePersistentStore from "../shared/store/usePersistentStore";
 import Home from "../pages/Home";
 import MyCommitBadge from "../pages/MyCommitBadge";
 import MyCommitScoreboard from "../pages/MyCommitScoreboard";
 import NotFound from "../pages/NotFound";
 
-const usePossibleToCheck = () => {
-  const {
-    commitInfo: { numOfCommit },
-  } = useCommitStore.getState();
+const checkToRoute = () => {
+  const { isAbleToRoute } = usePersistentStore.getState();
 
-  if (!numOfCommit || numOfCommit === 0) {
-    return redirect("/");
-  }
-
-  return null;
+  return isAbleToRoute ? null : redirect("/");
 };
 
 const router = createBrowserRouter([
@@ -24,12 +18,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/my-commit-badge",
-    loader: usePossibleToCheck,
+    loader: checkToRoute,
     element: <MyCommitBadge />,
   },
   {
     path: "/my-commit-scoreboard",
-    loader: usePossibleToCheck,
+    loader: checkToRoute,
     element: <MyCommitScoreboard />,
   },
   {

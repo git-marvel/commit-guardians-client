@@ -7,6 +7,8 @@ const throwFetchErrorMessage = (error) => {
       throw new Error(ERROR_MESSAGES.rateLimitExceeded);
     case 404:
       throw new Error(ERROR_MESSAGES.invalidGithubURL);
+    case 409:
+      throw new Error(ERROR_MESSAGES.noCommit);
     case 500:
       throw new Error(ERROR_MESSAGES.networkError);
     default:

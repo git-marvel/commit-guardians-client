@@ -26,12 +26,12 @@ describe("isOnlyDeletionChange", () => {
 describe("calculateFileScore", () => {
   it("모든 변경사항이 유효한 삭제일 경우 100% 점수를 반환해야 합니다.", () => {
     const changes = [{ "-": "deleted content" }, { "-": "deleted content" }];
-    expect(calculateFileScore("test.jsx", changes)).toBe(100);
+    expect(calculateFileScore(changes)).toBe(100);
   });
 
   it("삭제된 변경사항이 없을 경우 0% 점수를 반환해야 합니다.", () => {
     const changes = [{ "+": "added content" }, { "+": "added content" }];
-    expect(calculateFileScore("test.jsx", changes)).toBe(0);
+    expect(calculateFileScore(changes)).toBe(0);
   });
 
   it("절반의 변경사항만 유효한 삭제일 경우 50% 점수를 반환해야 합니다.", () => {
@@ -40,7 +40,7 @@ describe("calculateFileScore", () => {
       { "+": "added content" },
       { "-": "deleted content", "+": "added content" },
     ];
-    expect(calculateFileScore("test.jsx", changes)).toBe(33);
+    expect(calculateFileScore(changes)).toBe(33);
   });
 });
 
