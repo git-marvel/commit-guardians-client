@@ -9,16 +9,27 @@ const VirtualScroll = ({
   columnGap = 0,
   renderAhead = 5,
 }) => {
+  const [viewportY, setViewportY] = useState(0);
   const { height } = useWindowSize();
   const { y } = useWindowScroll();
 
+  const animationId = useRef(null);
   const scrollRef = useRef(null);
-  const [viewportY, setViewportY] = useState(0);
+
   const relativeY = y - viewportY;
 
   useEffect(() => {
-    const viewportY = scrollRef.current?.getBoundingClientRect().y ?? 0;
-    setViewportY(viewportY);
+    const maintainPositionY = () => {
+      const viewportY =
+        (scrollRef.current?.getBoundingClientRect().y ?? 0) + window.scrollY;
+      setViewportY(viewportY);
+    };
+
+    animationId.current = requestAnimationFrame(maintainPositionY);
+
+    return () => {
+      cancelAnimationFrame(animationId.current);
+    };
   }, []);
 
   const containerHeight = (itemHeight + columnGap) * children.length;
