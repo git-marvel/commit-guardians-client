@@ -9,7 +9,10 @@ const DOCS_TYPE_FILENAME_EXTENSIONS = [
   ".svg",
   ".ai",
   ".pdf",
+  ".txt",
 ];
+
+const DOCS_COMMENTS = ["/** ", "* ", "/// "];
 
 const isDocsFile = (filePath) => {
   return DOCS_TYPE_FILENAME_EXTENSIONS.some((extension) =>
@@ -17,22 +20,67 @@ const isDocsFile = (filePath) => {
   );
 };
 
+const isDocsComments = (change) => {
+  const keyOfEmptyValue =
+    change["+"] === "" && change["-"] === ""
+      ? false
+      : change["+"] === ""
+        ? "+"
+        : change["-"] === ""
+          ? "-"
+          : true;
+
+  if (keyOfEmptyValue === false) {
+    return false;
+  }
+
+  return DOCS_COMMENTS.some((comment) => {
+    const startIndex = 2;
+
+    switch (keyOfEmptyValue) {
+      case "+":
+        return change["-"].startsWith(comment, startIndex);
+      case "-":
+        return change["+"].startsWith(comment, startIndex);
+      default:
+        return (
+          change["+"].startsWith(comment, startIndex) &&
+          change["-"].startsWith(comment, startIndex)
+        );
+    }
+  });
+};
+
+const calculateFileScore = (filePath, changes) => {
+  if (isDocsFile(filePath)) {
+    return 100;
+  } else if (changes.length === 0) {
+    return 0;
+  }
+
+  const validChanges = changes.reduce((count, change) => {
+    return isDocsComments(change) ? count + 1 : count;
+  }, 0);
+
+  return Math.floor((validChanges / changes.length) * 100);
+};
+
 /**
  * @param {Object} diffObj - 변경사항 객체
  * @returns {number} commitScore - 최종 점수
  */
 const scoreDocsCommitType = (diffObj) => {
-  const totalFiles = Object.keys(diffObj);
+  const totalFiles = Object.entries(diffObj);
 
-  if (totalFiles.length === 0) {
+  if (!totalFiles.length) {
     return 0;
   }
 
-  const passedFilesCount = totalFiles.reduce((count, filePath) => {
-    return isDocsFile(filePath) ? count + 1 : count;
+  const totalScore = totalFiles.reduce((sum, [filePath, changes]) => {
+    return sum + calculateFileScore(filePath, changes);
   }, 0);
 
-  const commitScore = Math.floor((passedFilesCount / totalFiles.length) * 100);
+  const commitScore = Math.floor(totalScore / totalFiles.length);
 
   return commitScore;
 };
