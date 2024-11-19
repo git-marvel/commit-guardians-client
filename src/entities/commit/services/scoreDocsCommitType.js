@@ -35,15 +35,17 @@ const isDocsComments = (change) => {
   }
 
   return DOCS_COMMENTS.some((comment) => {
+    const startIndex = 2;
+
     switch (keyOfEmptyValue) {
       case "+":
-        return change["-"].startsWith(comment, 2);
+        return change["-"].startsWith(comment, startIndex);
       case "-":
-        return change["+"].startsWith(comment, 2);
+        return change["+"].startsWith(comment, startIndex);
       default:
         return (
-          change["+"].startsWith(comment, 2) &&
-          change["-"].startsWith(comment, 2)
+          change["+"].startsWith(comment, startIndex) &&
+          change["-"].startsWith(comment, startIndex)
         );
     }
   });
