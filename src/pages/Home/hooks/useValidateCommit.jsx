@@ -109,7 +109,7 @@ const useValidateCommit = () => {
         setRepository({ owner, repo });
         await fetchCommits({ owner, repo });
 
-        if (numOfCommit !== 0) {
+        if (numOfCommit > 0) {
           setIsAbleToRoute(true);
         }
 
