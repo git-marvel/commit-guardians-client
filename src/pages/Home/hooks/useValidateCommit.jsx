@@ -7,6 +7,7 @@ import {
 } from "../../../entities/commit/services";
 import { getCommitSummary } from "../../../entities/score/services";
 import useCommitStore from "../../../features/commit/store/useCommitStore";
+import usePersistentStore from "../../../shared/store/usePersistentStore";
 import useGithubStatusStore from "../../../features/githubAPIStatus/store/useGithubStatusStore";
 import { ERROR_MESSAGES } from "../../../shared/constants";
 import extractGitInfoFromURL from "../../../shared/utils/extractGitInfoFromURL";
@@ -25,6 +26,9 @@ const useValidateCommit = () => {
   );
   const setTotalNumOfCommit = useCommitStore(
     (state) => state.setTotalNumOfCommit
+  );
+  const setIsAbleToRoute = usePersistentStore(
+    (state) => state.setIsAbleToRoute
   );
   const setCommitSummary = useCommitStore((state) => state.setCommitSummary);
   const numOfCommit = useCommitStore((state) => state.commitInfo.numOfCommit);
@@ -89,6 +93,8 @@ const useValidateCommit = () => {
   const handleCheckCommitQuality = useCallback(
     async (event) => {
       event.preventDefault();
+      setErrorMessage(null);
+      setIsAbleToRoute(false);
 
       try {
         setIsLoading(true);
@@ -103,6 +109,10 @@ const useValidateCommit = () => {
         setRepository({ owner, repo });
         await fetchCommits({ owner, repo });
 
+        if (numOfCommit > 0) {
+          setIsAbleToRoute(true);
+        }
+
         setErrorMessage(
           numOfCommit === 0 ? ERROR_MESSAGES.noCommitsToCheck : null
         );
@@ -113,7 +123,7 @@ const useValidateCommit = () => {
         setIsLoading(false);
       }
     },
-    [fetchCommits, setRepository, numOfCommit]
+    [fetchCommits, setRepository, numOfCommit, setIsAbleToRoute]
   );
 
   return {

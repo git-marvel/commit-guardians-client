@@ -14,10 +14,9 @@ const isOnlyDeletionChange = (change) => {
 /**
  * 파일별 삭제 점수를 계산하는 함수입니다.
  * @param {Array} changes - 파일의 변경사항 목록
- * @param {string} fileName - 파일 이름
  * @returns {number} - 파일의 삭제 점수
  */
-const calculateFileScore = (fileName, changes) => {
+const calculateFileScore = (changes) => {
   const changesLength = changes.length;
 
   if (!changes || changesLength === 0) {
@@ -41,16 +40,16 @@ const scoreRemoveCommitType = (diffObj) => {
     return 0;
   }
 
-  const validFiles = Object.entries(diffObj).filter(
-    ([, changes]) => Array.isArray(changes) && changes.length > 0
+  const validFiles = Object.values(diffObj).filter(
+    (changes) => Array.isArray(changes) && changes.length > 0
   );
 
   if (validFiles.length === 0) {
     return 0;
   }
 
-  const totalScore = validFiles.reduce((sum, [fileName, changes]) => {
-    return sum + calculateFileScore(fileName, changes);
+  const totalScore = validFiles.reduce((sum, changes) => {
+    return sum + calculateFileScore(changes);
   }, 0);
 
   return Math.floor(totalScore / validFiles.length);
