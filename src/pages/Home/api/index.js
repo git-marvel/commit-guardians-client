@@ -72,7 +72,7 @@ const getCommitDiff = async ({ owner, repo, sha }) => {
 };
 
 const getCommitDiffList = async ({ owner, repo, commitsToCheck }) => {
-  const answer = [];
+  let answer = [];
   const interationSize = Math.ceil(
     commitsToCheck.length / DIFF_REQUEST_BATCH_SIZE
   );
@@ -93,7 +93,9 @@ const getCommitDiffList = async ({ owner, repo, commitsToCheck }) => {
       return commitWithDiff;
     });
 
-    answer.push(...(await Promise.all(fetchPromises)));
+    const chunk = await Promise.all(fetchPromises);
+    answer = answer.concat(chunk);
+
     await new Promise((resolve) =>
       setTimeout(resolve, DIFF_REQUEST_DELAY_TIME)
     );
