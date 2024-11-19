@@ -6,6 +6,8 @@ import { throwFetchErrorMessage } from "../../../shared/error/throwCustomErrorMe
 
 const COMMITS_PER_PAGE = 100;
 const DIFF_MEDIA_TYPE = "application/vnd.github.diff";
+const DIFF_REQUEST_BATCH_SIZE = 200;
+const DIFF_REQUEST_DELAY_TIME = 1000;
 
 const setCommitBaseUrl = ({ owner, repo }) =>
   `https://api.github.com/repos/${owner}/${repo}/commits`;
@@ -70,18 +72,36 @@ const getCommitDiff = async ({ owner, repo, sha }) => {
 };
 
 const getCommitDiffList = async ({ owner, repo, commitsToCheck }) => {
-  const fetchPromises = commitsToCheck.map(async (commitWithType) => {
-    const { sha } = commitWithType;
-    const diffObj = await getCommitDiff({ owner, repo, sha });
-    const commitWithDiff = makeCommitEntityWithDiff({
-      commit: commitWithType,
-      diffObj,
+  let answer = [];
+  const interationSize = Math.ceil(
+    commitsToCheck.length / DIFF_REQUEST_BATCH_SIZE
+  );
+
+  for (let i = 0; i < interationSize; i++) {
+    const slicedCommitsToCheck = commitsToCheck.slice(
+      DIFF_REQUEST_BATCH_SIZE * i,
+      DIFF_REQUEST_BATCH_SIZE * (i + 1)
+    );
+    const fetchPromises = slicedCommitsToCheck.map(async (commitWithType) => {
+      const { sha } = commitWithType;
+      const diffObj = await getCommitDiff({ owner, repo, sha });
+      const commitWithDiff = makeCommitEntityWithDiff({
+        commit: commitWithType,
+        diffObj,
+      });
+
+      return commitWithDiff;
     });
 
-    return commitWithDiff;
-  });
+    const chunk = await Promise.all(fetchPromises);
+    answer = answer.concat(chunk);
 
-  return await Promise.all(fetchPromises);
+    await new Promise((resolve) =>
+      setTimeout(resolve, DIFF_REQUEST_DELAY_TIME)
+    );
+  }
+
+  return answer;
 };
 
 export { getCommitDiffList, getCommitList };
