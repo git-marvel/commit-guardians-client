@@ -4,6 +4,10 @@ import { storage } from "../../../shared/config";
 const getBadgeUrl = async ({ totalScore }) => {
   let fileRef;
 
+  if (totalScore === null) {
+    return null;
+  }
+
   if (totalScore >= 80) {
     fileRef = ref(storage, "badges/commit-rulemaster-style-01.svg");
   } else if (totalScore >= 50) {

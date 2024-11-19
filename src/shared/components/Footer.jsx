@@ -6,6 +6,7 @@ const Footer = () => {
     <div className="absolute bottom-0 flex flex-col items-center">
       <a
         href="https://github.com/git-marvel"
+        target="_blank"
         className="text-sm text-slate-600"
       >
         <h2 className="m-1 text-center text-sm">
