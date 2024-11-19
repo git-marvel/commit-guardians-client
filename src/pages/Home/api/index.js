@@ -73,11 +73,11 @@ const getCommitDiff = async ({ owner, repo, sha }) => {
 
 const getCommitDiffList = async ({ owner, repo, commitsToCheck }) => {
   let answer = [];
-  const interationSize = Math.ceil(
+  const iterationSize = Math.ceil(
     commitsToCheck.length / DIFF_REQUEST_BATCH_SIZE
   );
 
-  for (let i = 0; i < interationSize; i++) {
+  for (let i = 0; i < iterationSize; i++) {
     const slicedCommitsToCheck = commitsToCheck.slice(
       DIFF_REQUEST_BATCH_SIZE * i,
       DIFF_REQUEST_BATCH_SIZE * (i + 1)
