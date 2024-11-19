@@ -15,7 +15,7 @@ const Home = () => {
   } = useValidateCommit();
 
   return (
-    <div className="h-screen w-screen bg-gray-100">
+    <div className="h-screen w-screen bg-gray-100 dark:bg-gray-900">
       <div className="m-4 flex flex-row items-center justify-end px-10 py-5">
         <GithubAPIStatus />
       </div>

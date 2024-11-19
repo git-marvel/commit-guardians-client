@@ -23,7 +23,7 @@ export default {
       },
     },
     fontFamily: {
-      Pixelify: ["Pixelify"],
+      Pixelify: ["Pixelify", "Pretendard"],
     },
   },
   plugins: [],

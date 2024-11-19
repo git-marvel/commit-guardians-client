@@ -4,7 +4,7 @@ import InfoValue from "../../../features/commit/components/InfoValue";
 const ScoreBoardHeader = ({ gridCols }) => {
   return (
     <div
-      className={`${gridCols} grid w-full gap-4 divide-x-2 bg-slate-900 px-10 text-sm text-slate-300`}
+      className={`${gridCols} grid w-dvw gap-4 divide-x-2 bg-slate-900 px-10 text-sm text-slate-300 dark:bg-gray-400 dark:text-slate-900`}
     >
       <p className="col-span-1 px-2 py-1">TYPE</p>
       <p className="col-span-6 px-2 py-1">COMMIT MESSAGE</p>
