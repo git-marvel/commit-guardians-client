@@ -1,5 +1,3 @@
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
-
 const ERROR_MESSAGES = {
   githubStatusError: "Github 상태가 원할하지 않습니다.",
   noCommitsToCheck: "아쉽게도, 현재 검사할 수 있는 커밋이 없습니다. 😥",
@@ -24,4 +22,4 @@ const ERROR_MESSAGES = {
     "데이터 베이스의 알 수 없는 오류가 발생 한 것 같아요, 페이지를 다시 로드 해주세요!",
 };
 
-export { ERROR_MESSAGES, GITHUB_TOKEN };
+export { ERROR_MESSAGES };
