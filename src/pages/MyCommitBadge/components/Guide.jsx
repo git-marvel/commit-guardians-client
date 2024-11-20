@@ -1,19 +1,19 @@
-import CheckCircleIcon from "../../../shared/components/CheckCircleIcon";
+import CommitTypeValue from "../../../features/commit/components/CommitTypeValue";
 import PlusMinusIcon from "../../../shared/components/PlusMinusIcon";
 
 const Guide = () => {
   return (
-    <div className="px-32">
+    <div className="px-28">
       <div className="space-y-12">
         <section>
           <h3 className="text-sm/7 font-semibold text-slate-400">FAQ</h3>
-          <dl className="mt-2 divide-y divide-slate-100">
+          <dl className="divide-y divide-slate-100">
             <details className="group py-4 marker:content-['']">
-              <summary className="[&amp;::-webkit-details-marker]:hidden flex cursor-pointer select-none justify-between font-semibold text-slate-900 group-open:text-blue-500">
+              <summary className="[&amp;::-webkit-details-marker]:hidden flex cursor-pointer select-none justify-between font-semibold text-slate-900 group-open:text-blue-500 dark:text-slate-300">
                 입력 가능한 레포지토리 커밋 메시지 형식은 어떻게 되나요?
                 <PlusMinusIcon />
               </summary>
-              <div className="pb-4 pt-4">
+              <div className="pb-4 pt-4 text-slate-700 dark:text-slate-400">
                 <div className="text-base">
                   <span>
                     *대소문자 구분이 없습니다. (Case-insensitive)
@@ -41,19 +41,20 @@ const Guide = () => {
               </div>
             </details>
             <details className="group py-4 marker:content-['']">
-              <summary className="[&amp;::-webkit-details-marker]:hidden flex cursor-pointer select-none justify-between font-semibold text-slate-900 group-open:text-blue-500">
+              <summary className="[&amp;::-webkit-details-marker]:hidden flex cursor-pointer select-none justify-between font-semibold text-slate-900 group-open:text-blue-500 dark:text-slate-300">
                 Commit Guardians가 확인하는 커밋 타입과 채점 방식은 무엇인가요?
                 <PlusMinusIcon />
               </summary>
-              <div className="flex overflow-auto">
+              <div className="flex overflow-auto text-slate-700 dark:text-slate-400">
                 <div className="h-[420px]">
                   <div className="pb-4 pt-4">
-                    <div className="flex flex-row items-center">
-                      <CheckCircleIcon />
-                      <strong className="ml-1">remove</strong>
+                    <div className="mb-2 flex flex-row items-center">
+                      <CommitTypeValue type="remove" />
                     </div>
-                    <ul className="mb-2 list-disc ps-5 dark:text-gray-400">
-                      <li>파일 및 폴더, 코드를 삭제한 커밋</li>
+                    <ul className="mb-2 list-disc ps-5">
+                      <li>
+                        파일 및 폴더, 코드를 <b>삭제한 커밋</b>
+                      </li>
                       <li className="mb-2">
                         - 변경사항에 삭제한 부분만 포함됐는지 확인
                       </li>
@@ -63,12 +64,13 @@ const Guide = () => {
                     </ul>
                   </div>
                   <div className="pb-4 pt-4">
-                    <div className="flex flex-row items-center">
-                      <CheckCircleIcon />
-                      <strong className="ml-1">docs</strong>
+                    <div className="mb-2 flex flex-row items-center">
+                      <CommitTypeValue type="docs" />
                     </div>
-                    <ul className="mb-2 list-disc ps-5 dark:text-gray-400">
-                      <li>문서 작업만을 한 커밋</li>
+                    <ul className="mb-2 list-disc ps-5">
+                      <li>
+                        <b>문서 작업만</b>을 한 커밋
+                      </li>
                       <li>- 문서에 사용되는 파일만 포함됐는지 확인</li>
                       <li className="ps-5">
                         - 이미지 파일 - .img, .png, .jpeg, .svg, .ai
@@ -84,14 +86,14 @@ const Guide = () => {
                     </ul>
                   </div>
                   <div className="pb-4 pt-4">
-                    <div className="flex flex-row items-center">
-                      <CheckCircleIcon />
-                      <strong className="ml-1">style</strong>
+                    <div className="mb-2 flex flex-row items-center">
+                      <CommitTypeValue type="style" />
                     </div>
-                    <ul className="mb-2 list-disc ps-5 dark:text-gray-400">
+                    <ul className="mb-2 list-disc ps-5">
                       <li>
-                        주로 코드 포매팅, 들여 쓰기, 코드 정렬 등 코드의 동작에
-                        영향을 주지 않는 수정을 한 커밋
+                        주로 코드 포매팅, 들여 쓰기, 코드 정렬 등
+                        <b className="pl-1">코드의 동작에 영향을 주지 않는</b>{" "}
+                        수정을 한 커밋
                       </li>
                       <li>
                         - 파일명에 style을 나타내는 단어 확인
@@ -113,12 +115,13 @@ const Guide = () => {
                     </ul>
                   </div>
                   <div className="pb-4 pt-4">
-                    <div className="flex flex-row items-center">
-                      <CheckCircleIcon />
-                      <strong className="ml-1">test</strong>
+                    <div className="mb-2 flex flex-row items-center">
+                      <CommitTypeValue type="test" />
                     </div>
-                    <ul className="mb-2 list-disc ps-5 dark:text-gray-400">
-                      <li>- 테스트를 추가하거나 변경한 커밋</li>
+                    <ul className="mb-2 list-disc ps-5">
+                      <li>
+                        - <b>테스트를 추가하거나 변경한 커밋</b>
+                      </li>
                       <li className="ps-5">
                         - 테스트 코드를 작성한 파일만 포함됐는지 확인
                       </li>
@@ -145,9 +148,12 @@ const Guide = () => {
             </details>
           </dl>
         </section>
-        <section className="absolute bottom-52 m-1 text-sm text-slate-600">
-          <p>If you have an idea for a commitguardians</p>
-          <p>please email commitguardians@google.com!</p>
+        <section className="absolute bottom-52 m-1 text-sm text-slate-700 dark:text-slate-300">
+          <p>If you have an idea for a commitguardians ,</p>
+          <p>
+            Please email to{" "}
+            <b className="text-sky-400">commitguardians@google.com</b>
+          </p>
         </section>
       </div>
     </div>

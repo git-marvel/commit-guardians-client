@@ -20,7 +20,7 @@ const MyCommitBadge = () => {
       <div className="m-4 flex flex-row items-center justify-start px-10 py-5">
         <HomeButton />
       </div>
-      <div className="grid grid-cols-2 px-44">
+      <div className="grid grid-cols-2 px-20">
         <div className="flex flex-col items-center">
           {numOfPerfectCommits && (
             <div className="mb-10 flex items-center font-bold text-slate-500">
