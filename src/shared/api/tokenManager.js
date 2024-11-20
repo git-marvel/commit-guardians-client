@@ -29,6 +29,11 @@ const tokenStates = [
       import.meta.env.VITE_GITHUB_TOKEN_4 ?? import.meta.env.VITE_GITHUB_TOKEN,
     remaining: GITHUB_REQUEST_LIMIT,
   },
+  {
+    token:
+      import.meta.env.VITE_GITHUB_TOKEN_5 ?? import.meta.env.VITE_GITHUB_TOKEN,
+    remaining: GITHUB_REQUEST_LIMIT,
+  },
 ];
 
 const getBestGithubToken = () => {
