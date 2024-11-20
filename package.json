@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^1.7.7",
     "chart.js": "^4.4.6",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "diff-match-patch": "^1.0.5",
     "firebase": "^11.0.1",
     "idb-keyval": "^6.2.1",
