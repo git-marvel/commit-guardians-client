@@ -2,6 +2,7 @@ import CommitFormatStyleValue from "../../features/commit/components/CommitForma
 import GithubAPIStatus from "../../features/githubAPIStatus/components/GithubAPIStatus";
 import RepositoryLinkTag from "../../features/repository/components/RepositoryLinkTag";
 import HomeButton from "../../shared/components/HomeButton";
+import VirtualScroll from "../../shared/components/VirtualScroll";
 import ScoreBoardHeader from "./components/ScoreBoardHeader";
 import ScoreBoardRow from "./components/ScoreBoardRow";
 import useShowCommitDetails from "./hooks/useShowCommitDetails";
@@ -9,7 +10,7 @@ import useShowCommitDetails from "./hooks/useShowCommitDetails";
 const GRID_COLS = "grid-cols-16";
 
 const MyCommitScoreboard = () => {
-  const { commitList } = useShowCommitDetails();
+  const { commitList, needsVirtualScroll } = useShowCommitDetails();
 
   return (
     <div className="relative dark:bg-gray-900">
@@ -26,9 +27,25 @@ const MyCommitScoreboard = () => {
         </div>
         <ScoreBoardHeader gridCols={GRID_COLS} />
       </div>
-      {commitList.map((commit) => (
-        <ScoreBoardRow key={commit.sha} gridCols={GRID_COLS} commit={commit} />
-      ))}
+      {needsVirtualScroll ? (
+        <VirtualScroll itemHeight={50}>
+          {commitList.map((commit) => (
+            <ScoreBoardRow
+              key={commit.sha}
+              gridCols={GRID_COLS}
+              commit={commit}
+            />
+          ))}
+        </VirtualScroll>
+      ) : (
+        commitList.map((commit) => (
+          <ScoreBoardRow
+            key={commit.sha}
+            gridCols={GRID_COLS}
+            commit={commit}
+          />
+        ))
+      )}
     </div>
   );
 };
