@@ -10,15 +10,23 @@ const tokenStates = [
     remaining: GITHUB_REQUEST_LIMIT,
   },
   {
-    token: import.meta.env.VITE_GITHUB_TOKEN_1,
+    token:
+      import.meta.env.VITE_GITHUB_TOKEN_1 ?? import.meta.env.VITE_GITHUB_TOKEN,
     remaining: GITHUB_REQUEST_LIMIT,
   },
   {
-    token: import.meta.env.VITE_GITHUB_TOKEN_2,
+    token:
+      import.meta.env.VITE_GITHUB_TOKEN_2 ?? import.meta.env.VITE_GITHUB_TOKEN,
     remaining: GITHUB_REQUEST_LIMIT,
   },
   {
-    token: import.meta.env.VITE_GITHUB_TOKEN_3,
+    token:
+      import.meta.env.VITE_GITHUB_TOKEN_3 ?? import.meta.env.VITE_GITHUB_TOKEN,
+    remaining: GITHUB_REQUEST_LIMIT,
+  },
+  {
+    token:
+      import.meta.env.VITE_GITHUB_TOKEN_4 ?? import.meta.env.VITE_GITHUB_TOKEN,
     remaining: GITHUB_REQUEST_LIMIT,
   },
 ];
