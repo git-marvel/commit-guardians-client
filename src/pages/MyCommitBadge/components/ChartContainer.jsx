@@ -97,14 +97,14 @@ const ChartContainer = () => {
       const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
 
       ctx.save();
-      ctx.font = "bold 16px Arial";
+      ctx.font = "bold 12px Pretendard, sans-serif";
       ctx.fillStyle = "rgba(100, 100, 100, 1)";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
+      ctx.fillText("Total", width / 2, chart.chartArea.height * (3 / 4) - 21);
 
-      const centerX = width / 2;
-      const centerY = chart.chartArea.height * (3 / 4) + 2;
-      ctx.fillText(`Total: ${total}`, centerX, centerY);
+      ctx.font = "bold 48px Pretendard, sans-serif";
+      ctx.fillText(`${total}`, width / 2, chart.chartArea.height * (3 / 4) + 9);
 
       ctx.restore();
     },
@@ -133,7 +133,7 @@ const ChartContainer = () => {
 
         ctx.save();
         ctx.fillStyle = sectionColor;
-        ctx.font = "bold 10px Arial";
+        ctx.font = "bold 10px Pretendard, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
@@ -168,6 +168,7 @@ const ChartContainer = () => {
         font: {
           size: 14,
           weight: "bold",
+          family: "Pretendard, sans-serif",
         },
       },
     },
