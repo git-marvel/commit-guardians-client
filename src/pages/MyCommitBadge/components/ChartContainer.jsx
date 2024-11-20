@@ -26,17 +26,17 @@ const ChartContainer = () => {
   const people = new Map();
   const type = new Map([
     ["remove", 0],
-    ["style", 0],
     ["docs", 0],
+    ["style", 0],
     ["test", 0],
   ]);
 
-  commitList.forEach((element) => {
-    const key = element.type;
+  commitList.forEach((commit) => {
+    const key = commit.type;
     type.set(key, type.get(key) + 1);
 
-    const email = element.author.email;
-    const author = element.author;
+    const email = commit.author.email;
+    const author = commit.author;
 
     if (people.has(email)) {
       const existing = people.get(email);
@@ -46,6 +46,36 @@ const ChartContainer = () => {
     }
   });
 
+  const top3 = Array.from(people.values())
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 3);
+  const top3Map = new Map(
+    top3.map((author) => [
+      author.email,
+      {
+        ...author,
+        type: new Map([
+          ["remove", null],
+          ["style", null],
+          ["docs", null],
+          ["test", null],
+        ]),
+      },
+    ])
+  );
+
+  commitList.forEach((commit) => {
+    const { type: commitType, author } = commit;
+    const email = author.email;
+
+    if (top3Map.has(email)) {
+      const person = top3Map.get(email);
+      person.type.set(commitType, (person.type.get(commitType) || 0) + 1);
+    }
+  });
+
+  const top3Value = Array.from(top3Map.values());
+
   const pieData = {
     labels: Array.from(type.keys()),
     datasets: [
@@ -53,20 +83,16 @@ const ChartContainer = () => {
         label: "Commits",
         data: Array.from(type.values()),
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
+          "rgba(226, 232, 240, 1)",
+          "rgba(255, 255, 255, 1)",
+          "rgba(254, 215, 170, 1)",
+          "rgba(252, 231, 243, 1)",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
+          "rgba(226, 232, 240, 1)",
+          "rgba(255, 255, 255, 1)",
+          "rgba(254, 215, 170, 1)",
+          "rgba(252, 231, 243, 1)",
         ],
         borderWidth: 1,
       },
@@ -92,7 +118,7 @@ const ChartContainer = () => {
 
   const centerTextPlugin = {
     id: "centerText",
-    beforeDraw: (chart) => {
+    afterDatasetDraw: (chart) => {
       const { width, ctx, data } = chart;
       const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
 
@@ -116,14 +142,7 @@ const ChartContainer = () => {
       const { ctx, data } = chart;
       const dataset = data.datasets[0];
       const total = dataset.data.reduce((a, b) => a + b, 0);
-      const backgroundColor = [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-        "rgba(255, 159, 64, 1)",
-      ];
+      const backgroundColor = ["#9ca2a8", "#696969", "#fc8600", "#ff3dab"];
 
       chart.getDatasetMeta(0).data.forEach((arc, index) => {
         const { x, y } = arc.tooltipPosition();
@@ -145,26 +164,75 @@ const ChartContainer = () => {
   };
 
   const barData = {
-    labels: Array.from(people.values().map((element) => element.name)),
+    labels: top3Value.map((value) => value.name),
     datasets: [
       {
-        label: "Commits",
-        data: Array.from(people.values().map((element) => element.count)),
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        label: "reomve",
+        data: top3Value.map((value) => value.type.get("remove")),
+        backgroundColor: "rgba(226, 232, 240, 1)",
+        borderColor: "rgba(226, 232, 240, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: "docs",
+        data: top3Value.map((value) => value.type.get("docs")),
+        backgroundColor: "rgba(255, 255, 255, 1)",
+        borderColor: "rgba(255, 255, 255, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: "style",
+        data: top3Value.map((value) => value.type.get("style")),
+        backgroundColor: "rgba(254, 215, 170, 1)",
+        borderColor: "rgba(254, 215, 170, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: "test",
+        data: top3Value.map((value) => value.type.get("test")),
+        backgroundColor: "rgba(252, 231, 243, 1)",
+        borderColor: "rgba(252, 231, 243, 1)",
         borderWidth: 1,
       },
     ],
   };
+
+  const customColors = ["#9ca2a8", "#696969", "#fc8600", "#ff3dab"];
 
   const barOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       datalabels: {
-        color: "rgba(75, 192, 192, 1)",
-        anchor: "end",
-        align: "top",
+        display: true,
+        anchor: (context) => {
+          return context.datasetIndex === context.chart.data.datasets.length
+            ? "end"
+            : "center";
+        },
+        align: (context) => {
+          return context.datasetIndex === context.chart.data.datasets.length
+            ? "top"
+            : "center";
+        },
+        formatter: (value, context) => {
+          const datasetIndex = context.datasetIndex;
+          const dataIndex = context.dataIndex;
+
+          if (datasetIndex === context.chart.data.datasets.length) {
+            const total = context.chart.data.datasets.reduce(
+              (sum, dataset) => sum + dataset.data[dataIndex],
+              0
+            );
+            return `Total: ${total}`;
+          }
+          return value;
+        },
+        color: (context) => {
+          return context.datasetIndex === context.chart.data.datasets.length
+            ? "black"
+            : customColors[context.datasetIndex % customColors.length];
+        },
         font: {
           size: 14,
           weight: "bold",
@@ -175,12 +243,14 @@ const ChartContainer = () => {
     scales: {
       x: {
         beginAtZero: true,
+        stacked: true,
         grid: {
           color: "transparent",
         },
       },
       y: {
         beginAtZero: true,
+        stacked: true,
         grid: {
           color: "transparent",
         },
