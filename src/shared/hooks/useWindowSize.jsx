@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState(() => ({
@@ -21,7 +21,10 @@ const useWindowSize = () => {
     };
   }, []);
 
-  return windowSize;
+  const width = useMemo(() => windowSize.width, [windowSize.width]);
+  const height = useMemo(() => windowSize.height, [windowSize.height]);
+
+  return { width, height };
 };
 
 export default useWindowSize;

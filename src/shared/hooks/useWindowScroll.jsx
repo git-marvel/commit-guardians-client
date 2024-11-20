@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const useWindowScroll = () => {
   const [scrollPosition, setScrollPosition] = useState(() => ({
@@ -21,7 +21,10 @@ const useWindowScroll = () => {
     };
   }, []);
 
-  return scrollPosition;
+  const x = useMemo(() => scrollPosition.x, [scrollPosition.x]);
+  const y = useMemo(() => scrollPosition.y, [scrollPosition.y]);
+
+  return { x, y };
 };
 
 export default useWindowScroll;
