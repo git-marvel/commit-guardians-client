@@ -156,7 +156,9 @@ const ChartContainer = () => {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        ctx.fillText(`${value} (${percentage}%)`, x, y);
+        if (value !== 0) {
+          ctx.fillText(`${value} (${percentage}%)`, x, y);
+        }
 
         ctx.restore();
       });
@@ -260,14 +262,14 @@ const ChartContainer = () => {
 
   return (
     <div className="flex items-center justify-center space-x-4">
-      <div className="h-64 w-64">
+      <div className="h-60 w-60">
         <Doughnut
           data={pieData}
           options={pieOptions}
           plugins={[centerTextPlugin, sectionValuePlugin]}
         />
       </div>
-      <div className="h-64 w-64">
+      <div className="h-60 w-60">
         <Bar data={barData} options={barOptions} plugins={[ChartDataLabels]} />
       </div>
     </div>
