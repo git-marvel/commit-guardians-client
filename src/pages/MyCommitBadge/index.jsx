@@ -4,16 +4,13 @@ import CopyBadgeButton from "../../features/commitBadge/components/CopyBadge";
 import Button from "../../shared/components/Button";
 import Footer from "../../shared/components/Footer";
 import HomeButton from "../../shared/components/HomeButton";
+import ChartContainer from "./components/ChartContainer";
 import Guide from "./components/Guide";
 
 const MyCommitBadge = () => {
   const navigate = useNavigate();
   const handleRoutingCommitScoreboard = () => navigate("/my-commit-scoreboard");
-  const numOfPerfectCommits = useCommitStore(
-    (state) => state.commitSummary.numOfPerfectCommits
-  );
   const totalScore = useCommitStore((state) => state.commitSummary.totalScore);
-  const numOfCommit = useCommitStore((state) => state.commitInfo.numOfCommit);
 
   return (
     <div className="h-screen w-screen bg-gray-100 dark:bg-gray-900">
@@ -22,19 +19,12 @@ const MyCommitBadge = () => {
       </div>
       <div className="grid grid-cols-2 px-20">
         <div className="flex flex-col items-center">
-          {numOfPerfectCommits && (
-            <div className="mb-10 flex items-center font-bold text-slate-500">
-              <span className="mr-1 text-2xl text-sky-300">
-                {numOfPerfectCommits}
-              </span>
-              <span className="text-sm text-slate-300">commits</span>
-            </div>
-          )}
+          <ChartContainer />
           {totalScore && (
             <>
               <p className="font-bold text-slate-500">Total Score</p>
               <h1 className="mb-4 px-4 text-4xl font-bold text-blue-400">
-                + {totalScore}
+                {totalScore} / 100
               </h1>
             </>
           )}
@@ -42,9 +32,6 @@ const MyCommitBadge = () => {
             <Button onClick={handleRoutingCommitScoreboard}>
               <>
                 <span>View All Results</span>
-                <span className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-200 text-xs font-semibold text-blue-800">
-                  {numOfCommit}
-                </span>
               </>
             </Button>
           </div>
