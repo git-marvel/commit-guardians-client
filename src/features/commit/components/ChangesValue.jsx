@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
-import FileIcon from "../../../shared/assets/svg/file-icon.svg";
 import BarGraph from "../../../shared/components/BarGraph";
+import FileIcon from "../../../shared/components/FileIcon";
 
 const ChangesValue = memo(({ commit }) => {
   if (!commit.numOfFiles) {
@@ -10,14 +10,7 @@ const ChangesValue = memo(({ commit }) => {
 
   return (
     <div className="flex">
-      <img
-        src={FileIcon}
-        alt="File Icon"
-        width="20"
-        height="18"
-        color="slate-400"
-        className="my-0.5"
-      />
+      <FileIcon />
       <p className="pl-1 pr-4 font-bold text-slate-400">{commit.numOfFiles}</p>
       <BarGraph
         totalChanges={commit.numOfChanges}

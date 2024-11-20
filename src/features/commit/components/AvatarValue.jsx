@@ -11,7 +11,9 @@ const AvatarValue = ({ author }) => {
         alt="avatar_url"
         className="w-5 rounded-full"
       />
-      <p className="ml-2 text-sm text-slate-700">{author.name ?? "unknown"}</p>
+      <p className="ml-2 text-sm text-slate-700 dark:text-slate-400">
+        {author.name ?? "unknown"}
+      </p>
     </>
   );
 };

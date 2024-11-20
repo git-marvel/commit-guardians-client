@@ -8,7 +8,7 @@ const NotFound = () => {
   const handleRoutingHome = () => navigate("/", { replace: true });
 
   return (
-    <div className="flex h-dvh w-dvw flex-col items-center justify-center bg-gray-100">
+    <div className="flex h-dvh w-dvw flex-col items-center justify-center bg-gray-100 dark:bg-black">
       <Error
         code="404"
         heading="Page Not Found 🤔"

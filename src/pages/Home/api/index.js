@@ -1,7 +1,10 @@
 import axios from "axios";
 import { getChanges } from "../../../entities/change/services";
 import { makeCommitEntityWithDiff } from "../../../entities/commit/commitEntity";
-import { GITHUB_TOKEN } from "../../../shared/constants";
+import {
+  getBestGithubToken,
+  updateTokenState,
+} from "../../../shared/api/tokenManager";
 import { throwFetchErrorMessage } from "../../../shared/error/throwCustomErrorMessage";
 
 const COMMITS_PER_PAGE = 100;
@@ -13,12 +16,20 @@ const setCommitBaseUrl = ({ owner, repo }) =>
   `https://api.github.com/repos/${owner}/${repo}/commits`;
 
 const fetchWithAuth = async (url, accept = "*/*") => {
-  return await axios.get(url, {
+  const githubToken = getBestGithubToken();
+
+  const result = await axios.get(url, {
     headers: {
-      Authorization: `token ${GITHUB_TOKEN}`,
+      Authorization: `token ${githubToken}`,
       Accept: accept,
     },
   });
+
+  const remaining = parseInt(result.headers.get("x-ratelimit-remaining"), 10);
+
+  updateTokenState(githubToken, remaining);
+
+  return result;
 };
 
 const getCommitList = async ({ owner, repo }) => {
