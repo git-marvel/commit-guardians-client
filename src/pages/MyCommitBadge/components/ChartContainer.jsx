@@ -155,7 +155,7 @@ const ChartContainer = () => {
         ctx.font = "bold 10px Pretendard, sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        console.log(percentage);
+
         if (value !== 0) {
           ctx.fillText(`${value} (${percentage}%)`, x, y);
         }
