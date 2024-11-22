@@ -1,6 +1,8 @@
 import CommitTypeValue from "../../../features/commit/components/CommitTypeValue";
 import PlusMinusIcon from "../../../shared/components/PlusMinusIcon";
 
+const TEAM_MAIL = "commitguardians@google.com";
+
 const Guide = () => {
   return (
     <div className="px-28">
@@ -8,8 +10,8 @@ const Guide = () => {
         <section>
           <h3 className="text-sm/7 font-semibold text-slate-400">FAQ</h3>
           <dl className="divide-y divide-slate-100">
-            <details className="group py-4 marker:content-['']">
-              <summary className="[&amp;::-webkit-details-marker]:hidden flex cursor-pointer select-none justify-between font-semibold text-slate-900 group-open:text-blue-500 dark:text-slate-300">
+            <details className="group py-4" name="questions" open>
+              <summary className="flex cursor-pointer select-none justify-between font-semibold text-slate-900 group-open:text-blue-500 dark:text-slate-300">
                 입력 가능한 레포지토리 커밋 메시지 형식은 어떻게 되나요?
                 <PlusMinusIcon />
               </summary>
@@ -40,8 +42,8 @@ const Guide = () => {
                 </div>
               </div>
             </details>
-            <details className="group py-4 marker:content-['']">
-              <summary className="[&amp;::-webkit-details-marker]:hidden flex cursor-pointer select-none justify-between font-semibold text-slate-900 group-open:text-blue-500 dark:text-slate-300">
+            <details className="group py-4" name="questions">
+              <summary className="flex cursor-pointer select-none justify-between font-semibold text-slate-900 group-open:text-blue-500 dark:text-slate-300">
                 Commit Guardians가 확인하는 커밋 타입과 채점 방식은 무엇인가요?
                 <PlusMinusIcon />
               </summary>
@@ -55,12 +57,12 @@ const Guide = () => {
                       <li>
                         파일 및 폴더, 코드를 <b>삭제한 커밋</b>
                       </li>
-                      <li className="mb-2">
+                      <p className="mb-2">
                         - 변경사항에 삭제한 부분만 포함됐는지 확인
-                      </li>
+                      </p>
                       <li>해당하지 않는 경우 예시</li>
-                      <li>- 파일 삭제와 코드 수정을 같이 커밋했을 경우</li>
-                      <li>- 변경사항에 코드의 추가된 부분이 포함된 경우</li>
+                      <p>- 파일 삭제와 코드 수정을 같이 커밋했을 경우</p>
+                      <p>- 변경사항에 코드의 추가된 부분이 포함된 경우</p>
                     </ul>
                   </div>
                   <div className="pb-4 pt-4">
@@ -71,18 +73,18 @@ const Guide = () => {
                       <li>
                         <b>문서 작업만</b>을 한 커밋
                       </li>
-                      <li>- 문서에 사용되는 파일만 포함됐는지 확인</li>
-                      <li className="ps-5">
-                        - 이미지 파일 - .img, .png, .jpeg, .svg, .ai
+                      <p>- 문서에 사용되는 파일만 포함됐는지 확인</p>
+                      <li className="list-inside ps-5">
+                        이미지 파일 - .img, .png, .jpeg, .svg, .ai
                       </li>
-                      <li className="mb-2 ps-5">
-                        - 기타 문서 파일 - .pdf ,.docs, .md, .mdx, .rst
+                      <li className="mb-2 list-inside ps-5">
+                        기타 문서 파일 - .pdf, .docs, .md, .mdx, .rst
                       </li>
                       <li>해당하지 않는 경우 예시</li>
-                      <li className="ps-2">
+                      <p>
                         - 문서 파일과 소스 코드 파일의 수정사항을 같이 커밋했을
                         경우
-                      </li>
+                      </p>
                     </ul>
                   </div>
                   <div className="pb-4 pt-4">
@@ -95,23 +97,25 @@ const Guide = () => {
                         <b className="pl-1">코드의 동작에 영향을 주지 않는</b>{" "}
                         수정을 한 커밋
                       </li>
-                      <li>
+                      <p>
                         - 파일명에 style을 나타내는 단어 확인
                         (&quot;prettier&quot;, &quot;eslint&quot;,
                         &quot;config”)
-                      </li>
-                      <li>
+                      </p>
+                      <p>
                         - 변경사항에 특수문자(, &apos; &quot; \n ; 등)만
                         수정됐는지 확인
+                      </p>
+                      <p>- 변경사항이 console.log 와 관련됐는지 확인</p>
+                      <p>- 요소들의 위치 변경 확인</p>
+                      <li className="list-inside ps-5">
+                        tailwind className의 속성 순서
                       </li>
-                      <li>- 변경사항이 console.log 와 관련됐는지 확인</li>
-                      <li>- 요소들의 위치 변경 확인</li>
-                      <li className="ps-5">- tailwind className의 속성 순서</li>
-                      <li className="mb-2 ps-5">- 객체 속성들의 순서</li>
+                      <li className="mb-2 list-inside ps-5">
+                        객체 속성들의 순서
+                      </li>
                       <li>해당하지 않는 경우 예시</li>
-                      <li className="ps-5">
-                        - 변수명 변경 등 style 체크 사항에 벗어난 경우
-                      </li>
+                      <p>- 변수명 변경 등 style 체크 사항에 벗어난 경우</p>
                     </ul>
                   </div>
                   <div className="pb-4 pt-4">
@@ -120,27 +124,27 @@ const Guide = () => {
                     </div>
                     <ul className="mb-2 list-disc ps-5">
                       <li>
-                        - <b>테스트를 추가하거나 변경한 커밋</b>
+                        <b>테스트를 추가하거나 변경한 커밋</b>
                       </li>
-                      <li className="ps-5">
-                        - 테스트 코드를 작성한 파일만 포함됐는지 확인
+                      <p>- 테스트 코드를 작성한 파일만 포함됐는지 확인</p>
+                      <li className="mb-2 list-inside ps-5">
+                        test, tests, spec, mock
                       </li>
-                      <li className="ps-8">- test, tests, spec, mock</li>
-                      <li>- 해당하지 않는 경우 예시</li>
-                      <li className="ps-5">
+                      <li>해당하지 않는 경우 예시</li>
+                      <p>
                         - test 검증 키워드가 파일명에 없거나 끝에 위치하지 않은
                         경우
-                      </li>
-                      <li className="ps-8">
-                        <code>a/src/compiler-worker.ts</code>
-                      </li>
-                      <li className="ps-8">
-                        <code>a/mock_feed_repository_impl.dart</code>
-                      </li>
-                      <li className="ps-5">
+                      </p>
+                      <code className="block ps-5">
+                        a/src/compiler-worker.ts
+                      </code>
+                      <code className="block ps-5">
+                        a/mock_feed_repository_impl.dart
+                      </code>
+                      <p>
                         - 테스트 코드 관련 파일이 아닌 설정 파일 등의 수정사항을
                         같이 커밋했을 경우
-                      </li>
+                      </p>
                     </ul>
                   </div>
                 </div>
@@ -152,7 +156,9 @@ const Guide = () => {
           <p>If you have an idea for a commitguardians ,</p>
           <p>
             Please email to{" "}
-            <b className="text-sky-400">commitguardians@google.com</b>
+            <a href={`mailto:${TEAM_MAIL}`}>
+              <b className="text-sky-400">${TEAM_MAIL}</b>
+            </a>
           </p>
         </section>
       </div>
