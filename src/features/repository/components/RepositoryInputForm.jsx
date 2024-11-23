@@ -3,7 +3,7 @@ import Button from "../../../shared/components/Button";
 import CheckIcon from "../../../shared/components/CheckIcon";
 import GithubIcon from "../../../shared/components/GithubIcon";
 
-const RepositoryInputForm = ({ onSubmit }) => {
+function RepositoryInputForm({ onSubmit }) {
   return (
     <form
       className="mx-auto w-full max-w-2xl"
@@ -35,7 +35,7 @@ const RepositoryInputForm = ({ onSubmit }) => {
       </div>
     </form>
   );
-};
+}
 
 RepositoryInputForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

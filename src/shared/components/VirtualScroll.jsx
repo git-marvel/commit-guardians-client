@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import useWindowScroll from "../hooks/useWindowScroll";
 import useWindowSize from "../hooks/useWindowSize";
 
-const VirtualScroll = ({
+function VirtualScroll({
   children,
   itemHeight,
   columnGap = 0,
   renderAhead = 5,
-}) => {
+}) {
   const [viewportY, setViewportY] = useState(0);
   const { height } = useWindowSize();
   const { y } = useWindowScroll();
@@ -63,7 +63,7 @@ const VirtualScroll = ({
       </div>
     </div>
   );
-};
+}
 
 VirtualScroll.propTypes = {
   children: PropTypes.node.isRequired,

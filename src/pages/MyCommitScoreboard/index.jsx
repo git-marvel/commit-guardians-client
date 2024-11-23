@@ -9,7 +9,7 @@ import useShowCommitDetails from "./hooks/useShowCommitDetails";
 
 const GRID_COLS = "grid-cols-16";
 
-const MyCommitScoreboard = () => {
+function MyCommitScoreboard() {
   const { commitList, needsVirtualScroll } = useShowCommitDetails();
 
   return (
@@ -48,6 +48,6 @@ const MyCommitScoreboard = () => {
       )}
     </div>
   );
-};
+}
 
 export default MyCommitScoreboard;

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const CommitMessageValue = ({ commit }) => {
+function CommitMessageValue({ commit }) {
   const commitMessageTitle = commit.message.split("\n")[0];
 
   return (
@@ -15,7 +15,7 @@ const CommitMessageValue = ({ commit }) => {
       </p>
     </a>
   );
-};
+}
 
 CommitMessageValue.propTypes = {
   commit: PropTypes.shape({

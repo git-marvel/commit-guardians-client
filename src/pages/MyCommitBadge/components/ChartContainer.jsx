@@ -20,7 +20,7 @@ ChartJS.register(
   BarElement
 );
 
-const ChartContainer = () => {
+function ChartContainer() {
   const commitList = useCommitStore((state) => state.commitInfo.commitList);
 
   const people = new Map();
@@ -274,6 +274,6 @@ const ChartContainer = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ChartContainer;

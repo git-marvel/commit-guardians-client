@@ -2,7 +2,7 @@ import useGithubAPIStatus from "../hooks/useGithubAPIStatus";
 
 const GITHUB_STATUS_ADDRESS = "https://www.githubstatus.com";
 
-const GithubAPIStatus = () => {
+function GithubAPIStatus() {
   const { githubAPIStatusColor } = useGithubAPIStatus();
 
   return (
@@ -17,6 +17,6 @@ const GithubAPIStatus = () => {
       </div>
     </a>
   );
-};
+}
 
 export default GithubAPIStatus;

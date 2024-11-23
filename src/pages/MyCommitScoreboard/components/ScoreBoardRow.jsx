@@ -6,7 +6,7 @@ import CommitQualityScore from "../../../features/commit/components/CommitQualit
 import CommitTypeValue from "../../../features/commit/components/CommitTypeValue";
 import SHAValue from "../../../features/commit/components/SHAValue";
 
-const ScoreBoardRow = ({ gridCols, commit }) => {
+function ScoreBoardRow({ gridCols, commit }) {
   const time = new Date(commit.author.date).toTimeString().slice(0, 8);
 
   return (
@@ -37,7 +37,7 @@ const ScoreBoardRow = ({ gridCols, commit }) => {
       </div>
     </div>
   );
-};
+}
 
 ScoreBoardRow.propTypes = {
   commit: PropTypes.object.isRequired,

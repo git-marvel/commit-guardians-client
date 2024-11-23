@@ -6,7 +6,7 @@ import Loading from "../../shared/components/Loading";
 import Title from "./components/Title";
 import useValidateCommit from "./hooks/useValidateCommit";
 
-const Home = () => {
+function Home() {
   const {
     isLoading,
     errorMessage,
@@ -34,6 +34,6 @@ const Home = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Home;

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const SHA_FULL_LENGTH = 40;
 const SHA_SHORT_LENGTH = 7;
 
-const ShaHoverBox = ({ copiedSha, shaType }) => {
+function ShaHoverBox({ copiedSha, shaType }) {
   const isShaCopied =
     shaType === "Short"
       ? copiedSha.length === SHA_SHORT_LENGTH
@@ -16,7 +16,7 @@ const ShaHoverBox = ({ copiedSha, shaType }) => {
       {isShaCopied ? "Copied ✔️" : `${shaType} Copy`}
     </p>
   );
-};
+}
 
 ShaHoverBox.propTypes = {
   copiedSha: PropTypes.string.isRequired,

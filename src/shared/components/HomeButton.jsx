@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import HomeIcon from "../components/HomeIcon";
 
-const HomeButton = () => {
+function HomeButton() {
   const navigate = useNavigate();
   const handleRoutingHome = () => navigate("/", { replace: true });
 
@@ -13,6 +13,6 @@ const HomeButton = () => {
       <HomeIcon />
     </button>
   );
-};
+}
 
 export default HomeButton;

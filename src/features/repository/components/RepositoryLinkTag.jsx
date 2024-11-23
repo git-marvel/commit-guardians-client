@@ -1,6 +1,6 @@
 import useCommitStore from "../../commit/store/useCommitStore";
 
-const RepositoryLinkTag = () => {
+function RepositoryLinkTag() {
   const repository = useCommitStore((state) => state.repository);
 
   return (
@@ -14,6 +14,6 @@ const RepositoryLinkTag = () => {
       <span className="text-lg font-semibold">{repository.repo}</span>
     </a>
   );
-};
+}
 
 export default RepositoryLinkTag;

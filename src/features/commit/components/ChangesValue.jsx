@@ -3,7 +3,7 @@ import { memo } from "react";
 import BarGraph from "../../../shared/components/BarGraph";
 import FileIcon from "../../../shared/components/FileIcon";
 
-const ChangesValue = memo(({ commit }) => {
+const ChangesValue = memo(function ChangesValue({ commit }) {
   if (!commit.numOfFiles) {
     return null;
   }
@@ -27,7 +27,5 @@ ChangesValue.propTypes = {
     qualityScore: PropTypes.number,
   }).isRequired,
 };
-
-ChangesValue.displayName = "ChangesValue";
 
 export default ChangesValue;

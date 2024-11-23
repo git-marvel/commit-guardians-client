@@ -7,7 +7,7 @@ import HomeButton from "../../shared/components/HomeButton";
 import ChartContainer from "./components/ChartContainer";
 import Guide from "./components/Guide";
 
-const MyCommitBadge = () => {
+function MyCommitBadge() {
   const navigate = useNavigate();
   const handleRoutingCommitScoreboard = () => navigate("/my-commit-scoreboard");
   const totalScore = useCommitStore((state) => state.commitSummary.totalScore);
@@ -44,6 +44,6 @@ const MyCommitBadge = () => {
       </div>
     </div>
   );
-};
+}
 
 export default MyCommitBadge;
