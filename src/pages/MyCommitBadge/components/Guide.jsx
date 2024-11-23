@@ -3,7 +3,7 @@ import Accordion from "../../../shared/components/Accordion";
 
 const TEAM_MAIL = "commitguardians@google.com";
 
-const Guide = () => {
+function Guide() {
   return (
     <div className="px-28">
       <Accordion
@@ -141,6 +141,6 @@ const Guide = () => {
       </section>
     </div>
   );
-};
+}
 
 export default Guide;

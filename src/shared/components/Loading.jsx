@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Loading = ({ message = "Please wait for seconds" }) => {
+function Loading({ message = "Please wait for seconds" }) {
   return (
     <>
       <div className="my-5 w-1/3">
@@ -12,7 +12,7 @@ const Loading = ({ message = "Please wait for seconds" }) => {
       <p className="mt-2 text-sm dark:text-slate-200">{message}</p>
     </>
   );
-};
+}
 
 Loading.propTypes = {
   message: PropTypes.string,

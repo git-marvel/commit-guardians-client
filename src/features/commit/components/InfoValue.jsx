@@ -3,7 +3,7 @@ import React from "react";
 import InfoIcon from "../../../shared/components/InfoIcon";
 import { INFO_MESSAGES } from "../constants";
 
-const InfoValue = ({ type }) => {
+function InfoValue({ type }) {
   const messages = INFO_MESSAGES[type];
 
   return (
@@ -19,7 +19,7 @@ const InfoValue = ({ type }) => {
       </span>
     </span>
   );
-};
+}
 
 InfoValue.propTypes = {
   type: PropTypes.string.isRequired,

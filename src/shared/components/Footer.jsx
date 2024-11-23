@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import GithubIcon from "../components/GithubIcon";
 
-const Footer = () => {
+function Footer() {
   return (
     <div className="absolute bottom-0 flex flex-col items-center">
       <a
@@ -30,9 +30,9 @@ const Footer = () => {
       </div>
     </div>
   );
-};
+}
 
-const GithubNameButton = ({ name, githubUrl }) => {
+function GithubNameButton({ name, githubUrl }) {
   return (
     <a
       href={githubUrl}
@@ -43,7 +43,7 @@ const GithubNameButton = ({ name, githubUrl }) => {
       <GithubIcon />
     </a>
   );
-};
+}
 
 GithubNameButton.propTypes = {
   name: PropTypes.string.isRequired,

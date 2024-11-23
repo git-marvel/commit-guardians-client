@@ -3,7 +3,7 @@ import Button from "../../shared/components/Button";
 import Error from "../../shared/components/Error";
 import Footer from "../../shared/components/Footer";
 
-const NotFound = () => {
+function NotFound() {
   const navigate = useNavigate();
   const handleRoutingHome = () => navigate("/", { replace: true });
 
@@ -18,6 +18,6 @@ const NotFound = () => {
       <Footer />
     </div>
   );
-};
+}
 
 export default NotFound;

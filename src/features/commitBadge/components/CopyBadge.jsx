@@ -3,7 +3,7 @@ import Badge from "../../../shared/components/Badge";
 import Snackbar from "../../../shared/components/SnackBar";
 import useCopiedBadge from "../hooks/useCopyBadge";
 
-const CopyBadge = () => {
+function CopyBadge() {
   const { isCopied, error, copyBadgeTag, badgeTagUrl } = useCopiedBadge();
 
   return (
@@ -30,6 +30,6 @@ const CopyBadge = () => {
       </button>
     </>
   );
-};
+}
 
 export default CopyBadge;

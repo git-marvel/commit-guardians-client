@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Accordion = ({ category, title, children }) => {
+function Accordion({ category, title, children }) {
   return (
     <section>
       <h3 className="text-sm/7 font-semibold text-slate-400">{category}</h3>
@@ -21,7 +21,7 @@ const Accordion = ({ category, title, children }) => {
       </details>
     </section>
   );
-};
+}
 
 Accordion.propTypes = {
   category: PropTypes.string,

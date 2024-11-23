@@ -1,7 +1,7 @@
 const DEFAULT_IMG_URL =
   "https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif";
 
-const Title = () => {
+function Title() {
   return (
     <div className="mb-20 flex cursor-default flex-col items-center justify-center text-9xl font-extrabold">
       <div className="relative flex flex-row items-center">
@@ -31,6 +31,6 @@ const Title = () => {
       </span>
     </div>
   );
-};
+}
 
 export default Title;

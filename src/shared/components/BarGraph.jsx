@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const MAX_WIDTH = 20;
 
-const BarGraph = ({ totalChanges, qualityScore }) => {
+function BarGraph({ totalChanges, qualityScore }) {
   const width = Math.min(totalChanges, MAX_WIDTH) * 10;
   const scoreWidth =
     Math.min((totalChanges * qualityScore) / 100, MAX_WIDTH) * 10;
@@ -23,7 +23,7 @@ const BarGraph = ({ totalChanges, qualityScore }) => {
       </div>
     </>
   );
-};
+}
 
 BarGraph.propTypes = {
   totalChanges: PropTypes.number.isRequired,

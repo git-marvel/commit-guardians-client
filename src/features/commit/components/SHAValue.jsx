@@ -3,7 +3,7 @@ import CopyIcon from "../../../shared/components/CopyIcon";
 import useCopiedSha from "../hooks/useCopiedSha";
 import ShaHoverBox from "./ShaHoverBox";
 
-const SHAValue = ({ sha }) => {
+function SHAValue({ sha }) {
   const { copiedSha, handleCopyCommitSha } = useCopiedSha();
   const shortSha = sha.substring(0, 7);
 
@@ -24,7 +24,7 @@ const SHAValue = ({ sha }) => {
       </div>
     </div>
   );
-};
+}
 
 SHAValue.propTypes = {
   sha: PropTypes.string.isRequired,

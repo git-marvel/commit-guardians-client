@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Error = ({ code, heading, paragraph, button }) => {
+function Error({ code, heading, paragraph, button }) {
   return (
     <main className="flex flex-col items-center dark:text-white">
       <h1 className="font-Pixelify text-7xl">{code}</h1>
@@ -9,7 +9,7 @@ const Error = ({ code, heading, paragraph, button }) => {
       {button}
     </main>
   );
-};
+}
 
 Error.propTypes = {
   code: PropTypes.string,

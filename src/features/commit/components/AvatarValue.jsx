@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const DEFAULT_IMG_URL =
   "https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif";
 
-const AvatarValue = ({ author }) => {
+function AvatarValue({ author }) {
   return (
     <>
       <img
@@ -16,7 +16,7 @@ const AvatarValue = ({ author }) => {
       </p>
     </>
   );
-};
+}
 
 AvatarValue.propTypes = {
   author: PropTypes.object.isRequired,
