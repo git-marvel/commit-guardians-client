@@ -4,8 +4,12 @@ const MAX_WIDTH = 20;
 
 function BarGraph({ totalChanges, qualityScore }) {
   const width = Math.min(totalChanges, MAX_WIDTH) * 10;
-  const scoreWidth =
+  let scoreWidth =
     Math.min((totalChanges * qualityScore) / 100, MAX_WIDTH) * 10;
+
+  if (totalChanges > (MAX_WIDTH * 10) / qualityScore) {
+    scoreWidth = width * (qualityScore / 100);
+  }
 
   return (
     <>
