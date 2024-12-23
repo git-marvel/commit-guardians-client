@@ -35,6 +35,18 @@ const useValidateCommit = () => {
   const githubStatus = useGithubStatusStore((state) => state.githubStatus);
 
   useEffect(() => {
+    if (numOfCommit > 0) {
+      setIsAbleToRoute(true);
+    }
+
+    setErrorMessage(
+      numOfCommit === 0 && !isLoading && isSubmitButtonClick
+        ? ERROR_MESSAGES.noCommitsToCheck
+        : null
+    );
+  }, [numOfCommit, isLoading, isSubmitButtonClick, setIsAbleToRoute]);
+
+  useEffect(() => {
     if (
       !isLoading &&
       isGithubAPIHealthy &&
@@ -55,6 +67,7 @@ const useValidateCommit = () => {
 
   useEffect(() => {
     const isUnhealthy = githubStatus === "unknown" || githubStatus === "major";
+
     setErrorMessage(isUnhealthy ? ERROR_MESSAGES.githubStatusError : null);
     setGithubAPIHealthy(!isUnhealthy);
   }, [githubStatus]);
@@ -108,14 +121,6 @@ const useValidateCommit = () => {
 
         setRepository({ owner, repo });
         await fetchCommits({ owner, repo });
-
-        if (numOfCommit > 0) {
-          setIsAbleToRoute(true);
-        }
-
-        setErrorMessage(
-          numOfCommit === 0 ? ERROR_MESSAGES.noCommitsToCheck : null
-        );
       } catch (error) {
         setErrorMessage(error.message);
         setSubmitButtonClick(false);
@@ -123,7 +128,7 @@ const useValidateCommit = () => {
         setIsLoading(false);
       }
     },
-    [fetchCommits, setRepository, numOfCommit, setIsAbleToRoute]
+    [fetchCommits, setRepository, setIsAbleToRoute]
   );
 
   return {
