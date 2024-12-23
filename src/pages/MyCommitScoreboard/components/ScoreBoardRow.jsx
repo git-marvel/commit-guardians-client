@@ -11,7 +11,7 @@ function ScoreBoardRow({ gridCols, commit }) {
 
   return (
     <div
-      className={`${gridCols} grid w-full items-center gap-4 px-10 py-2 text-base text-slate-800 transition duration-300 ease-in-out hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-700`}
+      className={`${gridCols} grid w-full items-center gap-4 px-10 py-2 text-base text-slate-800 transition duration-300 ease-in-out hover:bg-slate-200 dark:text-slate-100 dark:hover:bg-slate-700`}
     >
       <div className="col-span-1 px-2 py-1">
         <CommitTypeValue type={commit.type} />

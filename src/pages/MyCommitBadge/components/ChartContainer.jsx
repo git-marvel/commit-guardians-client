@@ -169,7 +169,7 @@ function ChartContainer() {
     labels: top3Value.map((value) => value.name),
     datasets: [
       {
-        label: "reomve",
+        label: "remove",
         data: top3Value.map((value) => value.type.get("remove")),
         backgroundColor: "rgba(226, 232, 240, 1)",
         borderColor: "rgba(226, 232, 240, 1)",

@@ -4,7 +4,7 @@ function Loading({ message = "Please wait for seconds" }) {
   return (
     <>
       <div className="my-5 w-1/3">
-        <div className="h-2 w-full bg-neutral-300">
+        <div className="h-2 w-full bg-gray-300">
           <div className="h-2 animate-loadingProgressBar bg-sky-400"></div>
         </div>
       </div>

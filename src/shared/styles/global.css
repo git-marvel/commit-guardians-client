@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply bg-gray-100 dark:bg-gray-900;
+}
+
 @layer base {
   #root {
     width: 100dvw;
