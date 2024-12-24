@@ -4,7 +4,7 @@ import COMMIT_TYPE from "../../../entities/commit/enum/commitTypeEnum";
 function CommitTypeValue({ type }) {
   return (
     <p
-      className={`w-fit cursor-pointer px-2.5 py-0.5 text-sm ${COMMIT_TYPE[type].color} rounded-full`}
+      className={`w-fit cursor-default px-2.5 py-0.5 text-sm ${COMMIT_TYPE[type].color} rounded-full`}
     >
       {type}
     </p>

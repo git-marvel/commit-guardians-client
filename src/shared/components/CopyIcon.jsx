@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 function CopyIcon({ onClick = () => {} }) {
   return (
-    <div onClick={onClick}>
+    <button onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -25,7 +25,7 @@ function CopyIcon({ onClick = () => {} }) {
           strokeLinejoin="round"
         />
       </svg>
-    </div>
+    </button>
   );
 }
 

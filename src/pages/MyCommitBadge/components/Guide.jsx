@@ -1,11 +1,9 @@
 import CommitTypeValue from "../../../features/commit/components/CommitTypeValue";
 import Accordion from "../../../shared/components/Accordion";
 
-const TEAM_MAIL = "commitguardians@google.com";
-
 function Guide() {
   return (
-    <div className="px-28">
+    <div className="px-12">
       <Accordion
         category="FAQ"
         title="입력 가능한 레포지토리 커밋 메시지 형식은 어떻게 되나요?"
@@ -13,7 +11,9 @@ function Guide() {
         <div className="pb-4 pt-4 text-slate-700 dark:text-slate-400">
           <div className="text-base">
             <span>
-              *대소문자 구분이 없습니다. (Case-insensitive)
+              <p className="text-xs">
+                * 대소문자를 구분하지 않습니다. (Case-insensitive)
+              </p>
               <p className="mt-2">
                 <strong>1. 프리 픽스 스타일 (Prefix Style)</strong>
               </p>
@@ -130,15 +130,6 @@ function Guide() {
           </div>
         </div>
       </Accordion>
-      <section className="absolute bottom-52 m-1 text-sm text-slate-700 dark:text-slate-300">
-        <p>If you have an idea for a commitguardians,</p>
-        <p>
-          Please email to{" "}
-          <a href={`mailto:${TEAM_MAIL}`}>
-            <b className="text-sky-400">${TEAM_MAIL}</b>
-          </a>
-        </p>
-      </section>
     </div>
   );
 }
