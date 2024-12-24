@@ -3,7 +3,7 @@ const DEFAULT_IMG_URL =
 
 function Title() {
   return (
-    <div className="mb-20 flex cursor-default flex-col items-center justify-center text-9xl font-extrabold">
+    <div className="mb-12 flex cursor-default flex-col items-center justify-center text-9xl font-extrabold">
       <div className="relative flex flex-row items-center">
         <span className="font-Pixelify text-gray-700 transition duration-300 ease-in-out hover:text-sky-300 dark:text-gray-400">
           Commit
