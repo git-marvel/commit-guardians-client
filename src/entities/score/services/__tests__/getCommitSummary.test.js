@@ -56,9 +56,9 @@ describe("getCommitSummary", () => {
       return list;
     };
 
-    const commitList = [{ qualityScore: 100 }, ...generateZeroScore(100)];
-
-    const result = getCommitSummary(commitList);
+    const allCommits = generateZeroScore(100);
+    allCommits.push({ qualityScore: 100 });
+    const result = getCommitSummary(allCommits);
 
     expect(result).toEqual({
       numOfPerfectCommits: 1,
