@@ -15,7 +15,12 @@ describe("Home API", () => {
     it("하나의 레포지토리의 모든 커밋들을 가져올 수 있습니다", async () => {
       axios.get.mockResolvedValueOnce({
         data: mockCommits,
-        headers: { link: null },
+        headers: {
+          "x-ratelimit-remaining": 5000,
+          get(key) {
+            return this[key];
+          },
+        },
       });
 
       const result = await getCommitList({ owner: mockOwner, repo: mockRepo });
@@ -28,6 +33,12 @@ describe("Home API", () => {
       mockCommitsToCheck.forEach(() => {
         axios.get.mockResolvedValueOnce({
           data: diffPerCommit,
+          headers: {
+            "x-ratelimit-remaining": 5000,
+            get(key) {
+              return this[key];
+            },
+          },
         });
       });
 
