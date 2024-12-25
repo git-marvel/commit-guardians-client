@@ -11,7 +11,9 @@ const ChangesValue = memo(function ChangesValue({ commit }) {
   return (
     <div className="flex">
       <FileIcon />
-      <p className="pl-1 pr-4 font-bold text-slate-400">{commit.numOfFiles}</p>
+      <p className="w-10 pl-1 pr-4 font-bold text-slate-400">
+        {commit.numOfFiles}
+      </p>
       <BarGraph
         totalChanges={commit.numOfChanges}
         qualityScore={commit.qualityScore}
