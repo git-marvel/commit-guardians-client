@@ -13,8 +13,13 @@ function RepositoryInputForm({ onSubmit }) {
       method="post"
       onSubmit={onSubmit}
     >
-      <label className="mb-2 block text-base font-medium text-gray-900 dark:text-white">
-        Github Repository URL
+      <label className="mb-2 block flex justify-between text-base font-medium text-gray-900 dark:text-white">
+        <span>Github Repository URL</span>
+        {!githubToken && (
+          <span>
+            Please log in if you want to enter URLs directly &#x1F603;
+          </span>
+        )}
       </label>
       <div className="mb-8 flex">
         <span className="inline-flex items-center rounded-s-md border border-e-0 border-gray-300 bg-gray-200 px-3 text-sm text-gray-900 dark:border-gray-300 dark:bg-gray-600 dark:text-gray-400">
