@@ -3,6 +3,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 const initialState = {
   isAbleToRoute: false,
+  githubToken: null,
 };
 
 const usePersistentStore = create(
@@ -13,6 +14,11 @@ const usePersistentStore = create(
       setIsAbleToRoute: (isStored) =>
         set(() => ({
           isAbleToRoute: isStored,
+        })),
+
+      setGithubToken: (githubToken) =>
+        set(() => ({
+          githubToken: githubToken,
         })),
 
       clearAll: () =>
