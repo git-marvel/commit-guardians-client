@@ -18,7 +18,7 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const clientId = process.env.GITHUB_CLIENT_ID;
+    const clientId = process.env.VITE_GITHUB_CLIENT_ID;
     const clientSecret = process.env.GITHUB_CLIENT_SECRET;
 
     const tokenRes = await fetch(
