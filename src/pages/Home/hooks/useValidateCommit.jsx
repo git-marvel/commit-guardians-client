@@ -33,6 +33,7 @@ const useValidateCommit = () => {
   const setCommitSummary = useCommitStore((state) => state.setCommitSummary);
   const numOfCommit = useCommitStore((state) => state.commitInfo.numOfCommit);
   const githubStatus = useGithubStatusStore((state) => state.githubStatus);
+  const githubToken = usePersistentStore((state) => state.githubToken);
 
   useEffect(() => {
     if (numOfCommit > 0) {
@@ -74,12 +75,13 @@ const useValidateCommit = () => {
 
   const fetchCommits = useCallback(
     async ({ owner, repo }) => {
-      const allCommits = await getCommitList({ owner, repo });
+      const allCommits = await getCommitList({ owner, repo, githubToken, });
       const commitsToCheck = getCheckableCommits(allCommits);
       const commitWithDiff = await getCommitDiffList({
         owner,
         repo,
         commitsToCheck,
+        githubToken,
       });
 
       setTotalNumOfCommit(allCommits.length);
