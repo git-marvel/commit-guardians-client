@@ -7,14 +7,6 @@ import usePersistentStore from "../../../shared/store/usePersistentStore";
 function RepositoryInputForm({ onSubmit }) {
   const { githubToken } = usePersistentStore();
 
-  const GITHUB_CLIENT_ID = import.meta.env.VITE_GITHUB_CLIENT_ID;
-  const REDIRECT_URI = import.meta.env.VITE_GITHUB_REDIRECT_URI;
-
-  const handleLogin = () => {
-    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=user,repo`;
-    window.location.href = githubAuthUrl;
-  };
-
   return (
     <form
       className="mx-auto w-full max-w-2xl"
@@ -53,16 +45,12 @@ function RepositoryInputForm({ onSubmit }) {
         )}
       </div>
       <div className="flex justify-center">
-        {githubToken ? (
-          <Button>
-            <>
-              <CheckIcon />
-              <span>Check the Quality</span>
-            </>
-          </Button>
-        ) : (
-          <Button onClick={handleLogin}>GitHub으로 로그인</Button>
-        )}
+        <Button>
+          <>
+            <CheckIcon />
+            <span>Check the Quality</span>
+          </>
+        </Button>
       </div>
     </form>
   );
