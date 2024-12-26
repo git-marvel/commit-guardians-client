@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import MyCommitBadge from "../pages/MyCommitBadge";
 import MyCommitScoreboard from "../pages/MyCommitScoreboard";
 import NotFound from "../pages/NotFound";
+import GithubCallback from "../pages/GithubCallback";
 
 const checkToRoute = () => {
   const { isAbleToRoute } = usePersistentStore.getState();
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
     path: "/my-commit-scoreboard",
     loader: checkToRoute,
     element: <MyCommitScoreboard />,
+  },
+  {
+    path: "/oauth/github-callback",
+    element: <GithubCallback />,
   },
   {
     path: "*",
