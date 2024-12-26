@@ -75,34 +75,59 @@ const useValidateCommit = () => {
 
   const fetchCommits = useCallback(
     async ({ owner, repo }) => {
-      const allCommits = await getCommitList({ owner, repo, githubToken, });
-      const commitsToCheck = getCheckableCommits(allCommits);
-      const commitWithDiff = await getCommitDiffList({
-        owner,
-        repo,
-        commitsToCheck,
-        githubToken,
-      });
+      try {
+        let commitData = {};
 
-      setTotalNumOfCommit(allCommits.length);
+        if (!githubToken) {
+          const filename = `${owner}_${repo}.json`;
+          const response = await fetch(`/mockData/${filename}`);
+          commitData = await response.json();
+        } else {
+          const allCommits = await getCommitList({ owner, repo, githubToken });
+          const commitsToCheck = getCheckableCommits(allCommits);
+          const commitWithDiff = await getCommitDiffList({
+            owner,
+            repo,
+            commitsToCheck,
+            githubToken,
+          });
 
-      commitWithDiff.forEach((commit) => {
-        setCommitQualityScore({
-          commit,
-          commitType: commit.type,
-          diffObj: commit.diffObj,
-        });
-      });
+          const formatStyleCountInfo = getFormatStyleAndRate(commitsToCheck);
+          const totalCommitQualityInfo = getCommitSummary(commitWithDiff);
 
-      setCommitList(commitWithDiff);
+          commitData = {
+            totalNumOfCommit: allCommits.length,
+            formatStyleCountInfo,
+            totalCommitQualityInfo,
+            commitWithDiff,
+          };
 
-      const formatStyleCountInfo = getFormatStyleAndRate(commitsToCheck);
-      setCommitFormatStyle(formatStyleCountInfo);
+          const qualityScores = commitWithDiff.reduce((acc, commit) => {
+            acc[commit.sha] = {
+              commit,
+              commitType: commit.type,
+              diffObj: commit.diffObj,
+            };
+            return acc;
+          }, {});
+          setCommitQualityScore(qualityScores);
+        }
 
-      const totalCommitQualityInfo = getCommitSummary(commitWithDiff);
-      setCommitSummary(totalCommitQualityInfo);
+        setCommitList(commitData.commitWithDiff);
+        setTotalNumOfCommit(commitData.totalNumOfCommit);
+        setCommitFormatStyle(commitData.formatStyleCountInfo);
+        setCommitSummary(commitData.totalCommitQualityInfo);
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
     },
-    [setCommitFormatStyle, setCommitList, setCommitSummary, setTotalNumOfCommit]
+    [
+      githubToken,
+      setCommitFormatStyle,
+      setCommitList,
+      setCommitSummary,
+      setTotalNumOfCommit,
+    ]
   );
 
   const handleCheckCommitQuality = useCallback(
@@ -138,6 +163,7 @@ const useValidateCommit = () => {
     errorMessage,
     isGithubAPIHealthy,
     handleCheckCommitQuality,
+    githubToken,
   };
 };
 
