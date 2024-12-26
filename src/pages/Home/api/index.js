@@ -19,7 +19,10 @@ const fetchWithAuth = async (url, githubToken, accept = "*/*") => {
     },
   });
 
-  const tokenRemaining = parseInt(result.headers.get("x-ratelimit-remaining"), 10);
+  const tokenRemaining = parseInt(
+    result.headers.get("x-ratelimit-remaining"),
+    10
+  );
 
   return result;
 };
@@ -67,7 +70,11 @@ const getCommitDiff = async ({ owner, repo, sha, githubToken }) => {
   try {
     const commitUrl = `${setCommitBaseUrl({ owner, repo })}/${sha}`;
 
-    const response = await fetchWithAuth(commitUrl, githubToken, DIFF_MEDIA_TYPE);
+    const response = await fetchWithAuth(
+      commitUrl,
+      githubToken,
+      DIFF_MEDIA_TYPE
+    );
     const changedCode = response.data;
 
     return getChanges(changedCode);
@@ -76,7 +83,12 @@ const getCommitDiff = async ({ owner, repo, sha, githubToken }) => {
   }
 };
 
-const getCommitDiffList = async ({ owner, repo, commitsToCheck, githubToken }) => {
+const getCommitDiffList = async ({
+  owner,
+  repo,
+  commitsToCheck,
+  githubToken,
+}) => {
   let answer = [];
   const iterationSize = Math.ceil(
     commitsToCheck.length / DIFF_REQUEST_BATCH_SIZE
