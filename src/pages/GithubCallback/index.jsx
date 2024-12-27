@@ -16,28 +16,17 @@ function GithubCallback() {
     const code = new URLSearchParams(location.search).get("code");
     if (!code) {
       navigate("/");
-      console.log("No Code received");
       return;
     }
 
     (async () => {
-      try {
-        const res = await fetch(
-          `/.netlify/functions/github-callback?code=${code}`
-        );
-        const data = await res.json();
+      const res = await fetch(
+        `/.netlify/functions/github-callback?code=${code}`
+      );
+      const data = await res.json();
 
-        if (data.accessToken) {
-          setGithubToken(data.accessToken);
-          navigate("/");
-        } else {
-          console.error("No token received:", data);
-          navigate("/");
-        }
-      } catch (err) {
-        console.error("Token fetch error:", err);
-        navigate("/");
-      }
+      setGithubToken(data.accessToken);
+      navigate("/");
     })();
   }, [location, navigate, githubToken, setGithubToken]);
 
