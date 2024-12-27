@@ -21,6 +21,7 @@ const useValidateCommit = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const setRepository = useCommitStore((state) => state.setRepository);
   const setCommitList = useCommitStore((state) => state.setCommitList);
+  const clearAll = useCommitStore((state) => state.clearAll);
   const setCommitFormatStyle = useCommitStore(
     (state) => state.setCommitFormatStyle
   );
@@ -75,6 +76,7 @@ const useValidateCommit = () => {
 
   const fetchCommits = useCallback(
     async ({ owner, repo }) => {
+      clearAll();
       try {
         let commitData = {};
 
@@ -92,6 +94,14 @@ const useValidateCommit = () => {
             githubToken,
           });
 
+          commitWithDiff.forEach((commit) => {
+            setCommitQualityScore({
+              commit,
+              commitType: commit.type,
+              diffObj: commit.diffObj,
+            });
+          });
+
           const formatStyleCountInfo = getFormatStyleAndRate(commitsToCheck);
           const totalCommitQualityInfo = getCommitSummary(commitWithDiff);
 
@@ -101,16 +111,6 @@ const useValidateCommit = () => {
             totalCommitQualityInfo,
             commitWithDiff,
           };
-
-          const qualityScores = commitWithDiff.reduce((acc, commit) => {
-            acc[commit.sha] = {
-              commit,
-              commitType: commit.type,
-              diffObj: commit.diffObj,
-            };
-            return acc;
-          }, {});
-          setCommitQualityScore(qualityScores);
         }
 
         setCommitList(commitData.commitWithDiff);
