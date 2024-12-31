@@ -4,13 +4,34 @@
 
 ![project_intro.png](assets/readme/project_intro.png)
 
-<br/>
+<br>
 
 ## 목차
 
-<br/>
+- [프로젝트 등장 배경](#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%93%B1%EC%9E%A5-%EB%B0%B0%EA%B2%BD)
+- [기능](#%EA%B8%B0%EB%8A%A5)
+  - [1. 메인 페이지](#1-%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)
+  - [2. 커밋 뱃지 페이지](#2-%EC%BB%A4%EB%B0%8B-%EB%B1%83%EC%A7%80-%ED%8E%98%EC%9D%B4%EC%A7%80)
+  - [3. 커밋 분석 결과 페이지](#3-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D-%EA%B2%B0%EA%B3%BC-%ED%8E%98%EC%9D%B4%EC%A7%80)
+- [기술스택](#%EA%B8%B0%EC%88%A0%EC%8A%A4%ED%83%9D)
+  - [주요 라이브러리리](#%EC%A3%BC%EC%9A%94-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A6%AC)
+- [Git Commit 컨벤션](#git-commit-%EC%BB%A8%EB%B2%A4%EC%85%98)
+- [🤔 고민한 부분](#%F0%9F%A4%94-%EA%B3%A0%EB%AF%BC%ED%95%9C-%EB%B6%80%EB%B6%84)
+  - [1. 커밋 타입 필터링](#1-%EC%BB%A4%EB%B0%8B-%ED%83%80%EC%9E%85-%ED%95%84%ED%84%B0%EB%A7%81)
+  - [2. API 관련 리소스 최적화](#2-api-%EA%B4%80%EB%A0%A8-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EC%B5%9C%EC%A0%81%ED%99%94)
+  - [3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#3-github-api-rate-limit-%ED%9A%8C%ED%94%BC%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%86%A0%ED%81%B0-%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84)
+  - [4. GitHub 로그인 구현](#4-github-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84)
+  - [5. 대용량 데이터를 저장하고 처리하기](#5-%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0)
+  - [6. 많은 컴포넌트들을 화면에 렌더링 하기 위한 virtual scroll 도입](#6-%EB%A7%8E%EC%9D%80-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%93%A4%EC%9D%84-%ED%99%94%EB%A9%B4%EC%97%90-%EB%A0%8C%EB%8D%94%EB%A7%81-%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-virtual-scroll-%EB%8F%84%EC%9E%85)
+- [팀원 소개](#%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
+
+<br>
 
 ## 프로젝트 등장 배경
+
+**현재 깃헙 레포지토리의 커밋들은 과연 건강한 상태일까요?**
+
+이 질문에서 시작된 Commit Guardians 팀 프로젝트는, **커밋 메시지와 코드 변경 간의 일치성을 점검하고, 보다 나은 커밋 문화를 형성하기 위해 등장**하게 되었습니다.
 
 개발자의 일상은 코드만 작성하는 것이 아닌 **‘기록’을 남기고 공유하는 과정까지도 포함**된다고 생각합니다. 특히 팀 프로젝트나 개인 프로젝트 뿐만 아니라 오픈소스에서도 **커밋 메시지**는 작업 흐름을 이해하고 지난 작업을 되돌아보며 프로젝트의 맥락을 파악하는 데에 중요한 역할을 하고 있습니다.
 
@@ -18,11 +39,7 @@
 
 일반적으로 좋은 커밋 메시지의 내용은 **의미있는 커밋 메시지를 쓰는 것**이며, 최대한 논리적인 단위로 diff (변경사항)를 나누는 것입니다. 논리 단위별로 나누어 커밋을 하는 것이 개별 변경 사항으로 되돌리기 편하고 어느 부분에서 오류가 났는지 확인하기 수월하기 때문입니다. 이러한 꼼꼼한 커밋들이 모여서 유지보수가 용이하고 협업하기 좋은 프로젝트를 만드는 기초가 될 것이라고 생각합니다.
 
-그렇다면, **현재 깃헙 레포지토리의 커밋들은 과연 건강한 상태일까요?**
-
-이 질문에서 시작된 Commit Guardians 팀 프로젝트는, **커밋 메시지와 코드 변경 간의 일치성을 점검하고, 보다 나은 커밋 문화를 형성하기 위해 등장**하게 되었습니다.
-
-<br/>
+<br>
 
 ## 기능
 
@@ -34,19 +51,19 @@
 
 **1-1. github 로그인**
 
-- github 로그인 시 사용자의 레포지토리 url입력이 가능합니다.
+- github 로그인 시 사용자가 원하는 레포지토리 URL 입력이 가능합니다.
 - 로그인 전에는 예시 레포지토리로 서비스를 미리 이용해볼 수 있습니다.
 
 **1-2. 서비스 이용 가능 여부 확인하기**
 
-- 헤더의 좌측 상단 부분에는 Github API의 상태를 보여줍니다.
+- 헤더의 우측 상단 부분에는 Github API의 상태를 보여줍니다.
   Github의 Commit을 확인해야하는 서비스 특성 상 Github API status에 따라 서비스 이용을 할 수 없는 경우가 있어서 Github API status가 정상인 경우에만 URL 입력(커밋 분석)이 가능합니다.
-- Github API status 버튼 선택 시 [https://www.githubstatus.com/](https://www.githubstatus.com/) 로 이동하여 상세 내역을 볼 수 있습니다.
+- <a href="https://www.githubstatus.com/" target="_blank">Github API status 버튼</a> 선택 시 상세 내역을 볼 수 있습니다.
 
 **1-3. 현재 대응 가능한 Commit Type 확인하기**
 
 - `remove` `docs` `style` `test`
-- 로고 상단에는 현재 Commit Guardians에서 분석하고 있는 4개의 Commit Type을 알 수 있습니다.
+- 로고 상단에는 이 프로젝트에서 분석하고 있는 4개의 Commit Type을 알 수 있습니다.
 
 **1-4. 커밋 분석 시작하기**
 
@@ -54,9 +71,9 @@
 - URL 입력 후 Enter키 or Check the Quality 버튼을 눌러 커밋 분석을 시작할 수 있습니다.
 - 캐릭터의 설명을 통해 default branch의 Commit을 분석할 수 있다는 내용을 알려줍니다.
 
-<br/>
+<br>
 
-## 2. 커밋 뱃지 페이지
+### 2. 커밋 뱃지 페이지
 
 ![badge_readme.png](assets/readme/badge_readme.gif)
 ![b_review_faq.png](assets/readme/b_review_faq.gif)
@@ -65,7 +82,7 @@
 
 **2-1. 점수에 따른 뱃지 차별화**
 
-- 사용자의 점수에 따라 각각 다른 뱃지가 주어지며 4개의 뱃지로 구성되어 있습니다.  
+- 사용자의 점수에 따라 각각 다른 뱃지가 주어지며 4개의 뱃지로 구성되어 있습니다.
   점수 구간은 80점 이상, 50점 이상, 30점 이상, 30점 미만 으로 채점됩니다.
 - `Copy your Badge` 버튼을 통해 사용자의 GitHub repository README 에 뱃지를 붙여넣기할 수 있는 html 태그를 복사할 수 있습니다.
 
@@ -91,9 +108,9 @@
 
 - 푸터에는 사용자가 Commit Guardians 에 대한 아이디어를 제안할 수 있는 이메일 주소와 해당 프로젝트의 GitHub 링크가 있습니다.
 
-<br/>
+<br>
 
-## 3. 커밋 분석 결과 페이지
+### 3. 커밋 분석 결과 페이지
 
 ![scoreboard.png](assets/readme/scoreboard.gif)
 
@@ -113,7 +130,7 @@
   - DATE : 로컬날짜와 시간을 기준으로 확인할 수 있습니다.
   - SHA : 전체 SHA 값을 복사하거나 7자리만 복사할 수 있습니다.
 
-<br/>
+<br>
 
 ## 기술스택
 
@@ -137,40 +154,11 @@ GitHub 이용자의 대부분이 PC를 통한 웹 브라우저 환경을 사용�
 
 - `idb-keyval` : IndexedDB를 간편하게 사용할 수 있게 해주는 경량 오픈소스 라이브러리로, key-value 형식의 데이터 저장 및 조회 기능을 제공합니다. zustand 상태 관리 라이브러리와 함께 사용하여 상태를 브라우저의 IndexedDB에 저장할 수 있어 대량의 상태 데이터를 효율적으로 처리하고, 사용자 경험을 향상시킬 수 있었습니다.
 
-<br/>
+<br>
 
-## Git Commit 컨벤션
+## 🤔 고민한 부분
 
-**- Commit Type**
-
-```
-type: title
-
-body
-```
-
-<br/>
-
-**- Commit 메시지 종류 설명**
-
-| 제목     | 내용                                     |
-| -------- | ---------------------------------------- |
-| feat     | 새로운 기능에 대한 커밋                  |
-| fix      | 버그 수정에 대한 커밋                    |
-| chore    | 빌드 수정에 대한 커밋                    |
-| docs     | 문서 수정에 대한 커밋                    |
-| style    | 코드 스타일 혹은 포맷 등에 관한 커밋     |
-| refactor | 코드 리팩토링에 대한 커밋                |
-| design   | css 디자인 관련에 대한 커밋              |
-| test     | 테스트 코드 추가, 삭제, 변경에 대한 커밋 |
-| remove   | 불필요한 파일이나 로직 삭제에 관한 커밋  |
-
-<br/>
-<br/>
-
-# 🤔 고민한 부분
-
-## 1. 커밋 타입 필터링
+### 1. 커밋 타입 필터링
 
 좋은 커밋인지를 판단하기 위해 커밋의 메시지와 실제 변경 내용의 맥락이 일치한지 검사가 필요했습니다. 예를 들어 커밋 메시지에 “test: 테스트 코드 수정” 이라고 적혀있으나 변경 내용엔 해당 내용과 관련 없는 부분이 포함되는 경우에는 커밋의 질을 낮춘다고 판단되어야 합니다.
 
@@ -190,7 +178,7 @@ body
 
    같은 단어이지만 다양한 의미로 사용하는 경우가 빈번했습니다. 커밋 메시지 타입이 “style”일 때 코드 포맷 변경을 나타내는 경우도 있지만 디자인적인 스타일 변경에 사용되기도 했으며 “chore”인 경우에도 빌드에 관련 수정만을 나타내는 의미로 쓰이거나 자잘한 수정의 의미까지 포함하여 사용하는 경우도 있었습니다.
 
-</br>
+<br>
 
 <span style="background-color:#DCFFE4"> <strong>Analysis</strong> </span>
 
@@ -218,7 +206,7 @@ body
 
       예시: [ADD] 로그인 API 연동
 
-</br>
+<br>
 
 **2. 모호한 커밋 타입의 문제해결을 위한 commit type 필터링**
 
@@ -234,7 +222,7 @@ body
 | 8. 테스트를 추가하거나 변경하는 코드                          | test, tests, verify, unittest                                                       | 파일확장자 및 상대경로 (.jest, ...)       |
 | 9. 빌드 및 설정파일 수정(프로젝트의 기능과 직접적으로 연관 x) | chore                                                                               |                                           |
 
-</br>
+<br>
 
 "fix", "feat", "refactor” 와 같은 커밋 타입은 코드 변경 내용을 기반으로 분석할 수 있는 경우도 있었지만 대부분은 명확한 기준을 가지고 판단하기 어려운 경우가 많았습니다. 커밋 메시지의 내용 뿐만 아니라 전체 코드의 내용도 파악이 되어야 커밋 메시지와 코드 변경 내용의 일치성을 알 수 있었기 때문에 하나의 커밋의 변경 내용(diff)으로는 좋은 커밋인지 알기 어려웠습니다.
 
@@ -242,7 +230,7 @@ body
 
 대부분의 오픈소스 프로젝트에서 의미가 명확히 구분되고 실제 코드의 변경 내용과 커밋 메시지 간의 일치성을 판단하는 기준을 세울 수 있다는 점에서 `style`, `remove`, `docs`, `test` 4가지 타입으로 분석 대상을 선택했습니다.
 
-</br>
+<br>
 
 **3. 커밋 메시지 타입과 의미에 대한 명확한 기준 설정**
 
@@ -287,9 +275,9 @@ body
 
 현재는 변경 내용과 커밋 메시지를 판단할 때 명확한 대응이 가능한 타입만을 우선적으로 선택했으며 추후 필터링 기준을 확장하여 feat, fix 등을 포함하기 위한 추가 개선을 진행할 예정입니다.
 
-</br>
+<br>
 
-## 2. API 관련 리소스 최적화
+### 2. API 관련 리소스 최적화
 
 <span style="background-color:#DCFFE4"> <strong>Problem |</strong> </span>
 
@@ -312,19 +300,19 @@ GitHub는 사용자의 요청을 보다 유연하게 처리할 수 있도록 Gra
 
 기존 REST API로 요청하던 데이터를 GraphQL로 전환하여 리소스의 사용을 최적화 하려 했었지만, 기능이 저희 프로젝트의 적용할 수 없어 사용할 수 없었습니다.
 
-</br>
+<br>
 
-## 3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현
+### 3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현
 
-[Github API Rate Limit 참고링크](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-authenticated-users)
+<a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-authenticated-users" target="_blank">Github API Rate Limit 참고링크</a>
 
 <span style="background-color:#DCFFE4"> <strong>Problem |</strong> </span>
 
-### **Github API 호출 인증된 토큰 시간당 5,000회 제한**
+**Github API 호출 인증된 토큰 시간당 5,000회 제한**
 
 Github API 에 의존도가 높은 프로젝트였기에 **Github API 요청 제한 수는 저희 프로젝트에서 치명적**이었습니다. 커밋 분석 로직은 API 호출을 통해 필요한 값들을 불러오고, 커밋 메시지의 커밋 타입을 분석한 이후, 검사가능한 커밋 타입들만을 필터링합니다. 필터링 한 커밋의 `owner`, `repo`, `sha` 를 기반으로 API 호출을 통해 코드의 수정 정보인 diff 데이터를 가져옵니다.
 
-특히나 한 인증된 토큰 시간당 5,000회가 최대였기 때문에 예를 들어, [facebook/react](https://github.com/facebook/react) 와 같이 커밋 갯수가 19,000개 이상의 경우 19,000/100 = **190**회 API 호출을 통해 전체 커밋의 정보를 가져오고, 검사가능한 커밋을 추출하면 (2024.12.25 일 기준으로) 1450 개 이므로, **1450**회의 diff API 호출을 더 하게 됩니다.
+특히나 한 인증된 토큰 시간당 5,000회가 최대였기 때문에 예를 들어, <a href="https://github.com/facebook/react" target="_blank">facebook/react</a> 와 같이 커밋 갯수가 19,000개 이상의 경우 19,000/100 = **190**회 API 호출을 통해 전체 커밋의 정보를 가져오고, 검사가능한 커밋을 추출하면 (2024.12.25 일 기준으로) 1450 개 이므로, **1450**회의 diff API 호출을 더 하게 됩니다.
 
 즉, facebook/react 는 190 + 1450 = **1640**회의 API 호출을 하게 됩니다. 그럼 사실 2, 3번의 facebook/react 정도의 레포지토리만 조회를 하더라도 GitHub API Rate Limit 를 모두 소진하게 되는 문제가 있었습니다.
 
@@ -372,9 +360,9 @@ export { getBestGithubToken, updateTokenState };
 
 여러 토큰을 활용한 로테이션 방식으로, GitHub API 요청 제한에 도달하지 않고 대규모 데이터를 안정적으로 처리할 수 있었습니다. 그래서 facebook/react 처럼 커밋이 많은 레포지토리에서도 분석이 중단되지 않고 완료될 수 있었습니다. 토큰이 추가될 경우 tokenStates 배열에만 추가하면 자동으로 적용되도록 설계했습니다.
 
-</br>
+<br>
 
-## 4. GitHub 로그인 구현
+### 4. GitHub 로그인 구현
 
 <span style="background-color:#DCFFE4"> <strong>Problem |</strong> </span>
 
@@ -404,9 +392,9 @@ export { getBestGithubToken, updateTokenState };
 
 프로세스가 거의 똑같기 때문에 사용자가 로그인 하지않고 체험하면서 튜토리얼의 기능도 가질 수 있게 되었습니다.
 
-</br>
+<br>
 
-## 5. 대용량 데이터를 저장하고 처리하기
+### 5. 대용량 데이터를 저장하고 처리하기
 
 <span style="background-color:#DCFFE4"> <strong>Problem |</strong> </span>
 
@@ -490,11 +478,11 @@ IndexedDB는 5MiB 보다 훨씬 큰 용량(GB 단위)을 지원하여 커밋 dif
 
 zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 있게 되었고 idb-keyval 라이브러리를 통해 코드 복잡도를 줄이고 대용량 데이터를 안정적으로 처리할 수 있게 되었습니다.
 
-</br>
+<br>
 
-## 6. 많은 컴포넌트들을 화면에 렌더링 하기 위한 virtual scroll 도입
+### 6. 많은 컴포넌트들을 화면에 렌더링 하기 위한 virtual scroll 도입
 
-[virtual scroll 도입한 PR 링크](https://github.com/git-marvel/commit-guardians-client/pull/93)
+<a href="https://github.com/git-marvel/commit-guardians-client/pull/93" target="_blank">virtual scroll 도입한 PR 링크</a>
 
 ![](assets/readme/before_virtualscroll.gif)
 
@@ -502,7 +490,7 @@ zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 �
 
 **- INP 지수 상승 및 화면 버벅임**
 
-이미 검사가 끝난 모든 커밋들의 데이터를 가지고 컴포넌트를 렌더링하는 디테일 뷰에는 **화면 성능에 관한 문제**가 있었습니다. 적은 양의 컴포넌트들을 스크롤 할 때는 큰 문제가 없었지만, 많은 양의 컴포넌트들을 (대략 1천개 이상의 커밋 컴포넌트) 가진 디테일 화면에 첫 진입시 화면 렌더링의 시간이 지연되었습니다. 브라우저 퍼포먼스 탭을 확인해보니 [**INP**](https://web.dev/articles/inp?hl=ko)(**Interaction to Next Paint**) 지수가 급격히 상승하고, 화면이 동적으로 변할 때, 특히나 버벅이는 문제가 있었습니다. 이 문제는 사용자는 화면 전환 시의 느린 반응 속도와 지연으로 인해 답답함을 느끼게 하고, 전체적인 사용자 경험을 저하시키고, 앱 성능에 대한 부정적인 영향을 끼칠 것으로 예상했습니다.
+이미 검사가 끝난 모든 커밋들의 데이터를 가지고 컴포넌트를 렌더링하는 디테일 뷰에는 **화면 성능에 관한 문제**가 있었습니다. 적은 양의 컴포넌트들을 스크롤 할 때는 큰 문제가 없었지만, 많은 양의 컴포넌트들을 (대략 1천개 이상의 커밋 컴포넌트) 가진 디테일 화면에 첫 진입시 화면 렌더링의 시간이 지연되었습니다. 브라우저 퍼포먼스 탭을 확인해보니 <a href="https://web.dev/articles/inp?hl=ko">**INP**</a>(**Interaction to Next Paint**) 지수가 급격히 상승하고, 화면이 동적으로 변할 때, 특히나 버벅이는 문제가 있었습니다. 이 문제는 사용자는 화면 전환 시의 느린 반응 속도와 지연으로 인해 답답함을 느끼게 하고, 전체적인 사용자 경험을 저하시키고, 앱 성능에 대한 부정적인 영향을 끼칠 것으로 예상했습니다.
 
 <span style="background-color:#DCFFE4"> <strong>Analysis |</strong> </span>
 
@@ -525,11 +513,41 @@ zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 �
 
 결과적으로, 대규모 커밋 데이터를 다루는 레포지토리 결과를 볼 때에도 안정적인 성능과 원활한 사용자 경험을 달성하게 되었습니다.
 
-</br>
+<br>
+
+## 협업
+
+### Git Commit 컨벤션
+
+**- Commit Type**
+
+```
+type: title
+
+body
+```
+
+<br>
+
+**- Commit 메시지 종류 설명**
+
+| 제목     | 내용                                     |
+| -------- | ---------------------------------------- |
+| feat     | 새로운 기능에 대한 커밋                  |
+| fix      | 버그 수정에 대한 커밋                    |
+| chore    | 빌드 수정에 대한 커밋                    |
+| docs     | 문서 수정에 대한 커밋                    |
+| style    | 코드 스타일 혹은 포맷 등에 관한 커밋     |
+| refactor | 코드 리팩토링에 대한 커밋                |
+| design   | css 디자인 관련에 대한 커밋              |
+| test     | 테스트 코드 추가, 삭제, 변경에 대한 커밋 |
+| remove   | 불필요한 파일이나 로직 삭제에 관한 커밋  |
+
+<br>
 
 ## 팀원 소개
 
-**신철환**
+<a href="https://github.com/GreenteaHT" target="_blank">**신철환**</a>
 
 서비스의 목적을 가진 프로젝트의 협업은 이번이 처음입니다. 그 전에는 팀원들과 같이 코딩을 하면서 협업이란 무엇인지에 대해 이론적으로 접근했지 크게 와닿지는 않았습니다. 프로젝트를 진행하는 몇 주 동안 역할을 나누고, 많은 시간을 하나의 목표에 대해 집중하게 되면서 협업에 대해 많이 생각을 하게 되었습니다.
 
@@ -537,13 +555,13 @@ zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 �
 
 그래서 저에게 협업을 잘했냐고 물으면 저는 이번에는 커밋을 잘 쓰지 못해서 아쉽다고 대답할 겁니다. 하지만 나중에는 멋진 커밋을 쓰고 당당하게 “네”라고 답했으면 좋겠습니다.
 
-**홍유진**
+<a href="https://github.com/howyoujini" target="_blank">**홍유진**</a>
 
 이번 프로젝트를 진행하면서 커밋이 단순한 기록이 아니라, 프로덕트의 기반을 이루는 중요한 요소라는 사실을 다시 한번 실감하게 되었습니다. 사실, 커밋의 중요성에 대한 이야기는 자주 들었었지만, 이 프로젝트를 경험하기 전까지는 깊이 공감하지 못했습니다. 이번 프로젝트 경험을 통해, 좋은 커밋이 동료 개발자의 생산성을 얼마나 크게 향상시킬 수 있는지를 체감하게 되었고, 커밋에 대한 제 가치관 또한 크게 변화했습니다.
 
 또, 팀 프로젝트로 함께 협업을 하면서 서로의 생각을 맞춰나가는 과정이 즐거웠습니다. 지금은 저희 프로젝트가 style, remove, test, docs 의 커밋타입만 가능하지만, 이후 하나씩 하나씩 더 추가하여 업데이트 할 수 있었으면 좋겠습니다!
 
-**김수한**
+<a href="https://github.com/shkimjune" target="_blank">**김수한**</a>
 
 프로젝트 진행 초기에는 커밋메시지에 관한 기준을 정하는 과정이 있었습니다. 사람들마다 다르게 작성된 커밋 메시지와 변경 내용의 일치성을 규격화된 기준을 정해 판단해야했기 때문에 새로운 케이스가 나올 때마다 어떤 식으로 규격화를 시켜야할지 고민을 많이 했던 것 같습니다. 또한 API로 응답받은 데이터 처리 관련해서 다양한 문제들을 마주하게 되었습니다. 이를 해결하는 과정에서 IndexedDB 활용과 많은 양의 데이터를 API요청을 보낼 때 효율적으로 보낼 수 있는 방식 등 여러 가지를 배우게 되었습니다.
 
