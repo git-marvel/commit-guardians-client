@@ -45,38 +45,37 @@
 
 ### 1. 메인 페이지
 
-![home_mock.gif](assets/readme/home_mock.gif)
-
-![home_login.gif](assets/readme/home_login.gif)
-
 **1-1. github 로그인**
 
-- github 로그인 시 사용자가 원하는 레포지토리 URL 입력이 가능합니다.
+- 로그인 시 사용자가 원하는 레포지토리 URL 입력이 가능합니다.
 - 로그인 전에는 예시 레포지토리로 서비스를 미리 이용해볼 수 있습니다.
+
+<p>
+  <img width="500px" src="assets/readme/home_mock.gif" />
+</p>
 
 **1-2. 서비스 이용 가능 여부 확인하기**
 
 - 헤더의 우측 상단 부분에는 Github API의 상태를 보여줍니다.
-  Github의 Commit을 확인해야하는 서비스 특성 상 Github API status에 따라 서비스 이용을 할 수 없는 경우가 있어서 Github API status가 정상인 경우에만 URL 입력(커밋 분석)이 가능합니다.
+  Github의 커밋을 확인해야하는 서비스 특성 상 Github API status에 따라 서비스 이용을 할 수 없는 경우가 있어서 Github API status가 정상인 경우에만 URL 입력(커밋 분석)이 가능합니다.
 - <a href="https://www.githubstatus.com/" target="_blank">Github API status 버튼</a> 선택 시 상세 내역을 볼 수 있습니다.
 
 **1-3. 현재 대응 가능한 Commit Type 확인하기**
 
 - `remove` `docs` `style` `test`
-- 로고 상단에는 이 프로젝트에서 분석하고 있는 4개의 Commit Type을 알 수 있습니다.
+- 로고 상단에는 이 프로젝트에서 분석하고 있는 4개의 커밋 타입을 알 수 있습니다.
 
 **1-4. 커밋 분석 시작하기**
 
-- 맨 처음 보이는 화면으로 사용자가 commit을 분석받고 싶은 Github Repository의 URL을 입력할 수 있습니다.
+- 맨 처음 보이는 화면으로 사용자가 커밋을 분석받고 싶은 Github Repository의 URL을 입력할 수 있습니다.
 - URL 입력 후 Enter키 or Check the Quality 버튼을 눌러 커밋 분석을 시작할 수 있습니다.
-- 캐릭터의 설명을 통해 default branch의 Commit을 분석할 수 있다는 내용을 알려줍니다.
+- 캐릭터의 설명을 통해 default branch의 커밋을 분석할 수 있다는 내용을 알려줍니다.
 
 <br>
 
 ### 2. 커밋 뱃지 페이지
 
-![badge_readme.png](assets/readme/badge_readme.gif)
-![b_review_faq.png](assets/readme/b_review_faq.gif)
+![commit-badge.png](assets/readme/commit-badge.png)
 
 메인 페이지에서 커밋 퀄리티 분석이 끝난 후 보여지는 페이지입니다.
 
@@ -85,6 +84,8 @@
 - 사용자의 점수에 따라 각각 다른 뱃지가 주어지며 4개의 뱃지로 구성되어 있습니다.
   점수 구간은 80점 이상, 50점 이상, 30점 이상, 30점 미만 으로 채점됩니다.
 - `Copy your Badge` 버튼을 통해 사용자의 GitHub repository README 에 뱃지를 붙여넣기할 수 있는 html 태그를 복사할 수 있습니다.
+
+  <img width="500px" src="assets/readme/copy-badge.gif" />
 
 **2-2. Commit 통계 그래프**
 
@@ -97,16 +98,16 @@
 **2-3. 커밋 퀄리티 최종 점수**
 
 - 100점 만점을 기준으로 사용자의 점수를 볼 수 있습니다.
-- `View All Results` 버튼을 통해 커밋 분석 결과 페이지로 이동할 수 있으며 각각의 커밋 마다의 점수를 확인할 수 있습니다.
+- `View All Results` 버튼을 통해 커밋 분석 결과 페이지로 이동할 수 있으며 각각의 커밋마다의 점수를 확인할 수 있습니다.
 
 **2-4. FAQ**
 
 - 메인 페이지에서 입력 가능한 레포지토리 커밋 메시지 형식을 알 수 있습니다.
-- Commit Guardians 에서 확인하는 커밋 타입과 채점 방식을 확인할 수 있습니다.
+- 이 프로젝트에서 확인하는 커밋 타입과 채점 방식을 확인할 수 있습니다.
 
 **2-5. 사용자와의 소통을 위한 이메일주소와 GitHub 링크**
 
-- 푸터에는 사용자가 Commit Guardians 에 대한 아이디어를 제안할 수 있는 이메일 주소와 해당 프로젝트의 GitHub 링크가 있습니다.
+- 푸터에는 사용자가 아이디어를 제안할 수 있는 이메일 주소와 해당 프로젝트의 GitHub 링크가 있습니다.
 
 <br>
 
@@ -127,6 +128,9 @@
 - 각 커밋의 정보
   - COMMIT MESSAGE : 선택 시 해당 커밋의 GitHub 페이지가 열립니다.
   - CHANGES : 변경된 파일 갯수 뿐만 아니라, -/+ 의 묶음을 Change 로 정의하여 막대그래프를 통해 일치율을 확인할 수 있습니다.
+    - Change 단위 예시
+      <p>- change 2개</p>
+        <img width="500px" src="assets/readme/changes.png" />
   - DATE : 로컬날짜와 시간을 기준으로 확인할 수 있습니다.
   - SHA : 전체 SHA 값을 복사하거나 7자리만 복사할 수 있습니다.
 
@@ -158,13 +162,11 @@ GitHub 이용자의 대부분이 PC를 통한 웹 브라우저 환경을 사용�
 
 ## 🤔 고민한 부분
 
-### 1. 커밋 타입 필터링
+### 1. 커밋 분석을 위한 기준 설정에 대한 어려움
 
 좋은 커밋인지를 판단하기 위해 커밋의 메시지와 실제 변경 내용의 맥락이 일치한지 검사가 필요했습니다. 예를 들어 커밋 메시지에 “test: 테스트 코드 수정” 이라고 적혀있으나 변경 내용엔 해당 내용과 관련 없는 부분이 포함되는 경우에는 커밋의 질을 낮춘다고 판단되어야 합니다.
 
-<span style="background-color:#DCFFE4"> <strong>Problem</strong></span>
-
-**커밋 분석을 위한 기준 설정에 대한 어려움**
+1️⃣ **Problem**
 
 1. 커밋 메시지 형식의 비일관성
 
@@ -180,7 +182,7 @@ GitHub 이용자의 대부분이 PC를 통한 웹 브라우저 환경을 사용�
 
 <br>
 
-<span style="background-color:#DCFFE4"> <strong>Analysis</strong> </span>
+2️⃣ **Action**
 
 **1. 작성자의 스타일에 따른 커밋 메시지 형식 분석**
 
@@ -238,7 +240,13 @@ GitHub 이용자의 대부분이 PC를 통한 웹 브라우저 환경을 사용�
 
 각 타입마다 공통된 코드 변경 사항을 찾고 일반적으로 자주 쓰이는 의미를 기반으로 명확한 기준을 설정했습니다. 예를 들어, style 타입은 HTML태그에 언어 속성 추가, config파일 수정, 쓰이지 않은 코드를 삭제한 경우 등 판단 기준을 세우기 어려운 케이스보다는 일반적으로 쓰이는 코드 포맷에 관련한 수정에 대해 분석하여 기준을 설정했습니다.
 
-**- Commit Guardians가 확인하는 커밋 타입과 기준**
+<br>
+
+3️⃣ **Result**
+
+현재는 변경 내용과 커밋 메시지를 판단할 때 명확한 대응이 가능한 타입만을 우선적으로 선택했으며 추후 필터링 기준을 확장하여 feat, fix 등을 포함하기 위한 추가 개선을 진행할 예정입니다.
+
+**- 이 프로젝트에서 확인하는 커밋 타입과 기준**
 
 - remove
   - 파일 및 폴더, 코드를 삭제한 커밋
@@ -273,17 +281,15 @@ GitHub 이용자의 대부분이 PC를 통한 웹 브라우저 환경을 사용�
       - `a/mock_feed_repository_impl.dart`
     - 테스트 코드 관련 파일이 아닌 설정 파일 등의 수정사항을 같이 커밋했을 경우에 해당합니다.
 
-현재는 변경 내용과 커밋 메시지를 판단할 때 명확한 대응이 가능한 타입만을 우선적으로 선택했으며 추후 필터링 기준을 확장하여 feat, fix 등을 포함하기 위한 추가 개선을 진행할 예정입니다.
-
 <br>
 
 ### 2. API 관련 리소스 최적화
 
-<span style="background-color:#DCFFE4"> <strong>Problem |</strong> </span>
+1️⃣ **Problem**
 
 REST API를 이용하여 요청을 할 경우, 엔드포인트마다 전달받는 데이터 형식이 고정되어 있어 불필요한 정보도 함께 전달됩니다. 이로 인해 네트워크, 메모리, 프로세서 등의 리소스가 낭비됩니다. 실제로, 많은 양의 커밋을 요청할수록 버벅임과 대기 시간이 점점 증가하는 것을 체감했습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Analysis |</strong> </span>
+2️⃣ **Action**
 
 GitHub는 사용자의 요청을 보다 유연하게 처리할 수 있도록 GraphQL이라는 데이터 쿼리 언어를 사용한 API를 제공하고 있습니다. 필요한 정보만 스키마에 명시하여 요청할 수 있기 때문에, 사용자는 대역폭과 메모리를 절약할 수 있습니다.
 
@@ -296,7 +302,7 @@ GitHub는 사용자의 요청을 보다 유연하게 처리할 수 있도록 Gra
 2. 커밋 변경사항 미제공
    GraphQL은 커밋의 변경 사항 제공하지 않았습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Result |</strong> </span>
+3️⃣ **Result**
 
 기존 REST API로 요청하던 데이터를 GraphQL로 전환하여 리소스의 사용을 최적화 하려 했었지만, 기능이 저희 프로젝트의 적용할 수 없어 사용할 수 없었습니다.
 
@@ -306,7 +312,7 @@ GitHub는 사용자의 요청을 보다 유연하게 처리할 수 있도록 Gra
 
 <a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-authenticated-users" target="_blank">Github API Rate Limit 참고링크</a>
 
-<span style="background-color:#DCFFE4"> <strong>Problem |</strong> </span>
+1️⃣ **Problem**
 
 **Github API 호출 인증된 토큰 시간당 5,000회 제한**
 
@@ -318,13 +324,11 @@ Github API 에 의존도가 높은 프로젝트였기에 **Github API 요청 제
 
 또한, 검사가능한 커밋 타입이 추가가 된다면 더 많은 API 호출을 예상할 수 있습니다. 만약 모든 커밋이 검사 대상이라면 커밋 개수의 101% 만큼 API 호출을 하게 됩니다.
 
-<span style="background-color:#DCFFE4"> <strong>Analysis |</strong> </span>
-
 **인증된 토큰 로테이션 방식 검토**
 
 GitHub API 요청 제한은 각 토큰마다 독립적으로 적용되고 있습니다. API 호출이 많은 작업에서 Rate Limit 를 초과하는 문제가 빈번하게 발생했고, 하나의 토큰만으로는 프로젝트 요구 사항을 충족할 수 없었습니다. 여러 GitHub Personal Access Token(PAT)을 환경 변수로 받아 이를 효율적으로 로테이션하는 방식을 차우선으로 검토했습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Action |</strong> </span>
+2️⃣ **Action**
 
 **토큰 로테이션 로직 구현하여 일시적으로 해결했습니다**. 여러 토큰을 tokenStates 배열로 관리하며, 각 토큰의 남은 호출 가능 횟수(remaining)를 추적하도록 설계했습니다. API 호출 시, 남은 요청량이 가장 많은 토큰을 선택해 Rate Limit 초과를 방지했습니다. 호출 후, GitHub API의 응답 헤더에서 반환되는 X-RateLimit-Remaining 값을 사용해 토큰 상태를 업데이트했습니다. `getBestGithubToken()` 현재 사용 가능한 토큰 중 가장 많은 남은 요청 횟수를 가진 토큰을 반환하도록 했습니다. `updateTokenState()` 호출 후, 사용한 토큰의 상태를 최신 상태로 업데이트하여 토큰을 들고올 때 최신 limit 을 가져올 수 있도록 합니다.
 
@@ -356,7 +360,7 @@ const updateTokenState = (token, remaining) => {
 export { getBestGithubToken, updateTokenState };
 ```
 
-<span style="background-color:#DCFFE4"> <strong>Result |</strong> </span>
+3️⃣ **Result**
 
 여러 토큰을 활용한 로테이션 방식으로, GitHub API 요청 제한에 도달하지 않고 대규모 데이터를 안정적으로 처리할 수 있었습니다. 그래서 facebook/react 처럼 커밋이 많은 레포지토리에서도 분석이 중단되지 않고 완료될 수 있었습니다. 토큰이 추가될 경우 tokenStates 배열에만 추가하면 자동으로 적용되도록 설계했습니다.
 
@@ -364,15 +368,13 @@ export { getBestGithubToken, updateTokenState };
 
 ### 4. GitHub 로그인 구현
 
-<span style="background-color:#DCFFE4"> <strong>Problem |</strong> </span>
+1️⃣ **Problem**
 
 검사할 커밋이 단일 토큰의 요청량인 5000개 이상의 레포지토리도 정상적으로 모두 검사할 수 있도록 토큰 로테이션 방식을 구현하였습니다. 배포를 하지 않고 로컬에서만 운영을 한다면 토큰 로테이션 방식으로도 문제가 없겠지만, 배포하여 서비스를 한다면 많은 사람들이 이용하는 API 사용량이 저희가 수동으로 추가한 토큰의 요청량을 감당할 수 없을 것입니다.
 
-<span style="background-color:#DCFFE4"> <strong>Analysis |</strong> </span>
-
 유저의 접근성을 위해 로그인 기능을 추가하지 않으려 했지만 배포된 서비스가 정상적으로 돌아가려면 각 유저의 토큰을 사용하는 것이 최선이고 결국 로그인은 필수불가결이 되었습니다. 하지만 로그인을 하지않고 서비스를 경험하는 것도 중요하다 생각하여 방법을 찾게 되었습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Action |</strong> </span>
+2️⃣ **Action**
 
 **- 데모 버전 제공 고려**
 
@@ -382,7 +384,7 @@ export { getBestGithubToken, updateTokenState };
 
 따라서 일부 유명한 레포지토리의 데이터를 가져와 목업 데이터로 제공하기로 했습니다. 또한 사용자가 로그인한 유저와 최대한 비슷한 체험을 하기 위해 기능과 인터페이스적 요소를 똑같이 이용하게 하는 것이 중요하다 생각했습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Result |</strong> </span>
+3️⃣ **Result**
 
 비로그인 상태에서는 텍스트 입력 박스를 선택 박스로 변경하고, 제공되는 선택지를 이용해 제출하게 되면 목업 데이터를 이용해 실제 기능과 동일한 경험을 할 수 있게 하였습니다. 또한, 문구를 박스 위에 두어 로그인 시 직접 입력 가능한 점을 알게 하였습니다.
 
@@ -396,7 +398,7 @@ export { getBestGithubToken, updateTokenState };
 
 ### 5. 대용량 데이터를 저장하고 처리하기
 
-<span style="background-color:#DCFFE4"> <strong>Problem |</strong> </span>
+1️⃣ **Problem**
 
 **- 대용량 데이터 처리 시 에러 발생**
 
@@ -406,11 +408,9 @@ GitHub API를 통해 커밋들의 변경 내용(diff)을 가져오는 과정에�
 
 sessionStorage 는 대용량의 데이터를 처리할 경우 데이터가 저장되지 않고 용량이 초과되었다는 에러가 발생하는 문제가 있었습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Analysis |</strong> </span>
-
 sessionStorage 는 브라우저마다 약 5 MiB의 용량 제한이 있었고 이 용량 이상의 데이터를 저장하기에는 적합하지 않았습니다. GitHub API로 응답 받는 커밋 diff 데이터는 변경된 코드 양에 따라 매우 큰 크기의 데이터가 될 수 있기 때문에 기존의 sessionStorage로는 데이터 저장 실패로 인한 에러 발생 가능성이 커졌습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Action |</strong> </span>
+2️⃣ **Action**
 
 이 문제의 해결을 위해 sessionStorage대신 IndexedDB를 사용했습니다.
 
@@ -470,7 +470,7 @@ const useCommitStore = create(
 export default useCommitStore;
 ```
 
-<span style="background-color:#DCFFE4"> <strong>Result |</strong> </span>
+3️⃣ **Result**
 
 **- sessionStorage 에서 발생하던 저장 용량 초과 문제를 해결**
 
@@ -486,23 +486,21 @@ zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 �
 
 ![](assets/readme/before_virtualscroll.gif)
 
-<span style="background-color:#DCFFE4"> <strong>Problem |</strong> </span>
+1️⃣ **Problem**
 
 **- INP 지수 상승 및 화면 버벅임**
 
 이미 검사가 끝난 모든 커밋들의 데이터를 가지고 컴포넌트를 렌더링하는 디테일 뷰에는 **화면 성능에 관한 문제**가 있었습니다. 적은 양의 컴포넌트들을 스크롤 할 때는 큰 문제가 없었지만, 많은 양의 컴포넌트들을 (대략 1천개 이상의 커밋 컴포넌트) 가진 디테일 화면에 첫 진입시 화면 렌더링의 시간이 지연되었습니다. 브라우저 퍼포먼스 탭을 확인해보니 <a href="https://web.dev/articles/inp?hl=ko">**INP**</a>(**Interaction to Next Paint**) 지수가 급격히 상승하고, 화면이 동적으로 변할 때, 특히나 버벅이는 문제가 있었습니다. 이 문제는 사용자는 화면 전환 시의 느린 반응 속도와 지연으로 인해 답답함을 느끼게 하고, 전체적인 사용자 경험을 저하시키고, 앱 성능에 대한 부정적인 영향을 끼칠 것으로 예상했습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Analysis |</strong> </span>
-
 브라우저가 모든 컴포넌트를 한 번에 렌더링하려는 과정에서 브라우저가 필요하지 않은 데이터까지 모두 DOM 에 렌더링하는 방식이 병목현상의 주요 원인임을 확인할 수 있었습니다. 스크롤이 반드시 필요한 디테일화면에서 스크롤 사용 시 성능 저하가 더욱 심각하게 나타나는 것을 확인했습니다. 따라서 INP 지수를 개선하고, 스크롤 시 부드러운 사용자 경험을 제공할 방법을 찾아야 했습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Action |</strong> </span>
+2️⃣ **Action**
 
 **- Virtual Scroll 도입**
 
 이 문제를 해결하기 위해 저희는 **Virtual Scroll** 기술을 도입하였습니다. Virtual Scroll 은 사용자가 **현재 화면에서 보고 있는 부분에 해당하는 데이터만 DOM 에 렌더링하고, 보이지 않는 부분은 렌더링하지 않음**으로써 브라우저의 불필요한 작업을 줄여주는 기술입니다. 이런 방식을 통해 초기 렌더링 시 필요하지 않은 데이터 처리를 최소화하고, 렌더링 속도를 크게 향상시킬 수 있었습니다. 더불어 무한스크롤처럼 페이지네이션을 통한 데이터 요청을 통해서도 개선할 수 있었지만, 이미 커밋들이 분석된 다음 디테일 화면 페이지를 보는 것이기에 무한 스크롤 기능은 필요없다 판단했습니다. Virtual Scroll 을 도입하고 렌더링 최적화를 위해 컴포넌트 분리 및 메모이제이션 적용하여 성능을 개선했습니다.
 
-<span style="background-color:#DCFFE4"> <strong>Result |</strong> </span>
+3️⃣ **Result**
 
 ![](assets/readme/after_virtualscroll.gif)
 
