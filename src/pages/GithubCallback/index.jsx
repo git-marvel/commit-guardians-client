@@ -30,11 +30,7 @@ function GithubCallback() {
     })();
   }, [location, navigate, githubToken, setGithubToken]);
 
-  return (
-    <div>
-      <h2>GitHub OAuth 콜백 처리 중...</h2>
-    </div>
-  );
+  return <></>;
 }
 
 export default GithubCallback;
