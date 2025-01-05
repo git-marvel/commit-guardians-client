@@ -76,7 +76,6 @@ const useValidateCommit = () => {
 
   const fetchCommits = useCallback(
     async ({ owner, repo }) => {
-      clearAll();
       try {
         let commitData = {};
 
@@ -133,6 +132,7 @@ const useValidateCommit = () => {
   const handleCheckCommitQuality = useCallback(
     async (event) => {
       event.preventDefault();
+      clearAll();
       setErrorMessage(null);
       setIsAbleToRoute(false);
 
