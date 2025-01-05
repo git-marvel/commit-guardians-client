@@ -15,7 +15,7 @@
   - [3. 커밋 분석 결과 페이지](#3-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D-%EA%B2%B0%EA%B3%BC-%ED%8E%98%EC%9D%B4%EC%A7%80)
 - [기술 스택](#%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
   - [그 외 라이브러리](#%EA%B7%B8-%EC%99%B8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC)
-- [🤔 고민한 부분](#🤔-고민한-부분)
+- [🤔 고민한 부분](#1-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B8%B0%EC%A4%80-%EC%84%A4%EC%A0%95%EC%97%90-%EB%8C%80%ED%95%9C-%EC%96%B4%EB%A0%A4%EC%9B%80)
   - [1. 커밋 분석을 위한 기준 설정에 대한 어려움](#1-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B8%B0%EC%A4%80-%EC%84%A4%EC%A0%95%EC%97%90-%EB%8C%80%ED%95%9C-%EC%96%B4%EB%A0%A4%EC%9B%80)
   - [2. 데이터 효율성 vs 사용자 경험: REST API 선택](#2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9A%A8%EC%9C%A8%EC%84%B1-vs-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-rest-api-%EC%84%A0%ED%83%9D)
   - [3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#3-github-api-rate-limit-%ED%9A%8C%ED%94%BC%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%86%A0%ED%81%B0-%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84)
