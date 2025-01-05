@@ -10,25 +10,25 @@
 
 - [프로젝트 등장 배경](#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%93%B1%EC%9E%A5-%EB%B0%B0%EA%B2%BD)
 - [기능](#%EA%B8%B0%EB%8A%A5)
-  * [1. 메인 페이지](#1-%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)
-  * [2. 커밋 뱃지 페이지](#2-%EC%BB%A4%EB%B0%8B-%EB%B1%83%EC%A7%80-%ED%8E%98%EC%9D%B4%EC%A7%80)
-  * [3. 커밋 분석 결과 페이지](#3-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D-%EA%B2%B0%EA%B3%BC-%ED%8E%98%EC%9D%B4%EC%A7%80)
+  - [1. 메인 페이지](#1-%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)
+  - [2. 커밋 뱃지 페이지](#2-%EC%BB%A4%EB%B0%8B-%EB%B1%83%EC%A7%80-%ED%8E%98%EC%9D%B4%EC%A7%80)
+  - [3. 커밋 분석 결과 페이지](#3-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D-%EA%B2%B0%EA%B3%BC-%ED%8E%98%EC%9D%B4%EC%A7%80)
 - [기술 스택](#%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
-  * [그 외 라이브러리](#%EA%B7%B8-%EC%99%B8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC)
+  - [그 외 라이브러리](#%EA%B7%B8-%EC%99%B8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC)
 - [🤔 고민한 부분](#%F0%9F%A4%94-%EA%B3%A0%EB%AF%BC%ED%95%9C-%EB%B6%80%EB%B6%84)
-  * [1. 커밋 분석을 위한 기준 설정에 대한 어려움](#1-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B8%B0%EC%A4%80-%EC%84%A4%EC%A0%95%EC%97%90-%EB%8C%80%ED%95%9C-%EC%96%B4%EB%A0%A4%EC%9B%80)
-  * [2. 데이터 효율성 vs 사용자 경험: REST API 선택](#2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9A%A8%EC%9C%A8%EC%84%B1-vs-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-rest-api-%EC%84%A0%ED%83%9D)
-  * [3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#3-github-api-rate-limit-%ED%9A%8C%ED%94%BC%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%86%A0%ED%81%B0-%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84)
-  * [4. 깃허브 로그인 구현](#4-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84)
-  * [5. 대용량 데이터를 저장하고 처리하기](#5-%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0)
-  * [6. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#6-%EB%A7%8E%EC%9D%80-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%93%A4%EC%9D%84-%ED%99%94%EB%A9%B4%EC%97%90-%EB%A0%8C%EB%8D%94%EB%A7%81%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-virtual-scroll-%EB%8F%84%EC%9E%85)
+  - [1. 커밋 분석을 위한 기준 설정에 대한 어려움](#1-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B8%B0%EC%A4%80-%EC%84%A4%EC%A0%95%EC%97%90-%EB%8C%80%ED%95%9C-%EC%96%B4%EB%A0%A4%EC%9B%80)
+  - [2. 데이터 효율성 vs 사용자 경험: REST API 선택](#2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9A%A8%EC%9C%A8%EC%84%B1-vs-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-rest-api-%EC%84%A0%ED%83%9D)
+  - [3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#3-github-api-rate-limit-%ED%9A%8C%ED%94%BC%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%86%A0%ED%81%B0-%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84)
+  - [4. 깃허브 로그인 구현](#4-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84)
+  - [5. 대용량 데이터를 저장하고 처리하기](#5-%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0)
+  - [6. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#6-%EB%A7%8E%EC%9D%80-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%93%A4%EC%9D%84-%ED%99%94%EB%A9%B4%EC%97%90-%EB%A0%8C%EB%8D%94%EB%A7%81%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-virtual-scroll-%EB%8F%84%EC%9E%85)
 - [협업](#%ED%98%91%EC%97%85)
-  * [깃 커밋 컨벤션](#%EA%B9%83-%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98)
+  - [깃 커밋 컨벤션](#%EA%B9%83-%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98)
 - [팀원 소개](#%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
 
 <br>
 
-## 프로젝트 등장 배경
+## [프로젝트 등장 배경](#목차)
 
 **현재 깃헙 레포지토리의 커밋들은 과연 건강한 상태일까요?**
 
@@ -42,9 +42,9 @@
 
 <br>
 
-## 기능
+## [기능](#목차)
 
-### 1. 메인 페이지
+### [1. 메인 페이지](#목차)
 
 **1-1. 깃허브 로그인**
 
@@ -72,7 +72,7 @@
 
 <br>
 
-### 2. 커밋 뱃지 페이지
+### [2. 커밋 뱃지 페이지](#목차)
 
 ![commit-badge.png](assets/readme/commit-badge.png)
 
@@ -110,7 +110,7 @@
 
 <br>
 
-### 3. 커밋 분석 결과 페이지
+### [3. 커밋 분석 결과 페이지](#목차)
 
 ![scoreboard.png](assets/readme/scoreboard.gif)
 
@@ -135,7 +135,7 @@
 
 <br>
 
-## 기술 스택
+## [기술 스택](#목차)
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)
 ![VITE](https://img.shields.io/badge/VITE-f88afc?style=for-the-badge&logo=Vite&logoColor=white)
@@ -157,9 +157,9 @@
 
 <br>
 
-## 🤔 고민한 부분
+## 🤔 [고민한 부분](#목차)
 
-### 1. 커밋 분석을 위한 기준 설정에 대한 어려움
+### [1. 커밋 분석을 위한 기준 설정에 대한 어려움](#목차)
 
 좋은 커밋인지를 판단하기 위해 커밋의 메시지와 실제 변경 내용의 맥락이 일치하는지 검사가 필요했습니다. 예를 들어 커밋 메시지에 “test: 테스트 코드 수정”이라고 적혀있으나 변경 내용엔 해당 내용과 관련 없는 부분이 포함되는 경우에는 커밋의 질을 낮춘다고 판단되어야 합니다.
 
@@ -282,7 +282,7 @@
 
 <br>
 
-### 2. 데이터 효율성 vs 사용자 경험: REST API 선택
+### [2. 데이터 효율성 vs 사용자 경험: REST API 선택](#목차)
 
 1️⃣ **Problem**
 
@@ -307,7 +307,7 @@ REST API를 이용하여 요청할 경우, 엔드포인트마다 전달받는 �
 
 <br>
 
-### 3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현
+### [3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#목차)
 
 <a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-authenticated-users" target="_blank">Github API Rate Limit 참고 링크</a>
 
@@ -365,7 +365,7 @@ export { getBestGithubToken, updateTokenState };
 
 <br>
 
-### 4. 깃허브 로그인 구현
+### [4. 깃허브 로그인 구현](#목차)
 
 1️⃣ **Problem**
 
@@ -395,7 +395,7 @@ export { getBestGithubToken, updateTokenState };
 
 <br>
 
-### 5. 대용량 데이터를 저장하고 처리하기
+### [5. 대용량 데이터를 저장하고 처리하기](#목차)
 
 1️⃣ **Problem**
 
@@ -479,7 +479,7 @@ zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 �
 
 <br>
 
-### 6. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입
+### [6. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#목차)
 
 <a href="https://github.com/git-marvel/commit-guardians-client/pull/93" target="_blank">virtual scroll 도입한 PR 링크</a>
 
@@ -512,7 +512,7 @@ zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 �
 
 <br>
 
-## 협업
+## [협업](#목차)
 
 ### 깃 커밋 컨벤션
 
@@ -542,7 +542,7 @@ body
 
 <br>
 
-## 팀원 소개
+## [팀원 소개](#목차)
 
 <a href="https://github.com/GreenteaHT" target="_blank">**신철환**</a>
 
