@@ -136,6 +136,7 @@
 <br>
 
 ## [기술 스택](#목차)
+### 메인 라이브러리
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)
 ![VITE](https://img.shields.io/badge/VITE-f88afc?style=for-the-badge&logo=Vite&logoColor=white)
@@ -149,7 +150,7 @@
 ![npm](https://img.shields.io/badge/npm-2C8EBB?style=for-the-badge&logo=npm&logoColor=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
-### 그 외 라이브러리
+### 기타 라이브러리
 
 - `diff-match-patch` : 구글의 Neil Fraser가 개발한 오픈소스 라이브러리로, 텍스트의 차이점(diffs)을 계산하고 패치를 생성 및 적용하는 기능을 제공합니다. 대량의 커밋을 정확하고 빠르게 분석하여 코드 변경 사항을 확인하는 데 사용하였습니다.
 
