@@ -10,19 +10,19 @@
 
 - [프로젝트 등장 배경](#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%93%B1%EC%9E%A5-%EB%B0%B0%EA%B2%BD)
 - [기능](#%EA%B8%B0%EB%8A%A5)
-  * [1. 메인 페이지](#1-%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)
-  * [2. 커밋 뱃지 페이지](#2-%EC%BB%A4%EB%B0%8B-%EB%B1%83%EC%A7%80-%ED%8E%98%EC%9D%B4%EC%A7%80)
-  * [3. 커밋 분석 결과 페이지](#3-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D-%EA%B2%B0%EA%B3%BC-%ED%8E%98%EC%9D%B4%EC%A7%80)
+  - [1. 메인 페이지](#1-%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)
+  - [2. 커밋 뱃지 페이지](#2-%EC%BB%A4%EB%B0%8B-%EB%B1%83%EC%A7%80-%ED%8E%98%EC%9D%B4%EC%A7%80)
+  - [3. 커밋 분석 결과 페이지](#3-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D-%EA%B2%B0%EA%B3%BC-%ED%8E%98%EC%9D%B4%EC%A7%80)
 - [기술 스택](#%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
 - [🤔 고민하고 결정한 부분](#%F0%9F%A4%94-%EA%B3%A0%EB%AF%BC%ED%95%98%EA%B3%A0-%EA%B2%B0%EC%A0%95%ED%95%9C-%EB%B6%80%EB%B6%84)
-  * [1. 데이터 효율성 vs 사용자 경험: REST API 선택](#1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9A%A8%EC%9C%A8%EC%84%B1-vs-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-rest-api-%EC%84%A0%ED%83%9D)
-  * [2. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#2-github-api-rate-limit-%ED%9A%8C%ED%94%BC%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%86%A0%ED%81%B0-%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84)
-  * [3. 깃허브 로그인 기능의 필수 도입과 비로그인 사용자 접근성 향상](#3-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B8%B0%EB%8A%A5%EC%9D%98-%ED%95%84%EC%88%98-%EB%8F%84%EC%9E%85%EA%B3%BC-%EB%B9%84%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%91%EA%B7%BC%EC%84%B1-%ED%96%A5%EC%83%81)
-  * [4. 대용량 데이터를 저장하고 처리: indexedDB 사용](#4-%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EC%B2%98%EB%A6%AC-indexeddb-%EC%82%AC%EC%9A%A9)
-  * [5. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#5-%EB%A7%8E%EC%9D%80-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%93%A4%EC%9D%84-%ED%99%94%EB%A9%B4%EC%97%90-%EB%A0%8C%EB%8D%94%EB%A7%81%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-virtual-scroll-%EB%8F%84%EC%9E%85)
-  * [6. 커밋 분석을 위한 커밋 타입 기획](#6-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BB%A4%EB%B0%8B-%ED%83%80%EC%9E%85-%EA%B8%B0%ED%9A%8D)
+  - [1. 데이터 효율성 vs 사용자 경험: REST API 선택](#1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9A%A8%EC%9C%A8%EC%84%B1-vs-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-rest-api-%EC%84%A0%ED%83%9D)
+  - [2. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#2-github-api-rate-limit-%ED%9A%8C%ED%94%BC%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%86%A0%ED%81%B0-%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84)
+  - [3. 깃허브 로그인 기능의 필수 도입과 비로그인 사용자 접근성 향상](#3-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B8%B0%EB%8A%A5%EC%9D%98-%ED%95%84%EC%88%98-%EB%8F%84%EC%9E%85%EA%B3%BC-%EB%B9%84%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%91%EA%B7%BC%EC%84%B1-%ED%96%A5%EC%83%81)
+  - [4. 대용량 데이터를 저장하고 처리: indexedDB 사용](#4-%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EC%B2%98%EB%A6%AC-indexeddb-%EC%82%AC%EC%9A%A9)
+  - [5. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#5-%EB%A7%8E%EC%9D%80-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%93%A4%EC%9D%84-%ED%99%94%EB%A9%B4%EC%97%90-%EB%A0%8C%EB%8D%94%EB%A7%81%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-virtual-scroll-%EB%8F%84%EC%9E%85)
+  - [6. 커밋 분석을 위한 커밋 타입 기획](#6-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BB%A4%EB%B0%8B-%ED%83%80%EC%9E%85-%EA%B8%B0%ED%9A%8D)
 - [협업](#%ED%98%91%EC%97%85)
-  * [1. 깃 커밋 컨벤션](#1-%EA%B9%83-%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98)
+  - [1. 깃 커밋 컨벤션](#1-%EA%B9%83-%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98)
 - [팀원 소개](#%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
 
 <br>
@@ -135,6 +135,7 @@
 <br>
 
 ## [기술 스택](#목차)
+
 ### 메인 라이브러리
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)
