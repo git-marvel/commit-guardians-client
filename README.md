@@ -9,21 +9,20 @@
 ## 목차
 
 - [프로젝트 등장 배경](#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%93%B1%EC%9E%A5-%EB%B0%B0%EA%B2%BD)
-- [기능](#%EA%B8%B0%EB%8A%A5)
+- [기능](#기능)
   - [1. 메인 페이지](#1-%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)
   - [2. 커밋 뱃지 페이지](#2-%EC%BB%A4%EB%B0%8B-%EB%B1%83%EC%A7%80-%ED%8E%98%EC%9D%B4%EC%A7%80)
   - [3. 커밋 분석 결과 페이지](#3-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D-%EA%B2%B0%EA%B3%BC-%ED%8E%98%EC%9D%B4%EC%A7%80)
 - [기술 스택](#%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
-  - [그 외 라이브러리](#%EA%B7%B8-%EC%99%B8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC)
-- [🤔 고민한 부분](#1-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B8%B0%EC%A4%80-%EC%84%A4%EC%A0%95%EC%97%90-%EB%8C%80%ED%95%9C-%EC%96%B4%EB%A0%A4%EC%9B%80)
-  - [1. 커밋 분석을 위한 기준 설정에 대한 어려움](#1-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B8%B0%EC%A4%80-%EC%84%A4%EC%A0%95%EC%97%90-%EB%8C%80%ED%95%9C-%EC%96%B4%EB%A0%A4%EC%9B%80)
-  - [2. 데이터 효율성 vs 사용자 경험: REST API 선택](#2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9A%A8%EC%9C%A8%EC%84%B1-vs-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-rest-api-%EC%84%A0%ED%83%9D)
-  - [3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#3-github-api-rate-limit-%ED%9A%8C%ED%94%BC%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%86%A0%ED%81%B0-%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84)
-  - [4. 깃허브 로그인 구현](#4-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84)
-  - [5. 대용량 데이터를 저장하고 처리하기](#5-%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0)
-  - [6. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#6-%EB%A7%8E%EC%9D%80-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%93%A4%EC%9D%84-%ED%99%94%EB%A9%B4%EC%97%90-%EB%A0%8C%EB%8D%94%EB%A7%81%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-virtual-scroll-%EB%8F%84%EC%9E%85)
-- [협업](#%ED%98%91%EC%97%85)
-  - [깃 커밋 컨벤션](#%EA%B9%83-%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98)
+- [🤔 고민하고 결정한 부분](#고민하고-결정한-부분)
+  - [1. 데이터 효율성 vs 사용자 경험: REST API 선택](#1.-데이터-효율성-vs-사용자-경험:-REST-API-선택)
+  - [2. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#2.-GitHub-API-Rate-Limit-회피를-위한-토큰-로테이션-구현)
+  - [3. 깃허브 로그인 기능의 필수 도입과 비로그인 사용자 접근성 향상](#3.-깃허브-로그인-기능의-필수-도입과-비로그인-사용자-접근성-향상)
+  - [4. 대용량 데이터를 저장하고 처리: indexedDB 사용](#4.-대용량-데이터를-저장하고-처리:-indexedDB-사용)
+  - [5. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#5.-많은-컴포넌트들을-화면에-렌더링하기-위한-virtual-scroll-도입)
+  - [6. 커밋 분석을 위한 커밋 타입 기획](#6.-커밋-분석을-위한-커밋-타입-기획)
+- [협업](#협업)
+  - [1. 깃 커밋 컨벤션](#1.-깃-커밋-컨벤션)
 - [팀원 소개](#%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
 
 <br>
@@ -158,9 +157,239 @@
 
 <br>
 
-## [🤔 고민한 부분](#목차)
+## [🤔 고민하고 결정한 부분](#목차)
 
-### [1. 커밋 분석을 위한 기준 설정에 대한 어려움](#목차)
+### [1. 데이터 효율성 vs 사용자 경험: REST API 선택](#목차)
+
+1️⃣ **Problem**
+
+REST API를 이용하여 요청할 경우, 엔드포인트마다 전달받는 데이터 형식이 고정되어 있어 불필요한 정보도 함께 전달됩니다. 이에 따라 네트워크, 메모리, 프로세서 등의 리소스가 낭비됩니다. 실제로, [facebook/react](https://github.com/facebook/react)와 같은 대규모 프로젝트의 레포지토리를 분석할 경우 대략 1,500번의 요청을 보내고 응답을 받아 2만 개 정도의 커밋을 검사하게 되는데, 최소 5~10초 정도의 로딩 시간의 발생과 렉을 체감할 수 있었습니다.
+
+2️⃣ **Action**
+
+깃허브는 사용자의 요청을 더욱 유연하게 처리할 수 있도록 GraphQL이라는 데이터 쿼리 언어를 사용한 API를 제공하고 있습니다. 필요한 정보만 스키마에 명시하여 요청할 수 있기 때문에, 사용자는 대역폭과 메모리를 절약할 수 있습니다.
+
+하지만 GraphQL은 사용할 때 두 가지 주요 차이점이 존재했습니다.
+
+1. 토큰 기반 페이지네이션 (Token-Based Pagination)
+
+   GraphQL은 페이지네이션을 지원하지만, 페이지 번호 기반이 아닌 토큰 기반을 사용합니다. 이에 따라 순차적으로 다음 페이지의 내용을 요청해야 했고, REST API처럼 비동기적으로 커밋 목록을 병렬로 요청할 수 없어 페이지 로딩 시간이 많이 증가했습니다.
+
+2. 커밋 변경 사항 미제공
+   GraphQL은 커밋의 변경 사항 제공하지 않았습니다.
+
+3️⃣ **Result**
+
+데이터를 쿼리언어인 GraphQL로 전환하여 리소스의 사용을 최적화하려 했었지만, 유저 사용성을 위해 기존 REST API로 요청하던 방식을 유지하기로 했습니다.
+
+<br>
+
+### [2. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#목차)
+
+<a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-authenticated-users" target="_blank">Github API Rate Limit 참고 링크</a>
+
+1️⃣ **Problem**
+
+**Github API 호출 인증된 토큰 시간당 5,000회 제한**
+
+Github API 에 의존도가 높은 프로젝트였기에 **Github API 요청 제한 수는 저희 프로젝트에서 치명적**이었습니다. 커밋 분석 로직은 API 호출을 통해 필요한 값들을 불러오고, 커밋 메시지의 커밋 타입을 분석한 이후, 검사 가능한 커밋 타입들만을 필터링합니다. 필터링한 커밋의 `owner`, `repo`, `sha` 를 기반으로 API 호출을 통해 코드의 수정 정보인 diff 데이터를 가져옵니다.
+
+특히나 한 인증된 토큰 시간당 5,000회가 최대였기 때문에 예를 들어, <a href="https://github.com/facebook/react" target="_blank">facebook/react</a> 와 같이 커밋 갯수가 19,000개 이상의 경우 19,000/100 = **190**회 API 호출을 통해 전체 커밋의 정보를 가져오고, 검사 가능한 커밋을 추출하면 (2024.12.25 일 기준으로) 1450 개이므로, **1,450**회의 diff API 호출을 더 하게 됩니다.
+
+즉, facebook/react 는 190 + 1,450 = **1,640**회의 API 호출을 하게 됩니다. 그럼 사실 2, 3번의 facebook/react 정도의 레포지토리만 조회하더라도 GitHub API Rate Limit를 모두 소진하게 되는 문제가 있었습니다.
+
+또한, 검사 가능한 커밋 타입이 추가가 된다면 더 많은 API 호출을 예상할 수 있습니다. 만약 모든 커밋이 검사 대상이라면 커밋 개수의 101%만큼 API 호출을 하게 됩니다.
+
+**인증된 토큰 로테이션 방식 검토**
+
+GitHub API 요청 제한은 토큰마다 독립적으로 적용되고 있습니다. API 호출이 많은 작업에서 Rate Limit를 초과하는 문제가 빈번하게 발생했고, 하나의 토큰만으로는 프로젝트 요구 사항을 충족할 수 없었습니다. 여러 Personal Access Token(PAT)을 환경 변수로 받아 이를 효율적으로 로테이션하는 방식을 차 우선으로 검토했습니다.
+
+2️⃣ **Action**
+
+**토큰 로테이션 로직 구현하여 일시적으로 해결했습니다**. 여러 토큰을 `tokenStates`이라는 배열로 관리하며, 각 토큰의 남은 호출 가능 횟수(remaining)를 추적하도록 설계했습니다. API 호출 시, 남은 요청량이 가장 많은 토큰을 선택해 Rate Limit 초과를 방지했습니다. 호출 후, GitHub API의 응답 헤더에서 반환되는 `X-RateLimit-Remaining` 값을 사용해 토큰 상태를 업데이트했습니다. `getBestGithubToken()` 현재 사용 가능한 토큰 중 가장 많은 남은 요청 횟수를 가진 토큰을 반환하도록 했습니다. `updateTokenState()` 호출 후, 사용한 토큰의 상태를 최신 상태로 업데이트하여 토큰을 들고 올 때 남은 호출 가능 횟수를 가져올 수 있도록 합니다.
+
+```js
+const GITHUB_REQUEST_LIMIT = 5000;
+
+const tokenStates = [
+  {
+    token: import.meta.env.VITE_GITHUB_TOKEN,
+    remaining: GITHUB_REQUEST_LIMIT,
+  },
+  ...
+];
+
+const getBestGithubToken = () => {
+  tokenStates.sort((a, b) => b.remaining - a.remaining);
+
+  return tokenStates[0].token;
+};
+
+const updateTokenState = (token, remaining) => {
+  const tokenState = tokenStates.find((t) => t.token === token);
+
+  if (tokenState) {
+    tokenState.remaining = remaining;
+  }
+};
+
+export { getBestGithubToken, updateTokenState };
+```
+
+3️⃣ **Result**
+
+여러 토큰을 활용한 로테이션 방식으로, 대규모 데이터를 안정적으로 처리할 수 있었습니다. 그래서 facebook/react처럼 커밋이 많은 레포지토리에서도 분석이 중단되지 않고 완료될 수 있었습니다. 토큰이 추가될 경우 `tokenStates` 배열에만 추가하면 자동으로 적용되도록 설계했습니다.
+
+<br>
+
+### [3. 깃허브 로그인 기능의 필수 도입과 비로그인 사용자 접근성 향상](#목차)
+
+1️⃣ **Problem**
+
+검사할 커밋이 단일 토큰의 요청량인 5,000개 이상의 레포지토리도 정상적으로 모두 검사할 수 있도록 토큰 로테이션 방식을 구현하였습니다. 배포하지 않고 로컬에서만 운영한다면 토큰 로테이션 방식으로도 문제가 없겠지만, 배포하여 서비스한다면 많은 사람들이 이용하는 API 사용량이 저희가 수동으로 추가한 토큰의 요청량을 감당할 수 없을 것입니다.
+
+유저의 접근성을 위해 로그인 기능을 추가하지 않으려 했지만, 배포된 서비스가 정상적으로 돌아가려면 각 유저의 토큰을 사용하는 것이 최선이고 결국 로그인은 필수 불가결이 되었습니다. 하지만 로그인하지 않고 서비스를 경험하는 것도 중요하다 생각하여 방법을 찾게 되었습니다.
+
+2️⃣ **Action**
+
+**- 데모 버전 제공 고려**
+
+처음에는 로그인하지 않은 사용자가 링크를 제출하면 기본 토큰의 요청량(시간당 60개)을 이용하여 일부만 보여주도록 하고 로그인을 유도하려 했습니다. 하지만 정말 일부의 커밋 분석만 보여줄 수 있고 통계 기능을 사용할 수 없으며, 토큰의 요청량을 빠르게 소진하기 때문에 다른 레포지토리를 분석할 수 없다는 문제가 있었습니다. 또한, 일부 경우에는 API에 접근 자체가 되지 않는 문제도 발생했습니다.
+
+**- 목업 데이터를 이용한 동일한 경험 제공**
+
+따라서 일부 유명한 레포지토리의 데이터를 가져와 목업 데이터로 제공하기로 했습니다. 또한 사용자가 로그인한 유저와 최대한 비슷한 체험을 하기 위해 기능과 인터페이스적 요소를 똑같이 이용하게 하는 것이 중요하다고 생각했습니다.
+
+3️⃣ **Result**
+
+비로그인 상태에서는 텍스트 입력 박스를 선택 박스로 변경하고, 제공되는 선택지를 이용해 제출하게 되면 목업 데이터를 이용해 실제 기능과 동일한 경험을 할 수 있게 하였습니다. 또한, 문구를 박스 위에 두어 로그인 시 직접 입력할 수 있는 점을 알게 하였습니다.
+
+![without_login_selection_box](assets/readme/without_login_selection_box.gif)
+
+![login_input](assets/readme/login_input.gif)
+
+프로세스가 거의 똑같기 때문에 사용자가 로그인하지 않고 체험하면서 튜토리얼의 기능도 가질 수 있게 되었습니다.
+
+<br>
+
+### [4. 대용량 데이터를 저장하고 처리: indexedDB 사용](#목차)
+
+1️⃣ **Problem**
+
+**- 대용량 데이터 처리 시 에러 발생**
+
+커밋에 대한 데이터 관리로 페이지 리로드 시 상태가 초기화되는 것을 방지하기 위해 sessionStorage에 저장했습니다.
+
+GitHub API를 통해 커밋들의 변경 내용(diff)을 가져오는 과정에서 코드의 변경 사항이 많을 경우 저장되는 데이터의 크기가 매우 커졌고 이에 따라 데이터 저장에 문제가 발생하게 되었습니다.
+
+sessionStorage는 대용량의 데이터를 처리할 경우 데이터가 저장되지 않고 용량이 초과하였다는 에러가 발생하는 문제가 있었습니다.
+
+sessionStorage는 브라우저마다 약 5MiB의 용량 제한이 있었고 이 용량 이상의 데이터를 저장하기에는 적합하지 않았습니다. GitHub API로 응답받는 커밋 diff 데이터는 변경된 코드양에 따라 매우 큰 크기의 데이터가 될 수 있기 때문에 기존의 sessionStorage로는 데이터 저장 실패로 인한 에러 발생 가능성이 커졌습니다.
+
+2️⃣ **Action**
+
+이 문제의 해결을 위해 sessionStorage대신 IndexedDB를 사용했습니다.
+
+- IndexedDB
+  브라우저 내에서 대규모 데이터 구조를 저장하고 고성능 검색을 위해 인덱싱하는 웹 API입니다.
+
+idb-keyval 라이브러리를 통해 간단한 API(`get()`, `set()`, `del()` 등)을 써서 IndexedDB를 다룰 수 있도록 구현했습니다. 또한 zustand를 통해 상태를 관리하면서 데이터를 IndexedDB에 저장하는 방식으로 전환했습니다.
+
+- zustand의 persist 미들웨어(`storage: createJSONStorage(() => indexedDB)`)를 활용하여 zustand 상태를 IndexedDB에 저장하도록 설정했습니다.
+- IndexedDB에서 데이터를 불러오거나 삭제할 때 발생할 수 있는 에러를 처리해 주는 부분을 추가했습니다.
+
+```jsx
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+import { get, set, del } from "idb-keyval";
+import { throwIndexedDBErrorMessage } from "../../../shared/error/throwCustomErrorMessage";
+
+const indexedDB = {
+  getItem: async (name) => {
+    try {
+      const value = await get(name);
+      return value || null;
+    } catch (error) {
+      throwIndexedDBErrorMessage(error);
+    }
+  },
+  setItem: async (name, value) => {
+    try {
+      await set(name, value);
+    } catch (error) {
+      throwIndexedDBErrorMessage(error);
+    }
+  },
+  removeItem: async (name) => {
+    try {
+      await del(name);
+    } catch (error) {
+      throwIndexedDBErrorMessage(error);
+    }
+  },
+};
+
+const initialState = {};
+
+const useCommitStore = create(
+  persist(
+    (set) => ({
+      ...initialState,
+    }),
+    {
+      name: "commit-storage",
+      storage: createJSONStorage(() => indexedDB),
+    }
+  )
+);
+
+export default useCommitStore;
+```
+
+3️⃣ **Result**
+
+**- sessionStorage에서 발생하던 저장 용량 초과 문제를 해결**
+
+IndexedDB는 5MiB보다 훨씬 큰 용량(GB 단위)을 지원하여 커밋 diff 데이터와 같은 대량의 데이터를 처리할 때 에러가 발생하지 않고 원활하게 저장할 수 있게 되었습니다.
+
+zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 있게 되었고 idb-keyval 라이브러리를 통해 코드 복잡도를 줄이고 대용량 데이터를 안정적으로 처리할 수 있게 되었습니다.
+
+<br>
+
+### [5. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#목차)
+
+<a href="https://github.com/git-marvel/commit-guardians-client/pull/93" target="_blank">virtual scroll 도입한 PR 링크</a>
+
+![](assets/readme/before_virtualscroll.gif)
+
+1️⃣ **Problem**
+
+**- INP 지수 상승 및 화면 버벅임**
+
+이미 검사가 끝난 모든 커밋들의 데이터를 가지고 컴포넌트를 렌더링하는 디테일 뷰에는 **화면 성능에 관한 문제**가 있었습니다. 적은 양의 컴포넌트들을 스크롤 할 때는 큰 문제가 없었지만, 많은 양의 컴포넌트들을 (대략 1천 개 이상의 커밋 컴포넌트) 가진 디테일 화면에 첫 진입 시 화면 렌더링의 시간이 지연되었습니다. 브라우저 퍼포먼스 탭을 확인해 보니 <a href="https://web.dev/articles/inp?hl=ko">**INP**</a>(**Interaction to Next Paint**) 지수가 급격히 상승하고, 화면이 동적으로 변할 때, 특히나 버벅이는 문제가 있었습니다. 이 문제는 사용자는 화면 전환 시의 느린 반응 속도와 지연으로 인해 답답함을 느끼게 하고, 전체적인 사용자 경험을 저하하고, 앱 성능에 대한 부정적인 영향을 끼칠 것으로 예상했습니다.
+
+브라우저가 모든 컴포넌트를 한 번에 렌더링하려는 과정에서 브라우저가 필요하지 않은 데이터까지 모두 DOM에 렌더링하는 방식이 병목현상의 주요 원인임을 확인할 수 있었습니다. 스크롤이 필요한 디테일 화면에서 스크롤 사용 시 성능 저하가 더욱 심각하게 나타나는 것을 확인했습니다. 따라서 INP 지수를 개선하고, 스크롤 시 부드러운 사용자 경험을 제공할 방법을 찾아야 했습니다.
+
+2️⃣ **Action**
+
+**- Virtual Scroll 도입**
+
+이 문제를 해결하기 위해 저희는 **Virtual Scroll** 기술을 도입하였습니다. Virtual Scroll 은 사용자가 **현재 화면에서 보고 있는 부분에 해당하는 데이터만 DOM에 렌더링하고, 보이지 않는 부분은 렌더링하지 않음**으로써 브라우저의 불필요한 작업을 줄여주는 기술입니다. 이런 방식을 통해 초기 렌더링 시 필요하지 않은 데이터 처리를 최소화하고, 렌더링 속도를 크게 향상할 수 있었습니다. 더불어 무한 스크롤처럼 페이지네이션을 통한 데이터 요청을 통해서도 개선할 수 있었지만, 이미 커밋들이 분석된 다음 디테일 화면 페이지를 보는 것이기에 무한 스크롤 기능은 필요 없다고 판단했습니다. Virtual Scroll을 도입하고 렌더링 최적화를 위해 컴포넌트 분리 및 메모이제이션 적용하여 성능을 개선했습니다.
+
+3️⃣ **Result**
+
+![](assets/readme/after_virtualscroll.gif)
+
+초기 렌더링 시 불필요한 DOM 작업을 줄이고, 스크린에 보여주는 부분만 DOM에 그리도록 하면서 INP 지수를 개선할 수 있었습니다. 이로써, 두 가지 이점을 더 얻을 수 있었습니다.
+
+1. **스크롤 성능 향상**: 대규모 커밋 데이터를 가진 화면에서도 스크롤이 부드럽게 작동하고 즉각적인 반응성 제공할 수 있게 되었습니다.
+2. **사용자 경험 개선**: 화면 전환 속도가 빨라지고, 데이터가 많은 화면에서도 높은 성능 유지할 수 있습니다.
+
+결과적으로, 대규모 커밋 데이터를 다루는 레포지토리 결과를 볼 때에도 안정적인 성능과 원활한 사용자 경험을 달성하게 되었습니다.
+
+<br>
+
+### [6. 커밋 분석을 위한 커밋 타입 기획](#목차)
 
 좋은 커밋인지를 판단하기 위해 커밋의 메시지와 실제 변경 내용의 맥락이 일치하는지 검사가 필요했습니다. 예를 들어 커밋 메시지에 “test: 테스트 코드 수정”이라고 적혀있으나 변경 내용엔 해당 내용과 관련 없는 부분이 포함되는 경우에는 커밋의 질을 낮춘다고 판단되어야 합니다.
 
@@ -283,251 +512,9 @@
 
 <br>
 
-### [2. 데이터 효율성 vs 사용자 경험: REST API 선택](#목차)
-
-1️⃣ **Problem**
-
-REST API를 이용하여 요청할 경우, 엔드포인트마다 전달받는 데이터 형식이 고정되어 있어 불필요한 정보도 함께 전달됩니다. 이에 따라 네트워크, 메모리, 프로세서 등의 리소스가 낭비됩니다. 실제로, [facebook/react](https://github.com/facebook/react)와 같은 대규모 프로젝트의 레포지토리를 분석할 경우 대략 1,500번의 요청을 보내고 응답을 받아 2만 개 정도의 커밋을 검사하게 되는데, 최소 5~10초 정도의 로딩 시간의 발생과 렉을 체감할 수 있었습니다.
-
-2️⃣ **Action**
-
-깃허브는 사용자의 요청을 더욱 유연하게 처리할 수 있도록 GraphQL이라는 데이터 쿼리 언어를 사용한 API를 제공하고 있습니다. 필요한 정보만 스키마에 명시하여 요청할 수 있기 때문에, 사용자는 대역폭과 메모리를 절약할 수 있습니다.
-
-하지만 GraphQL은 사용할 때 두 가지 주요 차이점이 존재했습니다.
-
-1. 토큰 기반 페이지네이션 (Token-Based Pagination)
-
-   GraphQL은 페이지네이션을 지원하지만, 페이지 번호 기반이 아닌 토큰 기반을 사용합니다. 이에 따라 순차적으로 다음 페이지의 내용을 요청해야 했고, REST API처럼 비동기적으로 커밋 목록을 병렬로 요청할 수 없어 페이지 로딩 시간이 많이 증가했습니다.
-
-2. 커밋 변경 사항 미제공
-   GraphQL은 커밋의 변경 사항 제공하지 않았습니다.
-
-3️⃣ **Result**
-
-데이터를 쿼리언어인 GraphQL로 전환하여 리소스의 사용을 최적화하려 했었지만, 유저 사용성을 위해 기존 REST API로 요청하던 방식을 유지하기로 했습니다.
-
-<br>
-
-### [3. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#목차)
-
-<a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-authenticated-users" target="_blank">Github API Rate Limit 참고 링크</a>
-
-1️⃣ **Problem**
-
-**Github API 호출 인증된 토큰 시간당 5,000회 제한**
-
-Github API 에 의존도가 높은 프로젝트였기에 **Github API 요청 제한 수는 저희 프로젝트에서 치명적**이었습니다. 커밋 분석 로직은 API 호출을 통해 필요한 값들을 불러오고, 커밋 메시지의 커밋 타입을 분석한 이후, 검사 가능한 커밋 타입들만을 필터링합니다. 필터링한 커밋의 `owner`, `repo`, `sha` 를 기반으로 API 호출을 통해 코드의 수정 정보인 diff 데이터를 가져옵니다.
-
-특히나 한 인증된 토큰 시간당 5,000회가 최대였기 때문에 예를 들어, <a href="https://github.com/facebook/react" target="_blank">facebook/react</a> 와 같이 커밋 갯수가 19,000개 이상의 경우 19,000/100 = **190**회 API 호출을 통해 전체 커밋의 정보를 가져오고, 검사 가능한 커밋을 추출하면 (2024.12.25 일 기준으로) 1450 개이므로, **1,450**회의 diff API 호출을 더 하게 됩니다.
-
-즉, facebook/react 는 190 + 1,450 = **1,640**회의 API 호출을 하게 됩니다. 그럼 사실 2, 3번의 facebook/react 정도의 레포지토리만 조회하더라도 GitHub API Rate Limit를 모두 소진하게 되는 문제가 있었습니다.
-
-또한, 검사 가능한 커밋 타입이 추가가 된다면 더 많은 API 호출을 예상할 수 있습니다. 만약 모든 커밋이 검사 대상이라면 커밋 개수의 101%만큼 API 호출을 하게 됩니다.
-
-**인증된 토큰 로테이션 방식 검토**
-
-GitHub API 요청 제한은 토큰마다 독립적으로 적용되고 있습니다. API 호출이 많은 작업에서 Rate Limit를 초과하는 문제가 빈번하게 발생했고, 하나의 토큰만으로는 프로젝트 요구 사항을 충족할 수 없었습니다. 여러 Personal Access Token(PAT)을 환경 변수로 받아 이를 효율적으로 로테이션하는 방식을 차 우선으로 검토했습니다.
-
-2️⃣ **Action**
-
-**토큰 로테이션 로직 구현하여 일시적으로 해결했습니다**. 여러 토큰을 `tokenStates`이라는 배열로 관리하며, 각 토큰의 남은 호출 가능 횟수(remaining)를 추적하도록 설계했습니다. API 호출 시, 남은 요청량이 가장 많은 토큰을 선택해 Rate Limit 초과를 방지했습니다. 호출 후, GitHub API의 응답 헤더에서 반환되는 `X-RateLimit-Remaining` 값을 사용해 토큰 상태를 업데이트했습니다. `getBestGithubToken()` 현재 사용 가능한 토큰 중 가장 많은 남은 요청 횟수를 가진 토큰을 반환하도록 했습니다. `updateTokenState()` 호출 후, 사용한 토큰의 상태를 최신 상태로 업데이트하여 토큰을 들고 올 때 남은 호출 가능 횟수를 가져올 수 있도록 합니다.
-
-```js
-const GITHUB_REQUEST_LIMIT = 5000;
-
-const tokenStates = [
-  {
-    token: import.meta.env.VITE_GITHUB_TOKEN,
-    remaining: GITHUB_REQUEST_LIMIT,
-  },
-  ...
-];
-
-const getBestGithubToken = () => {
-  tokenStates.sort((a, b) => b.remaining - a.remaining);
-
-  return tokenStates[0].token;
-};
-
-const updateTokenState = (token, remaining) => {
-  const tokenState = tokenStates.find((t) => t.token === token);
-
-  if (tokenState) {
-    tokenState.remaining = remaining;
-  }
-};
-
-export { getBestGithubToken, updateTokenState };
-```
-
-3️⃣ **Result**
-
-여러 토큰을 활용한 로테이션 방식으로, 대규모 데이터를 안정적으로 처리할 수 있었습니다. 그래서 facebook/react처럼 커밋이 많은 레포지토리에서도 분석이 중단되지 않고 완료될 수 있었습니다. 토큰이 추가될 경우 `tokenStates` 배열에만 추가하면 자동으로 적용되도록 설계했습니다.
-
-<br>
-
-### [4. 깃허브 로그인 구현](#목차)
-
-1️⃣ **Problem**
-
-검사할 커밋이 단일 토큰의 요청량인 5,000개 이상의 레포지토리도 정상적으로 모두 검사할 수 있도록 토큰 로테이션 방식을 구현하였습니다. 배포하지 않고 로컬에서만 운영한다면 토큰 로테이션 방식으로도 문제가 없겠지만, 배포하여 서비스한다면 많은 사람들이 이용하는 API 사용량이 저희가 수동으로 추가한 토큰의 요청량을 감당할 수 없을 것입니다.
-
-유저의 접근성을 위해 로그인 기능을 추가하지 않으려 했지만, 배포된 서비스가 정상적으로 돌아가려면 각 유저의 토큰을 사용하는 것이 최선이고 결국 로그인은 필수 불가결이 되었습니다. 하지만 로그인하지 않고 서비스를 경험하는 것도 중요하다 생각하여 방법을 찾게 되었습니다.
-
-2️⃣ **Action**
-
-**- 데모 버전 제공 고려**
-
-처음에는 로그인하지 않은 사용자가 링크를 제출하면 기본 토큰의 요청량(시간당 60개)을 이용하여 일부만 보여주도록 하고 로그인을 유도하려 했습니다. 하지만 정말 일부의 커밋 분석만 보여줄 수 있고 통계 기능을 사용할 수 없으며, 토큰의 요청량을 빠르게 소진하기 때문에 다른 레포지토리를 분석할 수 없다는 문제가 있었습니다. 또한, 일부 경우에는 API에 접근 자체가 되지 않는 문제도 발생했습니다.
-
-**- 목업 데이터를 이용한 동일한 경험 제공**
-
-따라서 일부 유명한 레포지토리의 데이터를 가져와 목업 데이터로 제공하기로 했습니다. 또한 사용자가 로그인한 유저와 최대한 비슷한 체험을 하기 위해 기능과 인터페이스적 요소를 똑같이 이용하게 하는 것이 중요하다고 생각했습니다.
-
-3️⃣ **Result**
-
-비로그인 상태에서는 텍스트 입력 박스를 선택 박스로 변경하고, 제공되는 선택지를 이용해 제출하게 되면 목업 데이터를 이용해 실제 기능과 동일한 경험을 할 수 있게 하였습니다. 또한, 문구를 박스 위에 두어 로그인 시 직접 입력할 수 있는 점을 알게 하였습니다.
-
-![without_login_selection_box](assets/readme/without_login_selection_box.gif)
-
-![login_input](assets/readme/login_input.gif)
-
-프로세스가 거의 똑같기 때문에 사용자가 로그인하지 않고 체험하면서 튜토리얼의 기능도 가질 수 있게 되었습니다.
-
-<br>
-
-### [5. 대용량 데이터를 저장하고 처리하기](#목차)
-
-1️⃣ **Problem**
-
-**- 대용량 데이터 처리 시 에러 발생**
-
-커밋에 대한 데이터 관리로 페이지 리로드 시 상태가 초기화되는 것을 방지하기 위해 sessionStorage에 저장했습니다.
-
-GitHub API를 통해 커밋들의 변경 내용(diff)을 가져오는 과정에서 코드의 변경 사항이 많을 경우 저장되는 데이터의 크기가 매우 커졌고 이에 따라 데이터 저장에 문제가 발생하게 되었습니다.
-
-sessionStorage는 대용량의 데이터를 처리할 경우 데이터가 저장되지 않고 용량이 초과하였다는 에러가 발생하는 문제가 있었습니다.
-
-sessionStorage는 브라우저마다 약 5MiB의 용량 제한이 있었고 이 용량 이상의 데이터를 저장하기에는 적합하지 않았습니다. GitHub API로 응답받는 커밋 diff 데이터는 변경된 코드양에 따라 매우 큰 크기의 데이터가 될 수 있기 때문에 기존의 sessionStorage로는 데이터 저장 실패로 인한 에러 발생 가능성이 커졌습니다.
-
-2️⃣ **Action**
-
-이 문제의 해결을 위해 sessionStorage대신 IndexedDB를 사용했습니다.
-
-- IndexedDB
-  브라우저 내에서 대규모 데이터 구조를 저장하고 고성능 검색을 위해 인덱싱하는 웹 API입니다.
-
-idb-keyval 라이브러리를 통해 간단한 API(`get()`, `set()`, `del()` 등)을 써서 IndexedDB를 다룰 수 있도록 구현했습니다. 또한 zustand를 통해 상태를 관리하면서 데이터를 IndexedDB에 저장하는 방식으로 전환했습니다.
-
-- zustand의 persist 미들웨어(`storage: createJSONStorage(() => indexedDB)`)를 활용하여 zustand 상태를 IndexedDB에 저장하도록 설정했습니다.
-- IndexedDB에서 데이터를 불러오거나 삭제할 때 발생할 수 있는 에러를 처리해 주는 부분을 추가했습니다.
-
-```jsx
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
-import { get, set, del } from "idb-keyval";
-import { throwIndexedDBErrorMessage } from "../../../shared/error/throwCustomErrorMessage";
-
-const indexedDB = {
-  getItem: async (name) => {
-    try {
-      const value = await get(name);
-      return value || null;
-    } catch (error) {
-      throwIndexedDBErrorMessage(error);
-    }
-  },
-  setItem: async (name, value) => {
-    try {
-      await set(name, value);
-    } catch (error) {
-      throwIndexedDBErrorMessage(error);
-    }
-  },
-  removeItem: async (name) => {
-    try {
-      await del(name);
-    } catch (error) {
-      throwIndexedDBErrorMessage(error);
-    }
-  },
-};
-
-const initialState = {};
-
-const useCommitStore = create(
-  persist(
-    (set) => ({
-      ...initialState,
-    }),
-    {
-      name: "commit-storage",
-      storage: createJSONStorage(() => indexedDB),
-    }
-  )
-);
-
-export default useCommitStore;
-```
-
-3️⃣ **Result**
-
-**- sessionStorage에서 발생하던 저장 용량 초과 문제를 해결**
-
-IndexedDB는 5MiB보다 훨씬 큰 용량(GB 단위)을 지원하여 커밋 diff 데이터와 같은 대량의 데이터를 처리할 때 에러가 발생하지 않고 원활하게 저장할 수 있게 되었습니다.
-
-zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 있게 되었고 idb-keyval 라이브러리를 통해 코드 복잡도를 줄이고 대용량 데이터를 안정적으로 처리할 수 있게 되었습니다.
-
-<br>
-
-### [6. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#목차)
-
-<a href="https://github.com/git-marvel/commit-guardians-client/pull/93" target="_blank">virtual scroll 도입한 PR 링크</a>
-
-![](assets/readme/before_virtualscroll.gif)
-
-1️⃣ **Problem**
-
-**- INP 지수 상승 및 화면 버벅임**
-
-이미 검사가 끝난 모든 커밋들의 데이터를 가지고 컴포넌트를 렌더링하는 디테일 뷰에는 **화면 성능에 관한 문제**가 있었습니다. 적은 양의 컴포넌트들을 스크롤 할 때는 큰 문제가 없었지만, 많은 양의 컴포넌트들을 (대략 1천 개 이상의 커밋 컴포넌트) 가진 디테일 화면에 첫 진입 시 화면 렌더링의 시간이 지연되었습니다. 브라우저 퍼포먼스 탭을 확인해 보니 <a href="https://web.dev/articles/inp?hl=ko">**INP**</a>(**Interaction to Next Paint**) 지수가 급격히 상승하고, 화면이 동적으로 변할 때, 특히나 버벅이는 문제가 있었습니다. 이 문제는 사용자는 화면 전환 시의 느린 반응 속도와 지연으로 인해 답답함을 느끼게 하고, 전체적인 사용자 경험을 저하하고, 앱 성능에 대한 부정적인 영향을 끼칠 것으로 예상했습니다.
-
-브라우저가 모든 컴포넌트를 한 번에 렌더링하려는 과정에서 브라우저가 필요하지 않은 데이터까지 모두 DOM에 렌더링하는 방식이 병목현상의 주요 원인임을 확인할 수 있었습니다. 스크롤이 필요한 디테일 화면에서 스크롤 사용 시 성능 저하가 더욱 심각하게 나타나는 것을 확인했습니다. 따라서 INP 지수를 개선하고, 스크롤 시 부드러운 사용자 경험을 제공할 방법을 찾아야 했습니다.
-
-2️⃣ **Action**
-
-**- Virtual Scroll 도입**
-
-이 문제를 해결하기 위해 저희는 **Virtual Scroll** 기술을 도입하였습니다. Virtual Scroll 은 사용자가 **현재 화면에서 보고 있는 부분에 해당하는 데이터만 DOM에 렌더링하고, 보이지 않는 부분은 렌더링하지 않음**으로써 브라우저의 불필요한 작업을 줄여주는 기술입니다. 이런 방식을 통해 초기 렌더링 시 필요하지 않은 데이터 처리를 최소화하고, 렌더링 속도를 크게 향상할 수 있었습니다. 더불어 무한 스크롤처럼 페이지네이션을 통한 데이터 요청을 통해서도 개선할 수 있었지만, 이미 커밋들이 분석된 다음 디테일 화면 페이지를 보는 것이기에 무한 스크롤 기능은 필요 없다고 판단했습니다. Virtual Scroll을 도입하고 렌더링 최적화를 위해 컴포넌트 분리 및 메모이제이션 적용하여 성능을 개선했습니다.
-
-3️⃣ **Result**
-
-![](assets/readme/after_virtualscroll.gif)
-
-초기 렌더링 시 불필요한 DOM 작업을 줄이고, 스크린에 보여주는 부분만 DOM에 그리도록 하면서 INP 지수를 개선할 수 있었습니다. 이로써, 두 가지 이점을 더 얻을 수 있었습니다.
-
-1. **스크롤 성능 향상**: 대규모 커밋 데이터를 가진 화면에서도 스크롤이 부드럽게 작동하고 즉각적인 반응성 제공할 수 있게 되었습니다.
-2. **사용자 경험 개선**: 화면 전환 속도가 빨라지고, 데이터가 많은 화면에서도 높은 성능 유지할 수 있습니다.
-
-결과적으로, 대규모 커밋 데이터를 다루는 레포지토리 결과를 볼 때에도 안정적인 성능과 원활한 사용자 경험을 달성하게 되었습니다.
-
-<br>
-
 ## [협업](#목차)
 
-### 깃 커밋 컨벤션
-
-**- 커밋 타입**
-
-```
-type: title
-
-body
-```
-
-<br>
-
-**- 커밋 메시지 종류 설명**
+### [1. 깃 커밋 컨벤션](#목차)
 
 | 제목     | 내용                                     |
 | -------- | ---------------------------------------- |
