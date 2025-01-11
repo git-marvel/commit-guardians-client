@@ -14,7 +14,7 @@
   - [2. 커밋 뱃지 페이지](#2-%EC%BB%A4%EB%B0%8B-%EB%B1%83%EC%A7%80-%ED%8E%98%EC%9D%B4%EC%A7%80)
   - [3. 커밋 분석 결과 페이지](#3-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D-%EA%B2%B0%EA%B3%BC-%ED%8E%98%EC%9D%B4%EC%A7%80)
 - [기술 스택](#%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
-- [🤔 고민하고 결정한 부분](#%F0%9F%A4%94-%EA%B3%A0%EB%AF%BC%ED%95%98%EA%B3%A0-%EA%B2%B0%EC%A0%95%ED%95%9C-%EB%B6%80%EB%B6%84)
+- [🤔 고민하고 결정한 부분](#1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9A%A8%EC%9C%A8%EC%84%B1-vs-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-rest-api-%EC%84%A0%ED%83%9D)
   - [1. 데이터 효율성 vs 사용자 경험: REST API 선택](#1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9A%A8%EC%9C%A8%EC%84%B1-vs-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-rest-api-%EC%84%A0%ED%83%9D)
   - [2. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#2-github-api-rate-limit-%ED%9A%8C%ED%94%BC%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%86%A0%ED%81%B0-%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84)
   - [3. 깃허브 로그인 기능의 필수 도입과 비로그인 사용자 접근성 향상](#3-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B8%B0%EB%8A%A5%EC%9D%98-%ED%95%84%EC%88%98-%EB%8F%84%EC%9E%85%EA%B3%BC-%EB%B9%84%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%91%EA%B7%BC%EC%84%B1-%ED%96%A5%EC%83%81)
