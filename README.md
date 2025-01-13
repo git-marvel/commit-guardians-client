@@ -138,15 +138,14 @@
 
 ### 메인 라이브러리
 
-![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)
-![VITE](https://img.shields.io/badge/VITE-f88afc?style=for-the-badge&logo=Vite&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-FFD93E.svg?style=for-the-badge&logo=JavaScript&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)
 ![tailwindcss](https://img.shields.io/badge/tailwindcss-61DAFB?style=for-the-badge&logo=tailwindcss&logoColor=white)
 
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white)
 ![zustand](https://img.shields.io/badge/zustand-FF4154?style=for-the-badge&logo=zustand&logoColor=white)
 
-![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white)
+![VITE](https://img.shields.io/badge/VITE-f88afc?style=for-the-badge&logo=Vite&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-2C8EBB?style=for-the-badge&logo=npm&logoColor=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
@@ -177,6 +176,7 @@ REST API를 이용하여 요청할 경우, 엔드포인트마다 전달받는 �
    GraphQL은 페이지네이션을 지원하지만, 페이지 번호 기반이 아닌 토큰 기반을 사용합니다. 이에 따라 순차적으로 다음 페이지의 내용을 요청해야 했고, REST API처럼 비동기적으로 커밋 목록을 병렬로 요청할 수 없어 페이지 로딩 시간이 많이 증가했습니다.
 
 2. 커밋 변경 사항 미제공
+
    GraphQL은 커밋의 변경 사항 제공하지 않았습니다.
 
 3️⃣ **Result**
