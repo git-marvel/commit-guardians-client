@@ -18,7 +18,7 @@
   - [1. 데이터 효율성 vs 사용자 경험: REST API 선택](#1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9A%A8%EC%9C%A8%EC%84%B1-vs-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B2%BD%ED%97%98-rest-api-%EC%84%A0%ED%83%9D)
   - [2. GitHub API Rate Limit 회피를 위한 토큰 로테이션 구현](#2-github-api-rate-limit-%ED%9A%8C%ED%94%BC%EB%A5%BC-%EC%9C%84%ED%95%9C-%ED%86%A0%ED%81%B0-%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84)
   - [3. 깃허브 로그인 기능의 필수 도입과 비로그인 사용자 접근성 향상](#3-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B8%B0%EB%8A%A5%EC%9D%98-%ED%95%84%EC%88%98-%EB%8F%84%EC%9E%85%EA%B3%BC-%EB%B9%84%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%91%EA%B7%BC%EC%84%B1-%ED%96%A5%EC%83%81)
-  - [4. 대용량 데이터를 저장하고 처리: indexedDB 사용](#4-%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EC%B2%98%EB%A6%AC-indexeddb-%EC%82%AC%EC%9A%A9)
+  - [4. 대용량 데이터를 저장하고 처리: IndexedDB 사용](#4-%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B3%A0-%EC%B2%98%EB%A6%AC-IndexedDB-%EC%82%AC%EC%9A%A9)
   - [5. 많은 컴포넌트들을 화면에 렌더링하기 위한 virtual scroll 도입](#5-%EB%A7%8E%EC%9D%80-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%93%A4%EC%9D%84-%ED%99%94%EB%A9%B4%EC%97%90-%EB%A0%8C%EB%8D%94%EB%A7%81%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-virtual-scroll-%EB%8F%84%EC%9E%85)
   - [6. 커밋 분석을 위한 커밋 타입 기획](#6-%EC%BB%A4%EB%B0%8B-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BB%A4%EB%B0%8B-%ED%83%80%EC%9E%85-%EA%B8%B0%ED%9A%8D)
 - [협업](#%ED%98%91%EC%97%85)
@@ -153,7 +153,7 @@
 
 - `diff-match-patch` : 구글의 Neil Fraser가 개발한 오픈소스 라이브러리로, 텍스트의 차이점(diffs)을 계산하고 패치를 생성 및 적용하는 기능을 제공합니다. 대량의 커밋을 정확하고 빠르게 분석하여 코드 변경 사항을 확인하는 데 사용하였습니다.
 
-- `idb-keyval` : indexedDB를 간편하게 사용할 수 있게 해주는 경량 오픈소스 라이브러리로, key-value 형식의 데이터 저장 및 조회 기능을 제공합니다. zustand 상태 관리 라이브러리와 함께 사용하여 상태를 브라우저의 IndexedDB에 저장할 수 있어 대량의 상태 데이터를 효율적으로 처리하고, 사용자 경험을 향상할 수 있었습니다.
+- `idb-keyval` : IndexedDB를 간편하게 사용할 수 있게 해주는 경량 오픈소스 라이브러리로, key-value 형식의 데이터 저장 및 조회 기능을 제공합니다. zustand 상태 관리 라이브러리와 함께 사용하여 상태를 브라우저의 IndexedDB에 저장할 수 있어 대량의 상태 데이터를 효율적으로 처리하고, 사용자 경험을 향상할 수 있었습니다.
 
 <br>
 
@@ -273,7 +273,7 @@ export { getBestGithubToken, updateTokenState };
 
 <br>
 
-### [4. 대용량 데이터를 저장하고 처리: indexedDB 사용](#목차)
+### [4. 대용량 데이터를 저장하고 처리: IndexedDB 사용](#목차)
 
 1️⃣ **Problem**
 
@@ -289,14 +289,14 @@ sessionStorage는 브라우저마다 약 5MiB의 용량 제한이 있었고 이 
 
 2️⃣ **Action**
 
-이 문제의 해결을 위해 sessionStorage대신 indexedDB를 사용했습니다.
+이 문제의 해결을 위해 sessionStorage대신 IndexedDB를 사용했습니다.
 
-- indexedDB
+- IndexedDB
   브라우저 내에서 대규모 데이터 구조를 저장하고 고성능 검색을 위해 인덱싱하는 웹 API입니다.
 
-idb-keyval 라이브러리를 통해 간단한 API(`get()`, `set()`, `del()` 등)을 써서 indexedDB를 다룰 수 있도록 구현했습니다. 또한 zustand를 통해 상태를 관리하면서 데이터를 indexedDB에 저장하는 방식으로 전환했습니다.
+idb-keyval 라이브러리를 통해 간단한 API(`get()`, `set()`, `del()` 등)을 써서 IndexedDB를 다룰 수 있도록 구현했습니다. 또한 zustand를 통해 상태를 관리하면서 데이터를 IndexedDB에 저장하는 방식으로 전환했습니다.
 
-- zustand의 persist 미들웨어(`storage: createJSONStorage(() => indexedDB)`)를 활용하여 zustand 상태를 indexedDB에 저장하도록 설정했습니다.
+- zustand의 persist 미들웨어(`storage: createJSONStorage(() => IndexedDB)`)를 활용하여 zustand 상태를 IndexedDB에 저장하도록 설정했습니다.
 - IndexedDB에서 데이터를 불러오거나 삭제할 때 발생할 수 있는 에러를 처리해 주는 부분을 추가했습니다.
 
 ```jsx
@@ -305,7 +305,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import { get, set, del } from "idb-keyval";
 import { throwIndexedDBErrorMessage } from "../../../shared/error/throwCustomErrorMessage";
 
-const indexedDB = {
+const IndexedDB = {
   getItem: async (name) => {
     try {
       const value = await get(name);
@@ -339,7 +339,7 @@ const useCommitStore = create(
     }),
     {
       name: "commit-storage",
-      storage: createJSONStorage(() => indexedDB),
+      storage: createJSONStorage(() => IndexedDB),
     }
   )
 );
@@ -351,7 +351,7 @@ export default useCommitStore;
 
 **- sessionStorage에서 발생하던 저장 용량 초과 문제를 해결**
 
-indexedDB는 5MiB보다 훨씬 큰 용량(GB 단위)을 지원하여 커밋 diff 데이터와 같은 대량의 데이터를 처리할 때 에러가 발생하지 않고 원활하게 저장할 수 있게 되었습니다.
+IndexedDB는 5MiB보다 훨씬 큰 용량(GB 단위)을 지원하여 커밋 diff 데이터와 같은 대량의 데이터를 처리할 때 에러가 발생하지 않고 원활하게 저장할 수 있게 되었습니다.
 
 zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 있게 되었고 idb-keyval 라이브러리를 통해 코드 복잡도를 줄이고 대용량 데이터를 안정적으로 처리할 수 있게 되었습니다.
 
@@ -549,6 +549,6 @@ zustand와 결합하여 커밋 관련 상태를 지속적으로 관리할 수 �
 
 **김수한** (<a href="https://github.com/shkimjune" target="_blank">깃허브 주소</a>)
 
-프로젝트 진행 초기에는 커밋메시지에 관한 기준을 정하는 과정이 있었습니다. 사람마다 다르게 작성된 커밋 메시지와 변경 내용의 일치성을 규격화된 기준을 정해 판단해야 했기 때문에 새로운 케이스가 나올 때마다 어떤 식으로 규격화를 시켜야 할지 고민을 많이 했던 것 같습니다. 또한 API로 응답받은 데이터 처리 관련해서 다양한 문제들을 마주하게 되었습니다. 이를 해결하는 과정에서 indexedDB 활용과 많은 양의 데이터를 API 요청을 보낼 때 효율적으로 보낼 수 있는 방식 등 여러 가지를 배우게 되었습니다.
+프로젝트 진행 초기에는 커밋메시지에 관한 기준을 정하는 과정이 있었습니다. 사람마다 다르게 작성된 커밋 메시지와 변경 내용의 일치성을 규격화된 기준을 정해 판단해야 했기 때문에 새로운 케이스가 나올 때마다 어떤 식으로 규격화를 시켜야 할지 고민을 많이 했던 것 같습니다. 또한 API로 응답받은 데이터 처리 관련해서 다양한 문제들을 마주하게 되었습니다. 이를 해결하는 과정에서 IndexedDB 활용과 많은 양의 데이터를 API 요청을 보낼 때 효율적으로 보낼 수 있는 방식 등 여러 가지를 배우게 되었습니다.
 
 예상하지 못한 문제가 생겼을 때 팀원들과 각자의 의견을 공유하고 회의를 하다 보면 새로운 방향의 해결책들이 나와서 다양한 시도를 해볼 기회가 되었습니다. 짧은 기간이었지만 새로운 개념들을 배우게 되었고 효율적인 소통 방식에 대해 생각해 보고 적용해 볼 수 있었던 좋은 경험이었습니다.
