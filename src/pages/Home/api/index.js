@@ -19,11 +19,6 @@ const fetchWithAuth = async (url, githubToken, accept = "*/*") => {
     },
   });
 
-  const tokenRemaining = parseInt(
-    result.headers.get("x-ratelimit-remaining"),
-    10
-  );
-
   return result;
 };
 
