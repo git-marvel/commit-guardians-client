@@ -11,6 +11,16 @@ import {
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import useCommitStore from "../../../features/commit/store/useCommitStore";
 
+const CHART_COLORS = {
+  rgba: [
+    "rgba(226, 232, 240, 1)",
+    "rgba(255, 255, 255, 1)",
+    "rgba(254, 215, 170, 1)",
+    "rgba(252, 231, 243, 1)",
+  ],
+  hex: ["#9ca2a8", "#696969", "#fc8600", "#ff3dab"],
+};
+
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -82,18 +92,8 @@ function ChartContainer() {
       {
         label: "Commits",
         data: Array.from(type.values()),
-        backgroundColor: [
-          "rgba(226, 232, 240, 1)",
-          "rgba(255, 255, 255, 1)",
-          "rgba(254, 215, 170, 1)",
-          "rgba(252, 231, 243, 1)",
-        ],
-        borderColor: [
-          "rgba(226, 232, 240, 1)",
-          "rgba(255, 255, 255, 1)",
-          "rgba(254, 215, 170, 1)",
-          "rgba(252, 231, 243, 1)",
-        ],
+        backgroundColor: CHART_COLORS.rgba,
+        borderColor: CHART_COLORS.rgba,
         borderWidth: 1,
       },
     ],
@@ -142,13 +142,12 @@ function ChartContainer() {
       const { ctx, data } = chart;
       const dataset = data.datasets[0];
       const total = dataset.data.reduce((a, b) => a + b, 0);
-      const backgroundColor = ["#9ca2a8", "#696969", "#fc8600", "#ff3dab"];
 
       chart.getDatasetMeta(0).data.forEach((arc, index) => {
         const { x, y } = arc.tooltipPosition();
         const value = dataset.data[index];
         const percentage = ((value / total) * 100).toFixed(1);
-        const sectionColor = backgroundColor[index];
+        const sectionColor = CHART_COLORS.hex[index];
 
         ctx.save();
         ctx.fillStyle = sectionColor;
@@ -171,35 +170,33 @@ function ChartContainer() {
       {
         label: "remove",
         data: top3Value.map((value) => value.type.get("remove")),
-        backgroundColor: "rgba(226, 232, 240, 1)",
-        borderColor: "rgba(226, 232, 240, 1)",
+        backgroundColor: CHART_COLORS.rgba[0],
+        borderColor: CHART_COLORS.rgba[0],
         borderWidth: 1,
       },
       {
         label: "docs",
         data: top3Value.map((value) => value.type.get("docs")),
-        backgroundColor: "rgba(255, 255, 255, 1)",
-        borderColor: "rgba(255, 255, 255, 1)",
+        backgroundColor: CHART_COLORS.rgba[1],
+        borderColor: CHART_COLORS.rgba[1],
         borderWidth: 1,
       },
       {
         label: "style",
         data: top3Value.map((value) => value.type.get("style")),
-        backgroundColor: "rgba(254, 215, 170, 1)",
-        borderColor: "rgba(254, 215, 170, 1)",
+        backgroundColor: CHART_COLORS.rgba[2],
+        borderColor: CHART_COLORS.rgba[2],
         borderWidth: 1,
       },
       {
         label: "test",
         data: top3Value.map((value) => value.type.get("test")),
-        backgroundColor: "rgba(252, 231, 243, 1)",
-        borderColor: "rgba(252, 231, 243, 1)",
+        backgroundColor: CHART_COLORS.rgba[3],
+        borderColor: CHART_COLORS.rgba[3],
         borderWidth: 1,
       },
     ],
   };
-
-  const customColors = ["#9ca2a8", "#696969", "#fc8600", "#ff3dab"];
 
   const barOptions = {
     responsive: true,
@@ -233,7 +230,7 @@ function ChartContainer() {
         color: (context) => {
           return context.datasetIndex === context.chart.data.datasets.length
             ? "black"
-            : customColors[context.datasetIndex % customColors.length];
+            : CHART_COLORS.hex[context.datasetIndex % CHART_COLORS.hex.length];
         },
         font: {
           size: 14,
